@@ -8,6 +8,10 @@ export default mergeConfig(
       globals: true,
       environment: "jsdom",
       setupFiles: "./tests/setup.ts",
+      coverage: {
+        provider: "istanbul",
+        include: ["src/components/**/*"],
+      },
     },
   }),
 )
