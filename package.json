@@ -1,7 +1,13 @@
 {
   "name": "pk-components",
   "description": "A component library for React",
-  "version": "0.1.0",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "component",
+    "library"
+  ],
+  "version": "0.1.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
