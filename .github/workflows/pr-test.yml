@@ -26,16 +26,10 @@ jobs:
       - name: Execute test script
         run: npm run test
 
-      - name: Coverage report
-        uses: eleboys/test-coverage-report-action@v1.0.2
-        id: report
+      - name: Upload results to Codecov
+        uses: codecov/codecov-action@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: coverage/coverage-final.json
-          title: Code Test Coverage
-
-      - name: Print the output summary
-        run: echo "Report coverage json ${{ steps.report.outputs.summary }}"
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   PreviewBuild:
     runs-on: ubuntu-latest
