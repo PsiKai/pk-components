@@ -15,8 +15,7 @@ A reusable button component that accepts content (`children`), a click event han
 #### Example
 
 ```tsx
-import { Button } from "psikai-component-lib"
-
+import { Button } from "pk-components"
 ;<Button onClick={() => console.log("Button clicked")} className="primary-button">
   Submit
 </Button>

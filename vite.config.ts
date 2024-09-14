@@ -13,8 +13,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: "src/index.tsx",
-      name: "psikai-component-lib",
-      // fileName: format => `psikai-component-lib.${format}.js`,
+      name: "pk-components",
+      // fileName: format => `pk-components.${format}.js`,
     },
     rollupOptions: {
       external: ["react", "react-dom"],

@@ -1,6 +1,7 @@
 {
-  "name": "psikai-component-lib",
-  "version": "1.0.0",
+  "name": "pk-components",
+  "description": "A component library for React",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,14 +13,14 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/psikai-component-lib.umd.cjs",
-  "module": "./dist/psikai-component-lib.js",
-  "require": "./dist/psikai-component-lib.umd.cjs",
+  "main": "./dist/pk-components.umd.cjs",
+  "module": "./dist/pk-components.js",
+  "require": "./dist/pk-components.umd.cjs",
   "exports": {
     ".": {
-      "import": "./dist/psikai-component-lib.js",
-      "require": "./dist/psikai-component-lib.umd.cjs",
-      "main": "./dist/psikai-component-lib.umd.cjs",
+      "import": "./dist/pk-components.js",
+      "require": "./dist/pk-components.umd.cjs",
+      "main": "./dist/pk-components.umd.cjs",
       "types": "./dist/types/index.d.ts"
     }
   },

@@ -7,7 +7,7 @@ A repository of pre-built React components for commonly needed UI elements. Inst
 ### Installation
 
 ```sh
-npm i psikai-component-lib
+npm i pk-components
 ```
 
 ### Available Components
