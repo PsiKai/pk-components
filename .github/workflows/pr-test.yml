@@ -25,3 +25,19 @@ jobs:
 
       - name: Execute test script
         run: npm run test
+
+  PreviewBuild:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+
+      - name: Setup local packages
+        run: npm install
+
+      - name: Execute test script
+        run: npm run build
