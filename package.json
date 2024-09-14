@@ -1,15 +1,28 @@
 {
   "name": "psikai-component-lib",
-  "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite AppDev.tsx",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
-  "dependencies": {
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/psikai-component-lib.umd.cjs",
+  "module": "./dist/psikai-component-lib.js",
+  "require": "./dist/psikai-component-lib.umd.cjs",
+  "exports": {
+    ".": {
+      "import": "./dist/psikai-component-lib.js",
+      "require": "./dist/psikai-component-lib.umd.cjs",
+      "main": "./dist/psikai-component-lib.umd.cjs",
+      "types": "./dist/types/index.d.ts"
+    }
+  },
+  "peerDependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -24,6 +37,7 @@
     "globals": "^15.9.0",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
-    "vite": "^5.4.1"
+    "vite": "^5.4.1",
+    "vite-plugin-dts": "^4.2.1"
   }
 }

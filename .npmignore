@@ -1,0 +1,14 @@
+node_modules/
+src/
+index.html
+*.spec.*
+*.test.*
+.git/
+.gitignore
+
+eslint.config.js
+tsconfig.app.json
+tsconfig.json
+tsconfig.node.json
+tsconfig.node.tsbuildinfo
+vite.config.ts
