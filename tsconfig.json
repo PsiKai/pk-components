@@ -2,8 +2,15 @@
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "types": ["node", "vitest/globals"],
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "types": [
+      "node",
+      "vitest/globals"
+    ],
     "module": "ESNext",
     "skipLibCheck": true,
     "declaration": true,
@@ -24,6 +31,14 @@
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["./src"],
-  "exclude": ["node_modules", "./src/AppDev.tsx", "**/*.test.*", "**/*.spec.*", "./tests"]
+  "include": [
+    "./src"
+  ],
+  "exclude": [
+    "node_modules",
+    "./src/AppDev.tsx",
+    "**/*.test.*",
+    "**/*.spec.*",
+    "./tests"
+  ]
 }
