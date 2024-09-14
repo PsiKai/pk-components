@@ -36,7 +36,7 @@
   ],
   "exclude": [
     "node_modules",
-    "./src/AppDev.tsx",
+    "./src/dev",
     "**/*.test.*",
     "**/*.spec.*",
     "./tests"
