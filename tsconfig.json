@@ -3,6 +3,7 @@
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "types": ["node", "vitest/globals"],
     "module": "ESNext",
     "skipLibCheck": true,
     "declaration": true,
@@ -10,7 +11,7 @@
     "emitDeclarationOnly": false,
     "outDir": "./dist",
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     // "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
@@ -20,8 +21,9 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["./src"],
-  "exclude": ["node_modules", "./src/AppDev.tsx"]
+  "exclude": ["node_modules", "./src/AppDev.tsx", "**/*.test.*", "**/*.spec.*", "./tests"]
 }
