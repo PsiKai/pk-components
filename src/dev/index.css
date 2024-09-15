@@ -26,6 +26,20 @@ h1 {
   line-height: 1.1;
 }
 
+section {
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 2rem;
+  padding: 2rem;
+  margin: 2rem;
+  border-radius: 0.375rem;
+  border: 1px solid currentColor;
+  max-width: 600px;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

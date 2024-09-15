@@ -1,0 +1,161 @@
+.pk-button {
+  --hue-primary: 200;
+  --hue-secondary: 0;
+  --hue-warning: 30;
+  --hue-danger: 0;
+  --hue-success: 120;
+  --hue: 200;
+  --lightness: 40%;
+  --saturation: 100%;
+  --color-lightness: 100%;
+  --color-saturation: 100%;
+  cursor: pointer;
+  transition:
+    background-color 100ms,
+    border-color 100ms,
+    color 100ms,
+    transform 50ms;
+  border: 1px solid currentColor;
+  border-radius: 0.375rem;
+  font: inherit;
+  letter-spacing: 0.05em;
+  color: hsl(0, var(--color-saturation), var(--color-lightness));
+  background-color: hsl(var(--hue), var(--saturation), var(--lightness));
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.pk-button:hover:not(:disabled) {
+  --lightness: 35%;
+}
+
+.pk-button:disabled {
+  cursor: not-allowed;
+}
+
+.pk-button:focus-visible {
+  outline: 2px solid hsl(var(--hue), var(--saturation), var(--lightness));
+  outline-offset: 2px;
+}
+
+.pk-button:active:not(:disabled, .pk-button-link) {
+  transform: translate3d(0px, 1px, 5px);
+}
+
+.pk-button-progress,
+.pk-button:disabled {
+  --saturation: 70%;
+  --lightness: 50%;
+  box-shadow: none;
+
+  &.pk-button-secondary {
+    --lightness: 40%;
+    --saturation: 0%;
+  }
+
+  &.pk-button-success {
+    --lightness: 30%;
+  }
+}
+
+.pk-button.pk-button-progress {
+  cursor: progress;
+}
+
+.pk-button-medium,
+.pk-button-small,
+.pk-button-link {
+  text-transform: capitalize;
+}
+
+.pk-button-small {
+  padding: 0.25rem 0.75rem;
+}
+
+.pk-button-medium {
+  padding: 0.5rem 1rem;
+  font-size: 1.125rem;
+}
+
+.pk-button-large,
+.pk-button-block {
+  padding: 0.75rem 1.25rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-width: 2px;
+}
+
+.pk-button-block {
+  display: block;
+  width: 100%;
+}
+
+.pk-button-link {
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  color: hsl(var(--hue), var(--saturation), var(--lightness));
+  font-size: 1.125rem;
+  display: inline-block;
+
+  &:hover:not(:disabled) {
+    --lightness: 30%;
+  }
+}
+
+.pk-button-primary {
+  --hue: 200;
+}
+
+.pk-button-warning {
+  --lightness: 50%;
+  --hue: 30;
+
+  &:hover:not(:disabled) {
+    --lightness: 45%;
+  }
+}
+
+.pk-button-danger {
+  --hue: 0;
+}
+
+.pk-button-success {
+  --lightness: 30%;
+  --hue: 120;
+
+  &:hover:not(:disabled) {
+    --lightness: 25%;
+  }
+}
+
+.pk-button-secondary {
+  --lightness: 40%;
+  --saturation: 0%;
+  --hue: 0;
+
+  &:hover:not(:disabled) {
+    --lightness: 35%;
+  }
+}
+
+.pk-button-outline {
+  color: hsl(var(--hue), var(--saturation), var(--lightness));
+  background-color: transparent;
+  border-color: hsl(var(--hue), var(--saturation), var(--lightness));
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-saturation: 0%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pk-button {
+    transition: none;
+  }
+
+  .pk-button:active {
+    transform: none;
+  }
+}
