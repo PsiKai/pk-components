@@ -11,7 +11,7 @@ export function LoadingSpinner(props: TLoadingSpinnerProps) {
   const dotSize = useMemo(() => spinnerDotSizeMap[size], [size])
 
   return (
-    <div className="pk-loading-spinner">
+    <div className="pk-loading-spinner" role="progressbar">
       <div className="pk-loading-spinner-inner" style={{ height: `${height}px` }}>
         {dots.map(i => {
           const angle = (i / dots.length) * 2 * Math.PI
@@ -19,6 +19,7 @@ export function LoadingSpinner(props: TLoadingSpinnerProps) {
           const y = (height / 2) * Math.sin(angle)
           return (
             <div
+              data-testid="pk-loading-spinner-dot"
               key={i}
               style={{
                 transform: `translate(${x - dotSize / 2}px, ${y - dotSize / 2}px)`,
