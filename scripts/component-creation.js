@@ -7,6 +7,7 @@ const __dirname = dirname(__filename)
 
 async function main(componentName) {
   const santizedComponentName = componentName
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
     .split(/[-_\s]/g)
     .map(word => {
       return word.charAt(0).toUpperCase() + word.slice(1)
@@ -53,6 +54,12 @@ async function main(componentName) {
     generateSpecFile(santizedComponentName),
   )
 
+  // Create the readme file
+  await fs.promises.writeFile(
+    getFullFilePath(destinationPath, "README.md"),
+    generateReadmeFile(santizedComponentName),
+  )
+
   console.log("COMPONENT CREATED SUCCESSFULLY")
 }
 
@@ -66,6 +73,7 @@ function getFullFilePath(fullPath, fileName) {
 
 function generateIndexFile(componentName) {
   return `export { ${componentName} } from "./${componentName}"
+export type { T${componentName}Props } from "./${componentName}.model"
 `
 }
 
@@ -95,13 +103,39 @@ function generateSpecFile(componentName) {
   import { ${componentName} } from "./${componentName}"
 
   describe("${componentName}", () => {
-    render(<${componentName} />)
-    const component = screen.getByText("${componentName}")
+    beforeEach(() => {
+      render(<${componentName} />)
+    })
 
     it("should render the component", () => {
+      const component = screen.getByText("${componentName}")
       expect(component).toBeInTheDocument()
     })
   })
+`
+}
+
+function generateReadmeFile(componentName) {
+  return `### ${componentName} Component
+
+#### Description
+
+#### Props
+
+| Prop Name | Type | Required | Default | Description |
+| --------- | ---- | -------- | ------- | ----------- |
+| \`children\` | \`React.ReactNode\` | no | \`undefined\` | Children to display inside the component. |
+| \`className\` | \`string\` | no | \`undefined\` | Additional className to pass to the parent element. |
+
+#### Example
+
+\`\`\`tsx
+import { ${componentName} } from "pk-components"
+
+function YourComponent() {
+  return <${componentName}>Your content here</${componentName}>
+}
+\`\`\`
 `
 }
 

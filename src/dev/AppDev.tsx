@@ -1,26 +1,17 @@
-import React, { StrictMode } from "react"
-import { createRoot } from "react-dom/client"
-import { Button } from "../components/Button"
+import React from "react"
+import { LoadingSpinner } from "../components/LoadingSpinner"
+import { ButtonSection } from "./demos/Buttons"
 import "./index.css"
 
-// eslint-disable-next-line react-refresh/only-export-components
-const AppDev = () => {
-  const handleClick = (e: React.MouseEvent) => {
-    console.log("Button clicked", e)
-  }
-
+export const AppDev = () => {
   return (
     <>
-      <h1>Hello, world!</h1>
-      <Button onClick={handleClick}>Click me</Button>
+      <h1>PK Component Library</h1>
+      <ButtonSection />
+      <h2>Loading Spinner</h2>
+      <section>
+        <LoadingSpinner />
+      </section>
     </>
   )
 }
-
-const root = createRoot(document.getElementById("root")!)
-
-root.render(
-  <StrictMode>
-    <AppDev />
-  </StrictMode>,
-)

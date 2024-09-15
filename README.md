@@ -12,4 +12,5 @@ npm i pk-components
 
 ### Available Components
 
-- [Button](./src/components/Button/README.md)
+- [Button](https://github.com/psikai/pk-components/blob/main/src/components/Button/README.md)
+- [LoadingSpinner](https://github.com/psikai/pk-components/blob/main/src/components/LoadingSpinner/README.md)
