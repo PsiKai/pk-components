@@ -12,7 +12,8 @@ export default defineConfig({
     }),
     postcss({
       inject: true,
-      extract: false,
+      extract: true,
+      minimize: true,
     }),
   ],
   build: {
