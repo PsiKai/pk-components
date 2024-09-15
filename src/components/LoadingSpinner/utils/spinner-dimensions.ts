@@ -1,6 +1,12 @@
 import { TLoadingSpinnerProps } from "../LoadingSpinner.model"
 
-export const sizeMap: { [K in TLoadingSpinnerProps["size"] as string]: number } = {
+type TSpinnerMap = { [K in TLoadingSpinnerProps["size"] as string]: number }
+
+/**
+ * Map of spinner sizes to their dimensions.
+ * Numbers are in pixels and represent the width and height of the spinner.
+ */
+export const sizeMap: TSpinnerMap = {
   small: 16,
   medium: 20,
   large: 28,
@@ -8,7 +14,11 @@ export const sizeMap: { [K in TLoadingSpinnerProps["size"] as string]: number } 
   link: 20,
 }
 
-export const spinnerDotSizeMap: { [K in TLoadingSpinnerProps["size"] as string]: number } = {
+/**
+ * Map of spinner sizes to the size of the dots.
+ * Numbers are in pixels and represent the width and height of the dots.
+ */
+export const spinnerDotSizeMap: TSpinnerMap = {
   small: 4,
   medium: 4,
   large: 5,
@@ -16,7 +26,10 @@ export const spinnerDotSizeMap: { [K in TLoadingSpinnerProps["size"] as string]:
   link: 4,
 }
 
-export const spinnerDotCountMap: { [K in TLoadingSpinnerProps["size"] as string]: number } = {
+/**
+ * Map of spinner sizes to the number of dots.
+ */
+export const spinnerDotCountMap: TSpinnerMap = {
   small: 6,
   medium: 8,
   large: 10,
