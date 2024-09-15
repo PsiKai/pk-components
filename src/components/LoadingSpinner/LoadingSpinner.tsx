@@ -2,6 +2,7 @@ import { TLoadingSpinnerProps } from "./LoadingSpinner.model"
 import "./LoadingSpinner.css"
 import { useMemo } from "react"
 import { sizeMap, spinnerDotCountMap, spinnerDotSizeMap } from "./utils/spinner-dimensions"
+import { circlePointPosition } from "./utils/geometry"
 
 export function LoadingSpinner(props: TLoadingSpinnerProps) {
   const { size = "medium" } = props
@@ -14,9 +15,7 @@ export function LoadingSpinner(props: TLoadingSpinnerProps) {
     <div className="pk-loading-spinner" role="progressbar">
       <div className="pk-loading-spinner-inner" style={{ height: `${height}px` }}>
         {dots.map(i => {
-          const angle = (i / dots.length) * 2 * Math.PI
-          const x = (height / 2) * Math.cos(angle)
-          const y = (height / 2) * Math.sin(angle)
+          const { x, y } = circlePointPosition(height, dots.length, i)
           return (
             <div
               data-testid="pk-loading-spinner-dot"
