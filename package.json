@@ -7,7 +7,7 @@
     "component",
     "library"
   ],
-  "version": "0.2.1",
+  "version": "0.2.3",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -18,17 +18,20 @@
     "component": "node scripts/component-creation.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "./dist/style.css"
   ],
   "main": "./dist/pk-components.umd.cjs",
   "module": "./dist/pk-components.js",
   "require": "./dist/pk-components.umd.cjs",
+  "style": "./dist/style.css",
   "exports": {
     ".": {
       "import": "./dist/pk-components.js",
       "require": "./dist/pk-components.umd.cjs",
       "main": "./dist/pk-components.umd.cjs",
-      "types": "./dist/types/index.d.ts"
+      "types": "./dist/types/index.d.ts",
+      "style": "./dist/style.css"
     }
   },
   "peerDependencies": {
