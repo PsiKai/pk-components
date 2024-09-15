@@ -27,7 +27,6 @@
   left: 50%;
   border-radius: 50%;
   background-color: currentColor;
-  backdrop-filter: blur(1px);
 }
 
 @keyframes spin {
