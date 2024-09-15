@@ -22,6 +22,7 @@
   color: hsl(0, var(--color-saturation), var(--color-lightness));
   background-color: hsl(var(--hue), var(--saturation), var(--lightness));
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
 }
 
 .pk-button:hover:not(:disabled) {
@@ -30,6 +31,7 @@
 
 .pk-button:disabled {
   cursor: not-allowed;
+  opacity: 0.7;
 }
 
 .pk-button:focus-visible {
@@ -89,13 +91,15 @@
   width: 100%;
 }
 
-.pk-button-link {
+.pk-button.pk-button-link {
   background-color: transparent;
   border-color: transparent;
   box-shadow: none;
   color: hsl(var(--hue), var(--saturation), var(--lightness));
   font-size: 1.125rem;
   display: inline-block;
+  text-decoration: underline;
+  overflow: hidden;
 
   &:hover:not(:disabled) {
     --lightness: 30%;
@@ -138,7 +142,7 @@
   }
 }
 
-.pk-button-outline {
+.pk-button-outline:not(.pk-button-link) {
   color: hsl(var(--hue), var(--saturation), var(--lightness));
   background-color: transparent;
   border-color: hsl(var(--hue), var(--saturation), var(--lightness));

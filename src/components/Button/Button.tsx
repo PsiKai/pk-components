@@ -1,5 +1,6 @@
 import { useMemo } from "react"
 import { TButtonProps } from "./Button.model"
+import { LoadingSpinner } from "../LoadingSpinner"
 
 import "./Button.css"
 
@@ -27,8 +28,11 @@ export function Button(props: TButtonProps) {
       {children}
     </a>
   ) : (
-    <button className={classString} onClick={onClick} disabled={disabled || pending} type={type}>
-      {pending ? "Loading..." : children}
-    </button>
+    <>
+      <button className={classString} onClick={onClick} disabled={disabled || pending} type={type}>
+        {children}
+        {pending && <LoadingSpinner size={size} />}
+      </button>
+    </>
   )
 }

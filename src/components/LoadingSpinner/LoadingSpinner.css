@@ -1,0 +1,37 @@
+.pk-loading-spinner {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.pk-loading-spinner::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: currentColor;
+  opacity: 0.5;
+}
+
+.pk-loading-spinner-inner {
+  position: relative;
+  animation: spin 1s linear infinite;
+  aspect-ratio: 1 / 1;
+}
+
+.pk-loading-spinner-dot {
+  position: absolute;
+  aspect-ratio: 1 / 1;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  background-color: currentColor;
+  backdrop-filter: blur(1px);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
