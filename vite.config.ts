@@ -1,6 +1,7 @@
 import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react-swc"
 import dts from "vite-plugin-dts"
+import postcss from "rollup-plugin-postcss"
 
 export default defineConfig({
   plugins: [
@@ -8,6 +9,10 @@ export default defineConfig({
     dts({
       outDir: "dist/types",
       insertTypesEntry: true,
+    }),
+    postcss({
+      inject: true,
+      extract: false,
     }),
   ],
   build: {
