@@ -1,4 +1,4 @@
-import { TButtonProps } from "../Button/Button.model"
+import { TButtonProps } from "../Button"
 
 export type TLoadingSpinnerProps = {
   size?: TButtonProps["size"]

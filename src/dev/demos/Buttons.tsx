@@ -1,5 +1,5 @@
 import React, { useCallback } from "react"
-import type { TButtonProps } from "../../components/Button/Button.model"
+import type { TButtonProps } from "../../components/Button"
 import { Button } from "../../components/Button"
 
 const buttonVariants = [
