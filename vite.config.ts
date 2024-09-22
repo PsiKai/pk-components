@@ -1,6 +1,7 @@
 import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react-swc"
 import dts from "vite-plugin-dts"
+import cssInjectedByJS from "vite-plugin-css-injected-by-js"
 
 export default defineConfig({
   plugins: [
@@ -9,12 +10,15 @@ export default defineConfig({
       outDir: "dist/types",
       insertTypesEntry: true,
     }),
+    cssInjectedByJS(),
   ],
+  css: {
+    devSourcemap: true,
+  },
   build: {
     lib: {
       entry: "src/index.tsx",
       name: "pk-components",
-      // fileName: format => `pk-components.${format}.js`,
     },
     rollupOptions: {
       external: ["react", "react-dom"],

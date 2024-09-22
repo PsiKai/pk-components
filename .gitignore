@@ -25,3 +25,6 @@ dist-ssr
 
 # TEST COVERAGE
 coverage/
+
+# Local Builds
+pk-components-*.tgz

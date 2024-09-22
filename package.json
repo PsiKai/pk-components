@@ -7,10 +7,10 @@
     "component",
     "library"
   ],
-  "version": "0.2.1",
+  "version": "0.3.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 3001",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -18,7 +18,7 @@
     "component": "node scripts/component-creation.js"
   },
   "files": [
-    "dist"
+    "./dist"
   ],
   "main": "./dist/pk-components.umd.cjs",
   "module": "./dist/pk-components.js",
@@ -54,6 +54,7 @@
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1",
+    "vite-plugin-css-injected-by-js": "^3.5.1",
     "vite-plugin-dts": "^4.2.1",
     "vitest": "^2.1.1"
   }
