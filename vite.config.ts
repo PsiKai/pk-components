@@ -30,18 +30,22 @@ const libBuildConfig = {
         },
       },
     },
+    sourcemap: true,
   },
 }
 
 const demoBuildConfig = {
-  // root: "src/dev",
   build: {
     outDir: "build",
     rollupOptions: {
       input: "index.html",
     },
+    sourcemap: true,
   },
   plugins: [react()],
+  css: {
+    devSourcemap: true,
+  },
 }
 
 export default defineConfig(({ mode }) => {
@@ -52,6 +56,9 @@ export default defineConfig(({ mode }) => {
   } else {
     return {
       plugins: [react()],
+      css: {
+        devSourcemap: true,
+      },
     }
   }
 })
