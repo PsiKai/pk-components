@@ -14,6 +14,7 @@ A minimal spinning element meant to denote progress or pending application state
 | `aria-*`           | `[key: \`aria-${string}\`]: string \| number \| boolean \| null`  | No       | `undefined` | Optional Accessibility attributes               |
 | `data-*`           | `[key: \`data-${string}\`]: string \| number \| boolean \| null`  | No       | `undefined` | Optional dataset attributes                     |
 | `className`        | `string`                                                          | No       | `undefined` | Additional class names to apply to the spinner. |
+| `fit`              | `"xs" \| "sm" \| "md" \| "lg" \| "xl"`                            | No       | `md`        | The size of the spinner.                        |
 
 #### Example
 
