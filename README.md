@@ -25,3 +25,11 @@ npm i pk-components
 
 - [Button](https://github.com/psikai/pk-components/blob/main/src/components/Button/README.md)
 - [LoadingSpinner](https://github.com/psikai/pk-components/blob/main/src/components/LoadingSpinner/README.md)
+
+### Demo
+
+View the existing components in the live demo site hosted by Github Pages.
+
+[![pages-build-deployment](https://github.com/PsiKai/pk-components/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/PsiKai/pk-components/actions/workflows/pages/pages-build-deployment)
+
+[Live Demo Website](https://psikai.github.io/pk-components/)
