@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react-swc"
 import dts from "vite-plugin-dts"
 import cssInjectedByJS from "vite-plugin-css-injected-by-js"
 
-export default defineConfig({
+const libBuildConfig = {
   plugins: [
     react(),
     dts({
@@ -31,4 +31,27 @@ export default defineConfig({
       },
     },
   },
+}
+
+const demoBuildConfig = {
+  // root: "src/dev",
+  build: {
+    outDir: "build",
+    rollupOptions: {
+      input: "index.html",
+    },
+  },
+  plugins: [react()],
+}
+
+export default defineConfig(({ mode }) => {
+  if (mode === "lib") {
+    return libBuildConfig
+  } else if (mode === "demo") {
+    return demoBuildConfig
+  } else {
+    return {
+      plugins: [react()],
+    }
+  }
 })

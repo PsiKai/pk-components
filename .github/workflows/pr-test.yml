@@ -44,5 +44,8 @@ jobs:
       - name: Setup local packages
         run: npm install
 
-      - name: Execute test script
-        run: npm run build
+      - name: Execute library build script
+        run: npm run build:lib
+
+      - name: Execute demo build script
+        run: npm run build:demo
