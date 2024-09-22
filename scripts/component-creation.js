@@ -1,18 +1,13 @@
 import path, { dirname } from "path"
 import fs from "fs"
 import { fileURLToPath } from "url"
+import { pascalize } from "../utils/string-utils.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 async function main(componentName) {
-  const santizedComponentName = componentName
-    .replace(/([a-z])([A-Z])/g, "$1 $2")
-    .split(/[-_\s]/g)
-    .map(word => {
-      return word.charAt(0).toUpperCase() + word.slice(1)
-    })
-    .join("")
+  const santizedComponentName = pascalize(componentName)
 
   const destinationPath = path.join(__dirname, "../src", "components", santizedComponentName)
 
