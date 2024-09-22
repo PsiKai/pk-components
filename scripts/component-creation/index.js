@@ -1,7 +1,14 @@
 import path, { dirname } from "path"
 import fs from "fs"
 import { fileURLToPath } from "url"
-import { pascalize } from "../utils/string-utils.js"
+import { pascalize } from "../../utils/string-utils.js"
+import {
+  generateComponentFile,
+  generateIndexFile,
+  generateModelFile,
+  generateReadmeFile,
+  generateSpecFile,
+} from "./component-creation-templates.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -9,7 +16,7 @@ const __dirname = dirname(__filename)
 async function main(componentName) {
   const santizedComponentName = pascalize(componentName)
 
-  const destinationPath = path.join(__dirname, "../src", "components", santizedComponentName)
+  const destinationPath = path.join(__dirname, "../../src", "components", santizedComponentName)
 
   if (fs.existsSync(destinationPath)) {
     console.error("ERROR\nCOMPONENT ALREADY EXISTS:", santizedComponentName)
@@ -57,88 +64,6 @@ async function main(componentName) {
 
   console.log("COMPONENT CREATED SUCCESSFULLY")
 }
-
-/**
- * FILE TEMPLATE STRING GENERATORS
- */
-
-function generateIndexFile(componentName) {
-  return `export { ${componentName} } from "./${componentName}"
-export type { T${componentName}Props } from "./${componentName}.model"
-`
-}
-
-function generateComponentFile(componentName) {
-  return `import { T${componentName}Props } from "./${componentName}.model"
-import "./${componentName}.css"
-
-export function ${componentName}(props: T${componentName}Props) {
-  return <div>${componentName}</div>
-}
-`
-}
-
-function generateModelFile(componentName) {
-  return `import { AllHtmlAttributes } from "../../core-types"
-
-export type T${componentName}Props = AllHtmlAttributes & {
-  className?: string
-  children?: React.ReactNode
-}
-`
-}
-
-function generateSpecFile(componentName) {
-  return `import React from "react"
-  import { render, screen } from "@testing-library/react"
-  import "@testing-library/jest-dom"
-
-  import { ${componentName} } from "./${componentName}"
-
-  describe("${componentName}", () => {
-    beforeEach(() => {
-      render(<${componentName} />)
-    })
-
-    it("should render the component", () => {
-      const component = screen.getByText("${componentName}")
-      expect(component).toBeInTheDocument()
-    })
-  })
-`
-}
-
-function generateReadmeFile(componentName) {
-  return `### ${componentName} Component
-
-#### Description
-
-A brief description of the component. Basic functionality and behavior.
-
-#### Props
-
-| Prop Name            | Type                                                                | Required | Default       | Description                                     |
-| -------------------- | ------------------------------------------------------------------- | -------- | ------------- | ----------------------------------------------- |
-| \`[htmlAttributes]\` | \`React.AllHTMLAttributes<HTMLElement>\`                            | No       | \`undefined\` | Any valid HTML attribute for the element type   |
-| \`aria-\*\`          | \`[key: aria-$\{string\}]: string \\| number \\| boolean \\| null\` | No       | \`undefined\` | Optional Accessibility attributes               |
-| \`data-\*\`          | \`[key: data-$\{string\}]: string \\| number \\| boolean \\| null\` | No       | \`undefined\` | Optional dataset attributes                     |
-| \`className\`        | \`string\`                                                          | No       | \`undefined\` | Additional class names to apply to the spinner. |
-
-#### Example
-
-\`\`\`tsx
-import { ${componentName} } from "pk-components"
-
-function YourComponent() {
-  return <${componentName}>Your content here</${componentName}>
-}
-\`\`\`
-`
-}
-
-/**
- * END OF FILE TEMPLATE STRING GENERATORS
- */
 
 const componentName = process.argv[2]
 if (!componentName) {
