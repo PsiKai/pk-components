@@ -29,7 +29,7 @@ describe("Button", () => {
   for (const size of ["small", "medium", "large", "link", "block"] as const) {
     describe(`with size ${size}`, () => {
       beforeEach(() => {
-        render(<Button size={size}>Click me</Button>)
+        render(<Button fit={size}>Click me</Button>)
       })
 
       it("should have the correct size class", () => {

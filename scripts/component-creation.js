@@ -29,42 +29,38 @@ async function main(componentName) {
 
   // Create the index.ts file
   await fs.promises.writeFile(
-    getFullFilePath(destinationPath, "index.ts"),
+    path.join(destinationPath, "index.ts"),
     generateIndexFile(santizedComponentName),
   )
 
   // Create the component file
   await fs.promises.writeFile(
-    getFullFilePath(destinationPath, `${santizedComponentName}.tsx`),
+    path.join(destinationPath, `${santizedComponentName}.tsx`),
     generateComponentFile(santizedComponentName),
   )
 
   // Create the model file
   await fs.promises.writeFile(
-    getFullFilePath(destinationPath, `${santizedComponentName}.model.ts`),
+    path.join(destinationPath, `${santizedComponentName}.model.ts`),
     generateModelFile(santizedComponentName),
   )
 
   // Create the css file
-  await fs.promises.writeFile(getFullFilePath(destinationPath, `${santizedComponentName}.css`), "")
+  await fs.promises.writeFile(path.join(destinationPath, `${santizedComponentName}.css`), "")
 
   // Create the component spec file
   await fs.promises.writeFile(
-    getFullFilePath(destinationPath, `${santizedComponentName}.spec.tsx`),
+    path.join(destinationPath, `${santizedComponentName}.spec.tsx`),
     generateSpecFile(santizedComponentName),
   )
 
   // Create the readme file
   await fs.promises.writeFile(
-    getFullFilePath(destinationPath, "README.md"),
+    path.join(destinationPath, "README.md"),
     generateReadmeFile(santizedComponentName),
   )
 
   console.log("COMPONENT CREATED SUCCESSFULLY")
-}
-
-function getFullFilePath(fullPath, fileName) {
-  return path.join(fullPath, fileName)
 }
 
 /**
@@ -88,7 +84,9 @@ export function ${componentName}(props: T${componentName}Props) {
 }
 
 function generateModelFile(componentName) {
-  return `export type T${componentName}Props = {
+  return `import { AllHtmlAttributes } from "../../core-types"
+
+export type T${componentName}Props = AllHtmlAttributes & {
   className?: string
   children?: React.ReactNode
 }
@@ -120,12 +118,16 @@ function generateReadmeFile(componentName) {
 
 #### Description
 
+A brief description of the component. Basic functionality and behavior.
+
 #### Props
 
-| Prop Name | Type | Required | Default | Description |
-| --------- | ---- | -------- | ------- | ----------- |
-| \`children\` | \`React.ReactNode\` | no | \`undefined\` | Children to display inside the component. |
-| \`className\` | \`string\` | no | \`undefined\` | Additional className to pass to the parent element. |
+| Prop Name            | Type                                                                        | Required | Default       | Description                                     |
+| -------------------- | --------------------------------------------------------------------------- | -------- | ------------- | ----------------------------------------------- |
+| \`[htmlAttributes]\` | \`React.AllHTMLAttributes<HTMLElement>\`                                    | No       | \`undefined\` | Any valid HTML attribute for the element type   |
+| \`aria-\*\`          | \`[key: \\\`aria-$\{string\}\\\`]: string \\| number \\| boolean \\| null\` | No       | \`undefined\` | Optional Accessibility attributes               |
+| \`data-\*\`          | \`[key: \\\`data-$\{string\}\\\`]: string \\| number \\| boolean \\| null\` | No       | \`undefined\` | Optional dataset attributes                     |
+| \`className\`        | \`string\`                                                                  | No       | \`undefined\` | Additional class names to apply to the spinner. |
 
 #### Example
 
