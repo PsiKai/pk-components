@@ -1,0 +1,44 @@
+name: Main Build and Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  RunVitest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+
+      - name: Setup local packages
+        run: npm install
+
+      - name: Execute test script
+        run: npm run test
+
+      - name: Upload results to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+  PreviewBuild:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+
+      - name: Setup local packages
+        run: npm install
+
+      - name: Execute test script
+        run: npm run build
