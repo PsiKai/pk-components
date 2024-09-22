@@ -48,17 +48,20 @@ const demoBuildConfig = {
   },
 }
 
+const defaultConfig = {
+  plugins: [react()],
+  css: {
+    devSourcemap: true,
+  },
+}
+
 export default defineConfig(({ mode }) => {
-  if (mode === "lib") {
-    return libBuildConfig
-  } else if (mode === "demo") {
-    return demoBuildConfig
-  } else {
-    return {
-      plugins: [react()],
-      css: {
-        devSourcemap: true,
-      },
-    }
+  switch (mode) {
+    case "lib":
+      return libBuildConfig
+    case "demo":
+      return demoBuildConfig
+    default:
+      return defaultConfig
   }
 })
