@@ -1,74 +1,10 @@
-import path, { dirname } from "path"
-import fs from "fs"
-import { fileURLToPath } from "url"
-import { pascalize } from "../utils/string-utils.js"
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-
-async function main(componentName) {
-  const santizedComponentName = pascalize(componentName)
-
-  const destinationPath = path.join(__dirname, "../src", "components", santizedComponentName)
-
-  if (fs.existsSync(destinationPath)) {
-    console.error("ERROR\nCOMPONENT ALREADY EXISTS:", santizedComponentName)
-    process.exit(1)
-  }
-
-  console.log("CREATING COMPONENT:", santizedComponentName)
-  console.log("DESTINATION PATH:", destinationPath)
-
-  // Create the directory
-  await fs.promises.mkdir(destinationPath, { recursive: true })
-
-  // Create the index.ts file
-  await fs.promises.writeFile(
-    path.join(destinationPath, "index.ts"),
-    generateIndexFile(santizedComponentName),
-  )
-
-  // Create the component file
-  await fs.promises.writeFile(
-    path.join(destinationPath, `${santizedComponentName}.tsx`),
-    generateComponentFile(santizedComponentName),
-  )
-
-  // Create the model file
-  await fs.promises.writeFile(
-    path.join(destinationPath, `${santizedComponentName}.model.ts`),
-    generateModelFile(santizedComponentName),
-  )
-
-  // Create the css file
-  await fs.promises.writeFile(path.join(destinationPath, `${santizedComponentName}.css`), "")
-
-  // Create the component spec file
-  await fs.promises.writeFile(
-    path.join(destinationPath, `${santizedComponentName}.spec.tsx`),
-    generateSpecFile(santizedComponentName),
-  )
-
-  // Create the readme file
-  await fs.promises.writeFile(
-    path.join(destinationPath, "README.md"),
-    generateReadmeFile(santizedComponentName),
-  )
-
-  console.log("COMPONENT CREATED SUCCESSFULLY")
-}
-
-/**
- * FILE TEMPLATE STRING GENERATORS
- */
-
-function generateIndexFile(componentName) {
+export function generateIndexFile(componentName) {
   return `export { ${componentName} } from "./${componentName}"
 export type { T${componentName}Props } from "./${componentName}.model"
 `
 }
 
-function generateComponentFile(componentName) {
+export function generateComponentFile(componentName) {
   return `import { T${componentName}Props } from "./${componentName}.model"
 import "./${componentName}.css"
 
@@ -78,7 +14,7 @@ export function ${componentName}(props: T${componentName}Props) {
 `
 }
 
-function generateModelFile(componentName) {
+export function generateModelFile(componentName) {
   return `import { AllHtmlAttributes } from "../../core-types"
 
 export type T${componentName}Props = AllHtmlAttributes & {
@@ -88,7 +24,7 @@ export type T${componentName}Props = AllHtmlAttributes & {
 `
 }
 
-function generateSpecFile(componentName) {
+export function generateSpecFile(componentName) {
   return `import React from "react"
   import { render, screen } from "@testing-library/react"
   import "@testing-library/jest-dom"
@@ -108,7 +44,7 @@ function generateSpecFile(componentName) {
 `
 }
 
-function generateReadmeFile(componentName) {
+export function generateReadmeFile(componentName) {
   return `### ${componentName} Component
 
 #### Description
@@ -135,15 +71,3 @@ function YourComponent() {
 \`\`\`
 `
 }
-
-/**
- * END OF FILE TEMPLATE STRING GENERATORS
- */
-
-const componentName = process.argv[2]
-if (!componentName) {
-  console.error("ERROR: Please provide a component name")
-  process.exit(1)
-}
-
-main(componentName).catch(console.error)

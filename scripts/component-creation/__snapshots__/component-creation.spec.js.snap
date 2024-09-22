@@ -1,0 +1,75 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`component-creation template methods > generateComponentFile > should return string content for component file 1`] = `
+"import { TTestComponentProps } from "./TestComponent.model"
+import "./TestComponent.css"
+
+export function TestComponent(props: TTestComponentProps) {
+  return <div>TestComponent</div>
+}
+"
+`;
+
+exports[`component-creation template methods > generateComponentFile > should return string content for index file 1`] = `
+"export { TestComponent } from "./TestComponent"
+export type { TTestComponentProps } from "./TestComponent.model"
+"
+`;
+
+exports[`component-creation template methods > generateModelFile > should return string content for model file 1`] = `
+"import { AllHtmlAttributes } from "../../core-types"
+
+export type TTestComponentProps = AllHtmlAttributes & {
+  className?: string
+  children?: React.ReactNode
+}
+"
+`;
+
+exports[`component-creation template methods > generateReadmeFile > should return string content for readme file 1`] = `
+"### TestComponent Component
+
+#### Description
+
+A brief description of the component. Basic functionality and behavior.
+
+#### Props
+
+| Prop Name            | Type                                                                | Required | Default       | Description                                     |
+| -------------------- | ------------------------------------------------------------------- | -------- | ------------- | ----------------------------------------------- |
+| \`[htmlAttributes]\` | \`React.AllHTMLAttributes<HTMLElement>\`                            | No       | \`undefined\` | Any valid HTML attribute for the element type   |
+| \`aria-*\`          | \`[key: aria-\${string}]: string \\| number \\| boolean \\| null\` | No       | \`undefined\` | Optional Accessibility attributes               |
+| \`data-*\`          | \`[key: data-\${string}]: string \\| number \\| boolean \\| null\` | No       | \`undefined\` | Optional dataset attributes                     |
+| \`className\`        | \`string\`                                                          | No       | \`undefined\` | Additional class names to apply to the spinner. |
+
+#### Example
+
+\`\`\`tsx
+import { TestComponent } from "pk-components"
+
+function YourComponent() {
+  return <TestComponent>Your content here</TestComponent>
+}
+\`\`\`
+"
+`;
+
+exports[`component-creation template methods > generateSpecFile > should return string content for spec file 1`] = `
+"import React from "react"
+  import { render, screen } from "@testing-library/react"
+  import "@testing-library/jest-dom"
+
+  import { TestComponent } from "./TestComponent"
+
+  describe("TestComponent", () => {
+    beforeEach(() => {
+      render(<TestComponent />)
+    })
+
+    it("should render the component", () => {
+      const component = screen.getByText("TestComponent")
+      expect(component).toBeInTheDocument()
+    })
+  })
+"
+`;

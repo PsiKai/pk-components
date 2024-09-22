@@ -15,7 +15,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run --coverage",
-    "component": "node scripts/component-creation.js"
+    "component": "node scripts/component-creation"
   },
   "files": [
     "./dist"
