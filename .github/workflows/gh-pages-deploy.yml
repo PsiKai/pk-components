@@ -1,4 +1,4 @@
-name: Main Build and Test
+name: Github Actions Deploy
 
 on:
   workflow_call:
