@@ -12,6 +12,18 @@ const buttonVariants = [
 
 const buttonSizes = ["link", "small", "medium", "large", "block"] as TButtonProps["fit"][]
 
+function usePending() {
+  const [pending, setPending] = React.useState("")
+
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+    setPending(e.currentTarget.textContent!)
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    setPending("")
+  }
+
+  return { pending, handleClick }
+}
+
 export const ButtonSection = () => {
   return (
     <>
@@ -29,14 +41,7 @@ export const ButtonSection = () => {
 }
 
 const ButtonSizes = () => {
-  const [pending, setPending] = React.useState("")
-
-  const handleClick = async (e: React.MouseEvent) => {
-    console.log("Button clicked", e.currentTarget.textContent)
-    setPending(e.currentTarget.textContent!)
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    setPending("")
-  }
+  const { pending, handleClick } = usePending()
 
   return (
     <section>
@@ -53,14 +58,7 @@ const ButtonSizes = () => {
 }
 
 const ButtonVariants = () => {
-  const [pending, setPending] = React.useState("")
-
-  const handleClick = async (e: React.MouseEvent) => {
-    console.log("Button clicked", e.currentTarget.textContent)
-    setPending(e.currentTarget.textContent!)
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    setPending("")
-  }
+  const { pending, handleClick } = usePending()
 
   return (
     <section>
@@ -79,14 +77,7 @@ const ButtonVariants = () => {
 }
 
 const ButtonOutline = () => {
-  const [pending, setPending] = React.useState("")
-
-  const handleClick = async (e: React.MouseEvent) => {
-    console.log("Button clicked", e.currentTarget.textContent)
-    setPending(e.currentTarget.textContent!)
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    setPending("")
-  }
+  const { pending, handleClick } = usePending()
 
   return (
     <section>
