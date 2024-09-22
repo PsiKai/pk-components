@@ -48,4 +48,4 @@ jobs:
       - RunVitest
       - PreviewBuild
     if: success()
-    uses: ./.github/gh-pages-deploy.yml
+    uses: ./.github/workflows/gh-pages-deploy.yml
