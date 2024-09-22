@@ -1,5 +1,5 @@
-![main](https://github.com/github/docs/actions/workflows/main-build-test.yml/badge.svg?branch=main)
-[![codecov](https://codecov.io/gh/PsiKai/pk-components/graph/badge.svg?token=SR0H8M8FKV)](https://codecov.io/gh/PsiKai/pk-components)
+[![main](https://github.com/github/docs/actions/workflows/main-build-test.yml/badge.svg?branch=main)]
+[![Code coverage](https://codecov.io/gh/PsiKai/pk-components/graph/badge.svg?token=SR0H8M8FKV)](https://codecov.io/gh/PsiKai/pk-components)
 [![NPM Version](https://img.shields.io/npm/v/npm.svg?style=flat)]()
 
 # PsiKai Component Library
