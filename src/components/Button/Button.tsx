@@ -2,6 +2,7 @@ import { useMemo } from "react"
 import { TButtonProps } from "./Button.model"
 import { LoadingSpinner } from "../LoadingSpinner"
 import "./Button.css"
+import { spinnerSizeMap } from "./utils/spinner-map"
 
 export function Button(props: TButtonProps) {
   const {
@@ -29,7 +30,7 @@ export function Button(props: TButtonProps) {
   ) : (
     <button className={classString} disabled={disabled || pending} type={type} {...rest}>
       {children}
-      {pending && <LoadingSpinner fit={fit} />}
+      {pending && <LoadingSpinner fit={spinnerSizeMap[fit]} />}
     </button>
   )
 }

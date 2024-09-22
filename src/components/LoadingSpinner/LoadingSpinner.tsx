@@ -5,7 +5,7 @@ import { circlePointPosition } from "./utils/geometry"
 import "./LoadingSpinner.css"
 
 export function LoadingSpinner(props: TLoadingSpinnerProps) {
-  const { fit = "medium" } = props
+  const { fit = "md", ...rest } = props
 
   const dots = useMemo(() => Array.from({ length: spinnerDotCountMap[fit] }, (_, i) => i), [fit])
   const height = useMemo(() => sizeMap[fit], [fit])
@@ -25,6 +25,7 @@ export function LoadingSpinner(props: TLoadingSpinnerProps) {
                 height: `${dotSize}px`,
               }}
               className="pk-loading-spinner-dot"
+              {...rest}
             />
           )
         })}
