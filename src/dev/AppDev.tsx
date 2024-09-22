@@ -1,5 +1,5 @@
 import React from "react"
-import { LoadingSpinner } from "../components/LoadingSpinner"
+import { LoadingSpinner } from "../lib/components/LoadingSpinner"
 import { ButtonSection } from "./demos/Buttons"
 import "./index.css"
 

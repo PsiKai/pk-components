@@ -17,12 +17,12 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: "src/index.tsx",
+      entry: "src/lib/index.tsx",
       name: "pk-components",
     },
     rollupOptions: {
       external: ["react", "react-dom"],
-      input: "src/index.tsx",
+      input: "src/lib/index.tsx",
       output: {
         globals: {
           react: "React",

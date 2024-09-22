@@ -1,6 +1,6 @@
 import React, { useCallback } from "react"
-import type { TButtonProps } from "../../components/Button"
-import { Button } from "../../components/Button"
+import type { TButtonProps } from "../../lib/components/Button"
+import { Button } from "../../lib/components/Button"
 
 const buttonVariants = [
   "primary",
