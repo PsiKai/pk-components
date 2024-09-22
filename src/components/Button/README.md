@@ -9,8 +9,8 @@ A reusable button component that accepts content (`children`), a click event han
 | Prop Name          | Type                                                              | Required | Default     | Description                                                    |
 | ------------------ | ----------------------------------------------------------------- | -------- | ----------- | -------------------------------------------------------------- |
 | `[htmlAttributes]` | `React.AllHTMLAttributes<HTMLButtonElement \| HTMLAnchorElement>` | No       | `undefined` | Any valid HTML attribute for the element type                  |
-| `aria-*`           | `[key: `aria-${string}`]: string \| number \| boolean \| null`    | No       | `undefined` | Optional Accessibility attributes                              |
-| `data-*`           | `[key: `data-${string}`]: string \| number \| boolean \| null`    | No       | `undefined` | Optional dataset attributes                                    |
+| `aria-*`           | `[key: aria-${string}]: string \| number \| boolean \| null`      | No       | `undefined` | Optional Accessibility attributes                              |
+| `data-*`           | `[key: data-${string}]: string \| number \| boolean \| null`      | No       | `undefined` | Optional dataset attributes                                    |
 | `children`         | `React.ReactNode`                                                 | No       | `undefined` | Content to display inside the button.                          |
 | `onClick`          | `React.MouseEventHandler<HTMLButtonElement>`                      | No       | `undefined` | Function to handle the button's click event.                   |
 | `className`        | `string`                                                          | No       | `undefined` | Additional CSS class for styling the button.                   |
