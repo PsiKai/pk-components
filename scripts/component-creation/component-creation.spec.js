@@ -23,14 +23,28 @@ describe("component-creation", () => {
     }
   })
 
-  it("should create the directory and files", async () => {
-    expect(fs.existsSync(filePath)).toBe(true)
-    expect(fs.existsSync(`${filePath}/index.ts`)).toBe(true)
-    expect(fs.existsSync(`${filePath}/${componentName}.tsx`)).toBe(true)
-    expect(fs.existsSync(`${filePath}/${componentName}.model.ts`)).toBe(true)
-    expect(fs.existsSync(`${filePath}/${componentName}.css`)).toBe(true)
-    expect(fs.existsSync(`${filePath}/${componentName}.spec.tsx`)).toBe(true)
-    expect(fs.existsSync(`${filePath}/README.md`)).toBe(true)
+  describe("with file system", async () => {
+    it("should create the directory in the components folder", async () => {
+      expect(fs.existsSync(filePath)).toBe(true)
+    })
+    it("should create the index.ts file", async () => {
+      expect(fs.existsSync(`${filePath}/index.ts`)).toBe(true)
+    })
+    it("should create the component file", async () => {
+      expect(fs.existsSync(`${filePath}/${componentName}.tsx`)).toBe(true)
+    })
+    it("should create the model file", async () => {
+      expect(fs.existsSync(`${filePath}/${componentName}.model.ts`)).toBe(true)
+    })
+    it("should create the css file", async () => {
+      expect(fs.existsSync(`${filePath}/${componentName}.css`)).toBe(true)
+    })
+    it("should create the component spec file", async () => {
+      expect(fs.existsSync(`${filePath}/${componentName}.spec.tsx`)).toBe(true)
+    })
+    it("should create the readme file", async () => {
+      expect(fs.existsSync(`${filePath}/README.md`)).toBe(true)
+    })
   })
 
   describe("with existing component of same name", () => {
