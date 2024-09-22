@@ -1,0 +1,28 @@
+name: Main Build and Test
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  DeployDemoApp:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Execute demo build script
+        run: npm run build:demo
+
+      - name: Deploy to GH Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build

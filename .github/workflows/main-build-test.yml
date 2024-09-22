@@ -43,27 +43,9 @@ jobs:
       - name: Execute library build script
         run: npm run build:lib
 
-  DeployDemoApp:
-    runs-on: ubuntu-latest
+  Deploy:
     needs:
       - RunVitest
       - PreviewBuild
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Execute demo build script
-        run: npm run build:demo
-
-      - name: Deploy to GH Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+    if: success()
+    uses: ./.github/gh-pages-deploy.yml
