@@ -46,6 +46,7 @@ const demoBuildConfig = {
   css: {
     devSourcemap: true,
   },
+  base: "/pk-components/",
 }
 
 const defaultConfig = {
