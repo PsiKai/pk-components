@@ -1,4 +1,4 @@
-[![main](https://github.com/psikai/pk-components/workflows/main-build-test.yml/badge.svg)](https://github.com/github/docs/actions/workflows/main-build-test.yml/badge.svg?branch=main)
+[![main](https://github.com/github/docs/actions/workflows/main-build-test.yml/badge.svg?branch=main)](https://github.com/psikai/pk-components/actions)
 [![Code coverage](https://codecov.io/gh/PsiKai/pk-components/graph/badge.svg?token=SR0H8M8FKV)](https://codecov.io/gh/PsiKai/pk-components)
 [![NPM Version](https://img.shields.io/npm/v/npm.svg?style=flat)]()
 
