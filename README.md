@@ -1,3 +1,7 @@
+![main](https://github.com/github/docs/actions/workflows/main.yml/badge.svg?branch=main)
+[![codecov](https://codecov.io/gh/PsiKai/pk-components/graph/badge.svg?token=SR0H8M8FKV)](https://codecov.io/gh/PsiKai/pk-components)
+[![NPM Version](https://img.shields.io/npm/v/npm.svg?style=flat)]()
+
 # PsiKai Component Library
 
 A repository of pre-built React components for commonly needed UI elements. Install the library and import the components into your JSX files. Props are exposed for additional customization, but sensible defaults are automatically applied.
