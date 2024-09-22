@@ -6,18 +6,21 @@ A reusable button component that accepts content (`children`), a click event han
 
 #### Props
 
-| Prop Name   | Type                                                             | Required | Default     | Description                                                    |
-| ----------- | ---------------------------------------------------------------- | -------- | ----------- | -------------------------------------------------------------- |
-| `children`  | `React.ReactNode`                                                | No       | `undefined` | Content to display inside the button.                          |
-| `onClick`   | `React.MouseEventHandler<HTMLButtonElement>`                     | No       | `undefined` | Function to handle the button's click event.                   |
-| `className` | `string`                                                         | No       | `undefined` | Additional CSS class for styling the button.                   |
-| `disabled`  | `boolean`                                                        | No       | `false`     | Disables the button from user interaction.                     |
-| `pending`   | `boolean`                                                        | No       | `false`     | Disables the button and presents a loading spinner.            |
-| `variant`   | `"primary" \| "secondary" \| "success" \| "warning" \| "danger"` | No       | `"primary"` | Determines the style of button to display.                     |
-| `type`      | `"button" \| "submit" \| "reset"`                                | No       | `"button"`  | Assigns the semantic HTML button type.                         |
-| `size`      | `"small" \| "medium" \| "large" \| "block" \| "link"`            | No       | `"large"`   | Determines the size of the button to display.                  |
-| `href`      | `string`                                                         | No       | `undefined` | When present, converts the button to an anchor tag.            |
-| `fill`      | `"solid" \| "outline"`                                           | No       | `"solid"`   | Changes the button's background color from filled to outlined. |
+| Prop Name          | Type                                                              | Required | Default     | Description                                                    |
+| ------------------ | ----------------------------------------------------------------- | -------- | ----------- | -------------------------------------------------------------- |
+| `[htmlAttributes]` | `React.AllHTMLAttributes<HTMLButtonElement \| HTMLAnchorElement>` | No       | `undefined` | Any valid HTML attribute for the element type                  |
+| `aria-*`           | `[key: aria-${string}]: string \| number \| boolean \| null`      | No       | `undefined` | Optional Accessibility attributes                              |
+| `data-*`           | `[key: data-${string}]: string \| number \| boolean \| null`      | No       | `undefined` | Optional dataset attributes                                    |
+| `children`         | `React.ReactNode`                                                 | No       | `undefined` | Content to display inside the button.                          |
+| `onClick`          | `React.MouseEventHandler<HTMLButtonElement>`                      | No       | `undefined` | Function to handle the button's click event.                   |
+| `className`        | `string`                                                          | No       | `undefined` | Additional CSS class for styling the button.                   |
+| `disabled`         | `boolean`                                                         | No       | `false`     | Disables the button from user interaction.                     |
+| `pending`          | `boolean`                                                         | No       | `false`     | Disables the button and presents a loading spinner.            |
+| `variant`          | `"primary" \| "secondary" \| "success" \| "warning" \| "danger"`  | No       | `"primary"` | Determines the style of button to display.                     |
+| `type`             | `"button" \| "submit" \| "reset"`                                 | No       | `"button"`  | Assigns the semantic HTML button type.                         |
+| `size`             | `"small" \| "medium" \| "large" \| "block" \| "link"`             | No       | `"large"`   | Determines the size of the button to display.                  |
+| `href`             | `string`                                                          | No       | `undefined` | When present, converts the button to an anchor tag.            |
+| `fill`             | `"solid" \| "outline"`                                            | No       | `"solid"`   | Changes the button's background color from filled to outlined. |
 
 #### Example
 

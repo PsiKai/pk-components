@@ -1,5 +1,5 @@
-import { TButtonProps } from "../Button"
+import { AllHtmlAttributes } from "../../core-types"
 
-export type TLoadingSpinnerProps = {
-  size?: TButtonProps["size"]
+export type TLoadingSpinnerProps = AllHtmlAttributes & {
+  fit?: "xs" | "sm" | "md" | "lg" | "xl"
 }

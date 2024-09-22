@@ -12,10 +12,10 @@ describe("LoadingSpinner", () => {
     expect(loadingSpinner).toBeInTheDocument()
   })
 
-  for (const size of ["small", "medium", "large"] as const) {
+  for (const size of ["xs", "sm", "md", "lg", "xl"] as const) {
     describe(`with size ${size}`, () => {
       beforeEach(() => {
-        render(<LoadingSpinner size={size} />)
+        render(<LoadingSpinner fit={size} />)
       })
 
       it("should display the correct number of dots", () => {

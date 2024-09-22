@@ -3,7 +3,7 @@
  * @param height {number} The height of the circle.
  * @param pointCount {number} The number of points on the circle.
  * @param currentPoint {number} The current point.
- * @returns {x: number, y: number} The x and y coordinates of the point.
+ * @returns object {x: number, y: number} The x and y coordinates of the point.
  */
 export function circlePointPosition(height: number, pointCount: number, currentPoint: number) {
   const angle = (currentPoint / pointCount) * (2 * Math.PI)

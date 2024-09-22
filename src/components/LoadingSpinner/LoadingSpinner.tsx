@@ -1,15 +1,15 @@
-import { TLoadingSpinnerProps } from "./LoadingSpinner.model"
-import "./LoadingSpinner.css"
 import { useMemo } from "react"
+import { TLoadingSpinnerProps } from "./LoadingSpinner.model"
 import { sizeMap, spinnerDotCountMap, spinnerDotSizeMap } from "./utils/spinner-dimensions"
 import { circlePointPosition } from "./utils/geometry"
+import "./LoadingSpinner.css"
 
 export function LoadingSpinner(props: TLoadingSpinnerProps) {
-  const { size = "medium" } = props
+  const { fit = "md", ...rest } = props
 
-  const dots = useMemo(() => Array.from({ length: spinnerDotCountMap[size] }, (_, i) => i), [size])
-  const height = useMemo(() => sizeMap[size], [size])
-  const dotSize = useMemo(() => spinnerDotSizeMap[size], [size])
+  const dots = useMemo(() => Array.from({ length: spinnerDotCountMap[fit] }, (_, i) => i), [fit])
+  const height = useMemo(() => sizeMap[fit], [fit])
+  const dotSize = useMemo(() => spinnerDotSizeMap[fit], [fit])
 
   return (
     <div className="pk-loading-spinner" role="progressbar">
@@ -25,6 +25,7 @@ export function LoadingSpinner(props: TLoadingSpinnerProps) {
                 height: `${dotSize}px`,
               }}
               className="pk-loading-spinner-dot"
+              {...rest}
             />
           )
         })}

@@ -26,7 +26,7 @@
 }
 
 .pk-button:hover:not(:disabled) {
-  --lightness: 35%;
+  --lightness: 30%;
 }
 
 .pk-button:disabled {
@@ -115,7 +115,7 @@
   --hue: 30;
 
   &:hover:not(:disabled) {
-    --lightness: 45%;
+    --lightness: 40%;
   }
 }
 
@@ -133,7 +133,7 @@
 }
 
 .pk-button-secondary {
-  --lightness: 40%;
+  --lightness: 50%;
   --saturation: 0%;
   --hue: 0;
 
