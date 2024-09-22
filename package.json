@@ -7,10 +7,10 @@
     "component",
     "library"
   ],
-  "version": "0.2.7",
+  "version": "0.2.8",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 3001",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -18,19 +18,17 @@
     "component": "node scripts/component-creation.js"
   },
   "files": [
-    "dist/"
+    "./dist"
   ],
-  "main": "dist/pk-components.umd.cjs",
-  "module": "dist/pk-components.js",
-  "require": "dist/pk-components.umd.cjs",
-  "style": "dist/style.css",
+  "main": "./dist/pk-components.umd.cjs",
+  "module": "./dist/pk-components.js",
+  "require": "./dist/pk-components.umd.cjs",
   "exports": {
     ".": {
-      "import": "dist/pk-components.js",
-      "require": "dist/pk-components.umd.cjs",
-      "main": "dist/pk-components.umd.cjs",
-      "types": "dist/types/index.d.ts",
-      "style": "dist/style.css"
+      "import": "./dist/pk-components.js",
+      "require": "./dist/pk-components.umd.cjs",
+      "main": "./dist/pk-components.umd.cjs",
+      "types": "./dist/types/index.d.ts"
     }
   },
   "peerDependencies": {
@@ -53,10 +51,10 @@
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
     "jsdom": "^25.0.0",
-    "rollup-plugin-postcss": "^4.0.2",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1",
+    "vite-plugin-css-injected-by-js": "^3.5.1",
     "vite-plugin-dts": "^4.2.1",
     "vitest": "^2.1.1"
   }
