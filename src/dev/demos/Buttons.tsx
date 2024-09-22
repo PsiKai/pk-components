@@ -10,7 +10,7 @@ const buttonVariants = [
   "danger",
 ] as TButtonProps["variant"][]
 
-const buttonSizes = ["small", "medium", "large", "link", "block"] as TButtonProps["size"][]
+const buttonSizes = ["link", "small", "medium", "large", "block"] as TButtonProps["fit"][]
 
 export const ButtonSection = () => {
   return (
@@ -40,11 +40,11 @@ const ButtonSizes = () => {
 
   return (
     <section>
-      {buttonSizes.map(size => {
-        const props = size === "link" ? { href: "/" } : { onClick: handleClick }
+      {buttonSizes.map(fit => {
+        const props = fit === "link" ? { href: "/" } : { onClick: handleClick }
         return (
-          <Button key={size} size={size} {...props} pending={pending === size + "-size"}>
-            {size + "-size"}
+          <Button key={fit} fit={fit} {...props} pending={pending === fit + "-fit"}>
+            {fit + "-fit"}
           </Button>
         )
       })}
@@ -109,17 +109,17 @@ const ButtonState = () => {
   const buttonMap = useCallback(
     (variant: (typeof buttonVariants)[number], disabled: boolean, pending: boolean) => {
       const fill = Math.random() > 0.7 ? "outline" : "solid"
-      const size = buttonSizes[Math.floor(Math.random() * buttonSizes.length)]
+      const fit = buttonSizes[Math.floor(Math.random() * buttonSizes.length)]
       return (
         <Button
           key={variant}
           variant={variant}
           fill={fill}
-          size={size}
+          fit={fit}
           pending={pending}
           disabled={disabled}
         >
-          {`${variant}-${fill}-${size}`}
+          {`${variant}-${fill}-${fit}`}
         </Button>
       )
     },

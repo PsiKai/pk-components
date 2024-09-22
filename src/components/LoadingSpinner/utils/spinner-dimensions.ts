@@ -1,6 +1,6 @@
 import { TLoadingSpinnerProps } from "../LoadingSpinner.model"
 
-type TSpinnerMap = { [K in TLoadingSpinnerProps["size"] as string]: number }
+type TSpinnerMap = { [K in TLoadingSpinnerProps["fit"] as string]: number }
 
 /**
  * Map of spinner sizes to their dimensions.
