@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react-swc"
 import dts from "vite-plugin-dts"
 import cssInjectedByJS from "vite-plugin-css-injected-by-js"
 
-export default defineConfig({
+const libBuildConfig = {
   plugins: [
     react(),
     dts({
@@ -17,12 +17,12 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: "src/index.tsx",
+      entry: "src/lib/index.tsx",
       name: "pk-components",
     },
     rollupOptions: {
       external: ["react", "react-dom"],
-      input: "src/index.tsx",
+      input: "src/lib/index.tsx",
       output: {
         globals: {
           react: "React",
@@ -30,5 +30,38 @@ export default defineConfig({
         },
       },
     },
+    sourcemap: true,
   },
+}
+
+const demoBuildConfig = {
+  build: {
+    outDir: "build",
+    rollupOptions: {
+      input: "index.html",
+    },
+    sourcemap: true,
+  },
+  plugins: [react()],
+  css: {
+    devSourcemap: true,
+  },
+}
+
+const defaultConfig = {
+  plugins: [react()],
+  css: {
+    devSourcemap: true,
+  },
+}
+
+export default defineConfig(({ mode }) => {
+  switch (mode) {
+    case "lib":
+      return libBuildConfig
+    case "demo":
+      return demoBuildConfig
+    default:
+      return defaultConfig
+  }
 })
