@@ -10,13 +10,8 @@ export default mergeConfig(
       setupFiles: "./tests/setup.ts",
       coverage: {
         provider: "istanbul",
-        include: [
-          "src/components/**/*",
-          "utils/**/*",
-          "src/hooks/**/*",
-          "src/utils/**/*",
-          "src/context/**/*",
-        ],
+        include: ["src/**/*", "utils/**/*"],
+        exclude: ["src/dev/**/*"],
       },
     },
   }),
