@@ -16,7 +16,13 @@ const __dirname = dirname(__filename)
 async function main(componentName) {
   const santizedComponentName = pascalize(componentName)
 
-  const destinationPath = path.join(__dirname, "../../src", "components", santizedComponentName)
+  const destinationPath = path.join(
+    __dirname,
+    "../../src",
+    "lib",
+    "components",
+    santizedComponentName,
+  )
 
   if (fs.existsSync(destinationPath)) {
     console.error("ERROR\nCOMPONENT ALREADY EXISTS:", santizedComponentName)

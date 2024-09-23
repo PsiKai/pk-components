@@ -11,13 +11,13 @@ import {
 
 describe("component-creation", () => {
   const componentName = "TestComponent"
-  const filePath = path.join(__dirname, `../../src/components/${componentName}`)
+  const filePath = path.join(__dirname, "../../src", "lib", "components", componentName)
 
-  beforeEach(() => {
+  beforeAll(() => {
     execSync(`npm run component ${componentName}`)
   })
 
-  afterEach(() => {
+  afterAll(() => {
     if (fs.existsSync(filePath)) {
       fs.rmdirSync(filePath, { recursive: true })
     }
