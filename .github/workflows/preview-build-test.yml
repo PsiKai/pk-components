@@ -22,3 +22,5 @@ jobs:
 
       - name: Run Playwright
         run: npx playwright test
+        env:
+          HOME: /root

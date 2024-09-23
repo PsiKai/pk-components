@@ -51,8 +51,5 @@ jobs:
         run: npm run build:demo
 
   TestDemoBuild:
-    needs:
-      - PreviewBuild
-      - RunVitest
     if: success()
     uses: ./.github/workflows/preview-build-test.yml
