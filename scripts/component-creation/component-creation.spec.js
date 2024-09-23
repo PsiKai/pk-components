@@ -8,16 +8,25 @@ import {
   generateSpecFile,
   generateReadmeFile,
 } from "./component-creation-templates"
+import { findFile } from "../../utils/file-utils"
 
 describe("component-creation", () => {
   const componentName = "TestComponent"
-  const filePath = path.join(__dirname, `../../src/components/${componentName}`)
+  const actualComponent = "Button"
+  const expectedHomeDirectory = "src"
 
-  beforeEach(() => {
+  let filePath = findFile(`${actualComponent}.tsx`, expectedHomeDirectory)
+  if (!filePath) {
+    throw new Error(`File not found: ${actualComponent}.tsx`)
+  }
+
+  filePath = path.dirname(filePath).replace(actualComponent, componentName)
+
+  beforeAll(() => {
     execSync(`npm run component ${componentName}`)
   })
 
-  afterEach(() => {
+  afterAll(() => {
     if (fs.existsSync(filePath)) {
       fs.rmdirSync(filePath, { recursive: true })
     }
