@@ -43,9 +43,15 @@ jobs:
       - name: Execute library build script
         run: npm run build:lib
 
+  TestDemoBuild:
+    needs:
+      - PreviewBuild
+      - RunVitest
+    if: success()
+    uses: ./.github/workflows/preview-build-test.yml
+
   Deploy:
     needs:
-      - RunVitest
-      - PreviewBuild
+      - TestDemoBuild
     if: success()
     uses: ./.github/workflows/gh-pages-deploy.yml

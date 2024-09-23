@@ -1,4 +1,4 @@
-import { defineConfig, mergeConfig } from "vitest/config"
+import { defineConfig, mergeConfig, configDefaults } from "vitest/config"
 import viteConfig from "./vite.config"
 
 export default defineConfig(configEnv => {
@@ -14,6 +14,7 @@ export default defineConfig(configEnv => {
           include: ["src/**/*", "utils/**/*"],
           exclude: ["src/dev/**/*"],
         },
+        exclude: [...configDefaults.exclude, "e2e"],
       },
     }),
   )

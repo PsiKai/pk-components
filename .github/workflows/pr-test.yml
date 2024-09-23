@@ -49,3 +49,7 @@ jobs:
 
       - name: Execute demo build script
         run: npm run build:demo
+
+  TestDemoBuild:
+    if: success()
+    uses: ./.github/workflows/preview-build-test.yml
