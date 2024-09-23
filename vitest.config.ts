@@ -12,7 +12,7 @@ export default defineConfig(configEnv => {
         coverage: {
           provider: "istanbul",
           include: ["src/**/*", "utils/**/*"],
-          exclude: ["src/dev/**/*"],
+          exclude: ["src/dev/**/*", "**/*.spec.*", "**/*.test.*"],
         },
         exclude: [...configDefaults.exclude, "e2e"],
       },
