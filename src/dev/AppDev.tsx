@@ -8,7 +8,9 @@ export const AppDev = () => {
     <>
       <h1>PK Component Library</h1>
       <ButtonSection />
-      <h2>Loading Spinner</h2>
+      <h2>
+        <code>LoadingSpinner</code>
+      </h2>
       <section>
         <LoadingSpinner />
       </section>

@@ -1,0 +1,24 @@
+name: Test Demo Build
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  TestPreviewDemo:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.47.2-jammy
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+
+      - name: Setup local packages
+        run: npm install
+
+      - name: Run Playwright
+        run: npx playwright test
