@@ -2,6 +2,7 @@ import React from "react"
 import { LoadingSpinner } from "../lib/components/LoadingSpinner"
 import { ButtonSection } from "./demos/Buttons"
 import "./index.css"
+import { InputSection } from "./demos/Inputs"
 
 export const AppDev = () => {
   return (
@@ -13,6 +14,12 @@ export const AppDev = () => {
       </h2>
       <section>
         <LoadingSpinner />
+      </section>
+      <h2>
+        <code>Input</code>
+      </h2>
+      <section>
+        <InputSection />
       </section>
     </>
   )
