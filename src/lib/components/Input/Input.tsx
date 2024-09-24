@@ -16,7 +16,7 @@ export function Input(props: TInputProps) {
         {label}
       </label>
       <span className="pk-input-hint">{hint}</span>
-      <input type="text" className={`pk-input ${feedbackState} ${className}`} {...rest} />
+      <input id={id} type="text" className={`pk-input ${feedbackState} ${className}`} {...rest} />
       <Feedback error={error} clean={clean} feedback={feedback} />
     </div>
   )
