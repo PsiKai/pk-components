@@ -1,0 +1,62 @@
+.pk-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.pk-input,
+.pk-input::placeholder {
+  font: inherit;
+  letter-spacing: inherit;
+  word-spacing: inherit;
+}
+
+.pk-input[type="text"] {
+  border: 1px solid currentColor;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  width: 100%;
+  display: block;
+}
+
+.pk-input[type="text"]:focus {
+  outline-offset: 2px;
+  outline: 2px solid gray;
+}
+
+.pk-input[type="text"].pk-input-error {
+  border-color: red;
+  outline-color: red;
+}
+
+.pk-input[type="text"].pk-input-clean {
+  border-color: green;
+  outline-color: green;
+}
+
+.pk-input-label {
+  font-weight: bold;
+}
+
+.pk-input-hint {
+  font-size: 0.9rem;
+  font-weight: thin;
+}
+
+.pk-input-feedback {
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.pk-input-feedback-error {
+  color: red;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.pk-input-feedback-clean {
+  color: green;
+  font-size: 0.9rem;
+  font-style: italic;
+}
