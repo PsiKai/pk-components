@@ -87,6 +87,11 @@ describe("Input", () => {
       const inputComponent = screen.getByRole("textbox")
       expect(inputComponent).toHaveClass("pk-input-error")
     })
+
+    it("should have aria-invalid attribute", () => {
+      const inputComponent = screen.getByRole("textbox")
+      expect(inputComponent).toHaveAttribute("aria-invalid", "true")
+    })
   })
 
   describe("with error state as boolean", () => {
@@ -121,6 +126,11 @@ describe("Input", () => {
     it("should not display the clean text", () => {
       const cleanComponent = screen.queryByText("test clean")
       expect(cleanComponent).not.toBeInTheDocument()
+    })
+
+    it("should have aria-invalid attribute", () => {
+      const inputComponent = screen.getByRole("textbox")
+      expect(inputComponent).toHaveAttribute("aria-invalid", "true")
     })
   })
 

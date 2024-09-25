@@ -23,6 +23,7 @@ export function Input(props: TInputProps) {
         aria-describedby={`${id}-hint ${id}-feedback`}
         type="text"
         className={`pk-input ${feedbackState} ${className}`}
+        {...(error ? { "aria-invalid": true } : {})}
         {...rest}
       />
       <Feedback error={error} clean={clean} feedback={feedback} id={id} />
