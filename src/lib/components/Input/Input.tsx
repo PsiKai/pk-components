@@ -15,21 +15,33 @@ export function Input(props: TInputProps) {
       <label className="pk-input-label" htmlFor={id}>
         {label}
       </label>
-      <span className="pk-input-hint">{hint}</span>
-      <input id={id} type="text" className={`pk-input ${feedbackState} ${className}`} {...rest} />
-      <Feedback error={error} clean={clean} feedback={feedback} />
+      <span id={`${id}-hint`} className="pk-input-hint">
+        {hint}
+      </span>
+      <input
+        id={id}
+        aria-describedby={`${id}-hint ${id}-feedback`}
+        type="text"
+        className={`pk-input ${feedbackState} ${className}`}
+        {...rest}
+      />
+      <Feedback error={error} clean={clean} feedback={feedback} id={id} />
     </div>
   )
 }
 
-function Feedback({ error, clean, feedback }: TFeedbackProps) {
+function Feedback({ error, clean, feedback, id }: TFeedbackProps & { id: string }) {
   return error ? (
-    <span className="pk-input-feedback-error">
+    <span id={`${id}-feedback`} className="pk-input-feedback-error">
       {typeof error === "string" ? error : "✗ Invalid"}
     </span>
   ) : clean ? (
-    <span className="pk-input-feedback-clean">{typeof clean === "string" ? clean : "✓ Done"}</span>
+    <span id={`${id}-feedback`} className="pk-input-feedback-clean">
+      {typeof clean === "string" ? clean : "✓ Done"}
+    </span>
   ) : feedback ? (
-    <span className="pk-input-feedback">{feedback}</span>
+    <span id={`${id}-feedback`} className="pk-input-feedback">
+      {feedback}
+    </span>
   ) : null
 }

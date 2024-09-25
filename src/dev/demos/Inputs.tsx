@@ -45,6 +45,7 @@ export const InputSection = () => {
         value={form.firstName}
         placeholder="John/Jane"
         disabled={pending}
+        required
       />
       <Input
         label="Middle Name"
@@ -68,6 +69,7 @@ export const InputSection = () => {
         value={form.lastName}
         placeholder="Doe"
         disabled={pending}
+        required
       />
 
       <Button
