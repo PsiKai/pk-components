@@ -20,10 +20,11 @@ export const InputSection = () => {
     e.preventDefault()
     setPending(true)
     await new Promise(resolve => setTimeout(resolve, 1000))
+    const name = `${form.firstName} ${form.middleName} ${form.lastName}`
     setForm({ firstName: "", lastName: "", middleName: "" })
     setTouched({ firstName: false, lastName: false, middleName: false })
     setPending(false)
-    alert(`Hello, ${form.firstName} ${form.lastName}!`)
+    alert(`Hello, ${name}!`)
   }
 
   return (

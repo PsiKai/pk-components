@@ -3,7 +3,7 @@ import { TFeedbackProps, TInputProps } from "./Input.model"
 import "./Input.css"
 
 export function Input(props: TInputProps) {
-  const { className, label, id, hint, feedback, clean, error, ...rest } = props
+  const { className = "", label, id, hint, feedback, clean, error, ...rest } = props
 
   const feedbackState = useMemo(
     () => (error ? "pk-input-error" : clean ? "pk-input-clean" : ""),

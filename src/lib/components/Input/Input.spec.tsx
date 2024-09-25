@@ -53,7 +53,7 @@ describe("Input", () => {
     })
   })
 
-  describe("with error state", () => {
+  describe("with error state as string", () => {
     beforeEach(() => {
       render(
         <Input
@@ -62,6 +62,7 @@ describe("Input", () => {
           feedback="test feedback"
           hint="test hint"
           error="test error"
+          clean="test clean"
         />,
       )
     })
@@ -72,9 +73,146 @@ describe("Input", () => {
       expect(errorComponent).toHaveClass("pk-input-feedback-error")
     })
 
+    it("should not display the feedback text", () => {
+      const feedbackComponent = screen.queryByText("test feedback")
+      expect(feedbackComponent).not.toBeInTheDocument()
+    })
+
+    it("should not display the clean text", () => {
+      const cleanComponent = screen.queryByText("test clean")
+      expect(cleanComponent).not.toBeInTheDocument()
+    })
+
     it("should have feedback state of error", () => {
       const inputComponent = screen.getByRole("textbox")
       expect(inputComponent).toHaveClass("pk-input-error")
+    })
+  })
+
+  describe("with error state as boolean", () => {
+    beforeEach(() => {
+      render(
+        <Input
+          id="test"
+          label="test label"
+          feedback="test feedback"
+          hint="test hint"
+          error={true}
+          clean="test clean"
+        />,
+      )
+    })
+
+    it("should render a default error message", () => {
+      const errorComponent = screen.getByText("✗ Invalid")
+      expect(errorComponent).toBeInTheDocument()
+    })
+
+    it("should have feedback state of error", () => {
+      const inputComponent = screen.getByRole("textbox")
+      expect(inputComponent).toHaveClass("pk-input-error")
+    })
+
+    it("should not display the feedback text", () => {
+      const feedbackComponent = screen.queryByText("test feedback")
+      expect(feedbackComponent).not.toBeInTheDocument()
+    })
+
+    it("should not display the clean text", () => {
+      const cleanComponent = screen.queryByText("test clean")
+      expect(cleanComponent).not.toBeInTheDocument()
+    })
+  })
+
+  describe("with clean state", () => {
+    beforeEach(() => {
+      render(
+        <Input
+          id="test"
+          label="test label"
+          feedback="test feedback"
+          hint="test hint"
+          clean="test clean"
+        />,
+      )
+    })
+
+    it("should render a clean message", () => {
+      const cleanComponent = screen.getByText("test clean")
+      expect(cleanComponent).toBeInTheDocument()
+      expect(cleanComponent).toHaveClass("pk-input-feedback-clean")
+    })
+
+    it("should not display the error text", () => {
+      const errorComponent = screen.queryByText("test error")
+      expect(errorComponent).not.toBeInTheDocument()
+    })
+
+    it("should not display the feedback text", () => {
+      const feedbackComponent = screen.queryByText("test feedback")
+      expect(feedbackComponent).not.toBeInTheDocument()
+    })
+
+    it("should have feedback state of clean", () => {
+      const inputComponent = screen.getByRole("textbox")
+      expect(inputComponent).toHaveClass("pk-input-clean")
+    })
+  })
+
+  describe("with clean state as boolean", () => {
+    beforeEach(() => {
+      render(
+        <Input
+          id="test"
+          label="test label"
+          feedback="test feedback"
+          hint="test hint"
+          clean={true}
+        />,
+      )
+    })
+
+    it("should render a default clean message", () => {
+      const cleanComponent = screen.getByText("✓ Done")
+      expect(cleanComponent).toBeInTheDocument()
+    })
+
+    it("should have feedback state of clean", () => {
+      const inputComponent = screen.getByRole("textbox")
+      expect(inputComponent).toHaveClass("pk-input-clean")
+    })
+
+    it("should not display the error text", () => {
+      const errorComponent = screen.queryByText("test error")
+      const defaultErrorComponent = screen.queryByText("✗ Invalid")
+      expect(errorComponent).not.toBeInTheDocument()
+      expect(defaultErrorComponent).not.toBeInTheDocument()
+    })
+
+    it("should not display the feedback text", () => {
+      const feedbackComponent = screen.queryByText("test feedback")
+      expect(feedbackComponent).not.toBeInTheDocument()
+    })
+  })
+
+  describe("with no feedback state", () => {
+    beforeEach(() => {
+      render(<Input id="test" label="test label" hint="test hint" />)
+    })
+
+    it("should not display the error text", () => {
+      const errorComponent = screen.queryByText("test error")
+      expect(errorComponent).not.toBeInTheDocument()
+    })
+
+    it("should not display the feedback text", () => {
+      const feedbackComponent = screen.queryByText("test feedback")
+      expect(feedbackComponent).not.toBeInTheDocument()
+    })
+
+    it("should not display the clean text", () => {
+      const cleanComponent = screen.queryByText("test clean")
+      expect(cleanComponent).not.toBeInTheDocument()
     })
   })
 })
