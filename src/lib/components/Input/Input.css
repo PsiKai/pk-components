@@ -22,13 +22,23 @@
   border: 0.1em solid currentColor;
   border-radius: 0.25rem;
   padding: 0.5rem;
-  /* padding: 0 0.2em; */
   width: 100%;
   display: block;
 }
 
+.pk-input[type="text"][disabled] {
+  cursor: not-allowed;
+}
+
 .pk-input[type="text"][required] {
   border-left-width: 0.2em;
+}
+
+.pk-input[type="text"][readonly] {
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3) inset;
+  border-top: none;
+  border-right: none;
+  border-left: none;
 }
 
 .pk-input[type="text"]:focus {
@@ -56,6 +66,12 @@
 
 .pk-input-label {
   font-weight: bold;
+}
+
+.pk-input-label.label-required::after {
+  content: "*";
+  color: hsl(var(--pk-hue-danger), 100%, 40%);
+  padding-left: 0.25rem;
 }
 
 .pk-input-hint {

@@ -53,6 +53,19 @@ describe("Input", () => {
     })
   })
 
+  describe("when required", () => {
+    beforeEach(() => {
+      render(
+        <Input id="test" label="test label" feedback="test feedback" hint="test hint" required />,
+      )
+    })
+
+    it("should render a required label", () => {
+      const labelComponent = screen.getByText("test label")
+      expect(labelComponent).toHaveClass("label-required")
+    })
+  })
+
   describe("with error state as string", () => {
     beforeEach(() => {
       render(

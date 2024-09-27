@@ -12,7 +12,7 @@ export function Input(props: TInputProps) {
 
   return (
     <div className="pk-input-wrapper">
-      <label className="pk-input-label" htmlFor={id}>
+      <label className={`pk-input-label ${props.required && "label-required"}`} htmlFor={id}>
         {label}
       </label>
       <span id={`${id}-hint`} className="pk-input-hint">
