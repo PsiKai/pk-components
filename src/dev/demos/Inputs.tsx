@@ -3,6 +3,71 @@ import { Input } from "../../lib/components/Input"
 import { Button } from "../../lib/components/Button"
 
 export const InputSection = () => {
+  return (
+    <>
+      <div className="sub-section">
+        <h3>Basic Text Input</h3>
+        <Input id="basic-text-input" />
+      </div>
+      <hr />
+      <div className="sub-section">
+        <h3>With Label</h3>
+        <Input label="Name" id="label-text-input" />
+      </div>
+      <hr />
+      <div className="sub-section">
+        <h3>With Hint Text</h3>
+        <Input id="hint-text-input" label="Name" hint="Enter your name" />
+      </div>
+      <hr />
+      <div className="sub-section">
+        <h3>With Feedback Text</h3>
+        <Input
+          id="feedback-text-input"
+          label="Name"
+          hint="Enter your name"
+          feedback="No special characters allowed."
+        />
+      </div>
+      <hr />
+      <div className="sub-section">
+        <h3>Required</h3>
+        <Input id="error-message-text-input" label="Name" feedback="Required" required />
+      </div>
+      <hr />
+      <div className="sub-section">
+        <h3>With Error Feedback</h3>
+        <Input id="error-text-input" label="Name" error={true} required />
+        <Input id="error-message-text-input" label="Name" error="Invalid name" required />
+      </div>
+      <hr />
+      <div className="sub-section">
+        <h3>With Success Feedback</h3>
+        <Input id="clean-text-input" label="Name" clean />
+        <Input id="clean-message-text-input" label="Name" clean="Name is valid" />
+      </div>
+      <hr />
+      <div className="sub-section">
+        <h3>With Placeholder</h3>
+        <Input id="placeholder-text-input" label="Name" placeholder="John Doe" />
+      </div>
+      <hr />
+      <div className="sub-section">
+        <h3>Disabled</h3>
+        <Input id="disabled-text-input" label="Name" disabled />
+      </div>
+      <hr />
+      <div className="sub-section">
+        <h3>Read Only</h3>
+        <Input id="readonly-text-input" label="Name" value="John Doe" readOnly />
+      </div>
+      <hr />
+      <InputForm />
+    </>
+  )
+}
+
+function InputForm() {
   const [form, setForm] = React.useState({ firstName: "", lastName: "", middleName: "" })
   const [pending, setPending] = React.useState(false)
   const [touched, setTouched] = React.useState({
@@ -32,7 +97,7 @@ export const InputSection = () => {
       onSubmit={handleSubmit}
       style={{ width: "100%", display: "flex", flexDirection: "column", gap: "1.5rem" }}
     >
-      <h3>Who are you?</h3>
+      <h3>With Form Feedback</h3>
       <Input
         label="First Name"
         id="firstName"
