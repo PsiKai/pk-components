@@ -1,23 +1,45 @@
 import { useMemo } from "react"
-import { TFeedbackProps, TInputProps } from "./Input.model"
+import { TInputProps } from "./Input.model"
 import "./Input.css"
 
 export function Input(props: TInputProps) {
   const { className = "", label, id, hint, feedback, clean, error, ...rest } = props
 
+  const isError = useMemo(() => error || typeof error === "string", [error])
+  const isClean = useMemo(() => clean || typeof clean === "string", [clean])
+
   const feedbackState = useMemo(
-    () =>
-      error || typeof error === "string"
-        ? "pk-input-error"
-        : clean || typeof clean === "string"
-          ? "pk-input-clean"
-          : "",
-    [error, clean],
+    () => (isError ? "error" : isClean ? "clean" : "default"),
+    [isError, isClean],
   )
+
+  const feedbackText = useMemo(() => {
+    if (isError) {
+      return typeof error === "string" ? error : "✗ Invalid"
+    }
+    if (isClean) {
+      return typeof clean === "string" ? clean : "✓ Done"
+    }
+    return feedback || ""
+  }, [isError, isClean, error, clean, feedback])
+
+  const inputClassNames = useMemo(() => {
+    return `pk-input pk-input-${feedbackState} ${className}`
+  }, [feedbackState, className])
+
+  const feedbackClassName = useMemo(() => {
+    return `pk-input-feedback-${feedbackState}`
+  }, [feedbackState])
+
+  const ariaInvalid = useMemo(() => (isError ? { "aria-invalid": true } : {}), [isError])
+
+  const labelClassNames = useMemo(() => {
+    return `pk-input-label ${props.required ? "label-required" : ""}`
+  }, [props.required])
 
   return (
     <div className="pk-input-wrapper">
-      <label className={`pk-input-label ${props.required && "label-required"}`} htmlFor={id}>
+      <label className={labelClassNames} htmlFor={id}>
         {label}
       </label>
       <span id={`${id}-hint`} className="pk-input-hint">
@@ -27,27 +49,13 @@ export function Input(props: TInputProps) {
         id={id}
         aria-describedby={`${id}-hint ${id}-feedback`}
         type="text"
-        className={`pk-input ${feedbackState} ${className}`}
-        {...(error ? { "aria-invalid": true } : {})}
+        className={inputClassNames}
+        {...ariaInvalid}
         {...rest}
       />
-      <Feedback error={error} clean={clean} feedback={feedback} id={id} />
+      <span id={`${id}-feedback`} className={feedbackClassName}>
+        {feedbackText}
+      </span>
     </div>
   )
-}
-
-function Feedback({ error, clean, feedback, id }: TFeedbackProps & { id: string }) {
-  return error ? (
-    <span id={`${id}-feedback`} className="pk-input-feedback-error">
-      {typeof error === "string" ? error : "✗ Invalid"}
-    </span>
-  ) : clean ? (
-    <span id={`${id}-feedback`} className="pk-input-feedback-clean">
-      {typeof clean === "string" ? clean : "✓ Done"}
-    </span>
-  ) : feedback ? (
-    <span id={`${id}-feedback`} className="pk-input-feedback">
-      {feedback}
-    </span>
-  ) : null
 }

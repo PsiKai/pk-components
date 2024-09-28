@@ -85,7 +85,7 @@
   font-weight: thin;
 }
 
-.pk-input-feedback,
+.pk-input-feedback-default,
 .pk-input-feedback-error,
 .pk-input-feedback-clean {
   font-size: 0.9rem;
