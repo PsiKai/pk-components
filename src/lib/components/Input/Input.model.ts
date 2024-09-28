@@ -1,9 +1,6 @@
 import { AllHtmlAttributes } from "../../core-types"
 
-export type TInputProps = AllHtmlAttributes & {
-  // className?: string
-  // children?: React.ReactNode
-  // onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+export type TInputProps = AllHtmlAttributes<HTMLInputElement> & {
   hint?: string
   label?: string
   id: string
