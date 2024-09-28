@@ -32,19 +32,60 @@ export const InputSection = () => {
       <hr />
       <div className="sub-section">
         <h3>Required</h3>
-        <Input id="error-message-text-input" label="Name" feedback="Required" required />
+        <Input
+          id="error-message-text-input"
+          label="Name"
+          hint="Mark the input required for automatic demarcation."
+          feedback="No special characters allowed."
+          required
+        />
       </div>
       <hr />
       <div className="sub-section">
         <h3>With Error Feedback</h3>
-        <Input id="error-text-input" label="Name" error={true} required />
-        <Input id="error-message-text-input" label="Name" error="Invalid name" required />
+        <Input
+          id="error-input"
+          label="No Feedback Text"
+          hint="Pass an empty string for no feedback text"
+          error=""
+        />
+        <Input
+          id="error-text-input"
+          label="Default Feedback Text"
+          hint="Pass a boolean value to get the default feedback text"
+          error
+          required
+        />
+        <Input
+          id="error-message-text-input"
+          label="Custom Feedback Text"
+          hint="Pass a string value to get a custom feedback text"
+          error="Invalid name"
+          required
+        />
       </div>
       <hr />
       <div className="sub-section">
         <h3>With Success Feedback</h3>
-        <Input id="clean-text-input" label="Name" clean />
-        <Input id="clean-message-text-input" label="Name" clean="Name is valid" />
+        <Input
+          id="clean-input"
+          label="No feedback text"
+          hint="Pass an empty string for no feedback text"
+          clean=""
+        />
+        <Input
+          id="clean-text-input"
+          label="Default Feedback Text"
+          hint="Pass a boolean value to get the default feedback text"
+          clean
+        />
+
+        <Input
+          id="clean-message-text-input"
+          label="Custom Feedback Text"
+          hint="Pass a string value to get a custom feedback text"
+          clean="Name is valid"
+        />
       </div>
       <hr />
       <div className="sub-section">
@@ -54,7 +95,7 @@ export const InputSection = () => {
       <hr />
       <div className="sub-section">
         <h3>Disabled</h3>
-        <Input id="disabled-text-input" label="Name" disabled />
+        <Input id="disabled-text-input" label="Name" disabled value="Alexander" />
       </div>
       <hr />
       <div className="sub-section">
