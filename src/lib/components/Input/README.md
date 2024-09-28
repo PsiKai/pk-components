@@ -30,8 +30,8 @@ Both given muted styles to indicate a lack of interactivity.
 | Prop Name          | Type                                    | Required | Default     | Description                                                                                  |
 | ------------------ | --------------------------------------- | -------- | ----------- | -------------------------------------------------------------------------------------------- |
 | `[htmlAttributes]` | `React.AllHTMLAttributes<InputElement>` | No       | `undefined` | Any valid HTML attribute for an input element.                                               |
-| `className`        | `string`                                | No       | `undefined` | Additional class names to apply to the spinner.                                              |
-| `id`               | `string`                                | Yes      | `undefined` | Id attribute assiged to input element. Required to create an accessible label.               |
+| `className`        | `string`                                | No       | `undefined` | Additional class names to apply to the input element.                                        |
+| `id`               | `string`                                | Yes      | `undefined` | Id attribute assigned to the input element. Required to create an accessible label.          |
 | `label`            | `string`                                | No       | `undefined` | The accessble label to be associatied with the input. Not required but strongly recommended. |
 | `hint`             | `string`                                | No       | `undefined` | Smaller hint text to go under the label.                                                     |
 | `feedback`         | `string`                                | No       | `undefined` | Custom informative feedback about the input requirements under the element.                  |
@@ -44,12 +44,20 @@ Both given muted styles to indicate a lack of interactivity.
 import { Input } from "pk-components"
 
 function YourComponent() {
+  const [value, setValue] = React.useState("")
+
+  const onChange = (e: React.ChangeEvent) => {
+    setValue(e.target.value)
+  }
+
   return (
     <Input
       id="example-input"
       label="Your content here"
       hint="Your customized input"
       feedback="You'll love this input"
+      onChange={onChange}
+      value={value}
     />
   )
 }
