@@ -54,13 +54,13 @@
 .pk-input[type="text"].pk-input-error {
   --hue: var(--pk-hue-danger);
   --lightness: 40%;
-  --saturation: 100%;
+  --saturation: 50%;
 }
 
 .pk-input[type="text"].pk-input-clean {
   --hue: var(--pk-hue-success);
   --lightness: 30%;
-  --saturation: 100%;
+  --saturation: 70%;
 }
 
 .pk-input[type="text"].pk-input-error,
@@ -95,13 +95,13 @@
 .pk-input-feedback-error {
   --hue: var(--pk-hue-danger);
   --lightness: 40%;
-  --saturation: 100%;
+  --saturation: 50%;
 }
 
 .pk-input-feedback-clean {
   --hue: var(--pk-hue-success);
   --lightness: 30%;
-  --saturation: 100%;
+  --saturation: 70%;
 }
 
 .pk-input-feedback-clean,
