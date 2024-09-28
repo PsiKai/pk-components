@@ -46,7 +46,7 @@ import { Input } from "pk-components"
 function YourComponent() {
   const [value, setValue] = React.useState("")
 
-  const onChange = (e: React.ChangeEvent) => {
+  const onChange = (e: React.ChangeEvent<InputElement>) => {
     setValue(e.target.value)
   }
 
