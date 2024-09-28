@@ -8,14 +8,17 @@ export const AppDev = () => {
   return (
     <>
       <h1>PK Component Library</h1>
+      <h2 id="Button">
+        <code>Button</code>
+      </h2>
       <ButtonSection />
-      <h2>
+      <h2 id="LoadingSpinner">
         <code>LoadingSpinner</code>
       </h2>
       <section>
         <LoadingSpinner />
       </section>
-      <h2>
+      <h2 id="Input">
         <code>Input</code>
       </h2>
       <section>

@@ -27,9 +27,6 @@ function usePending() {
 export const ButtonSection = () => {
   return (
     <>
-      <h2>
-        <code>Button</code>
-      </h2>
       <h3>Size</h3>
       <ButtonSizes />
       <h3>Variant</h3>
