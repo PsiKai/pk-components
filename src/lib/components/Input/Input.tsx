@@ -6,7 +6,12 @@ export function Input(props: TInputProps) {
   const { className = "", label, id, hint, feedback, clean, error, ...rest } = props
 
   const feedbackState = useMemo(
-    () => (error ? "pk-input-error" : clean ? "pk-input-clean" : ""),
+    () =>
+      error || typeof error === "string"
+        ? "pk-input-error"
+        : clean || typeof clean === "string"
+          ? "pk-input-clean"
+          : "",
     [error, clean],
   )
 

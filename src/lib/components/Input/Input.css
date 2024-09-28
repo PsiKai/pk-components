@@ -43,11 +43,12 @@
   border-top: none;
   border-right: none;
   border-left: none;
+  background-color: hsl(var(--pk-hue-secondary), 0%, 40%, 0.1);
 }
 
 .pk-input[type="text"]:focus {
   outline-offset: 2px;
-  outline: 2px solid currentColor;
+  outline: 2px solid hsl(var(--hue), var(--saturation), var(--lightness));
 }
 
 .pk-input[type="text"].pk-input-error {
