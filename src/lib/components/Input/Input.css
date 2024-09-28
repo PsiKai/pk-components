@@ -19,7 +19,10 @@
 }
 
 .pk-input[type="text"] {
-  border: 0.1em solid currentColor;
+  --hue: var(--pk-hue-secondary);
+  --lightness: 50%;
+  --saturation: 0%;
+  border: 0.1em solid;
   border-radius: 0.25rem;
   padding: 0.5rem;
   width: 100%;
@@ -59,7 +62,8 @@
 }
 
 .pk-input[type="text"].pk-input-error,
-.pk-input[type="text"].pk-input-clean {
+.pk-input[type="text"].pk-input-clean,
+.pk-input[type="text"] {
   border-color: hsl(var(--hue), var(--saturation), var(--lightness));
   outline-color: hsl(var(--hue), var(--saturation), var(--lightness));
 }
