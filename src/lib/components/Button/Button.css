@@ -1,10 +1,7 @@
+@import "../index.css";
+
 .pk-button {
-  --hue-primary: 200;
-  --hue-secondary: 0;
-  --hue-warning: 30;
-  --hue-danger: 0;
-  --hue-success: 120;
-  --hue: 200;
+  --hue: var(--pk-hue-primary);
   --lightness: 40%;
   --saturation: 100%;
   --color-lightness: 100%;
@@ -107,12 +104,12 @@
 }
 
 .pk-button-primary {
-  --hue: 200;
+  --hue: var(--pk-hue-primary);
 }
 
 .pk-button-warning {
   --lightness: 50%;
-  --hue: 30;
+  --hue: var(--pk-hue-warning);
 
   &:hover:not(:disabled) {
     --lightness: 40%;
@@ -120,12 +117,12 @@
 }
 
 .pk-button-danger {
-  --hue: 0;
+  --hue: var(--pk-hue-danger);
 }
 
 .pk-button-success {
   --lightness: 30%;
-  --hue: 120;
+  --hue: var(--pk-hue-success);
 
   &:hover:not(:disabled) {
     --lightness: 25%;
@@ -135,7 +132,7 @@
 .pk-button-secondary {
   --lightness: 50%;
   --saturation: 0%;
-  --hue: 0;
+  --hue: var(--pk-hue-secondary);
 
   &:hover:not(:disabled) {
     --lightness: 35%;

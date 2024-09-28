@@ -1,0 +1,110 @@
+@import "../index.css";
+
+.pk-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+
+  --hue: var(--pk-hue-secondary);
+  --lightness: 40%;
+  --saturation: 0%;
+}
+
+.pk-input,
+.pk-input::placeholder {
+  font: inherit;
+  letter-spacing: inherit;
+  word-spacing: inherit;
+}
+
+.pk-input[type="text"] {
+  --hue: var(--pk-hue-secondary);
+  --lightness: 50%;
+  --saturation: 0%;
+  border: 0.1em solid;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  width: 100%;
+  display: block;
+}
+
+.pk-input[type="text"][disabled] {
+  cursor: not-allowed;
+  background-color: hsl(var(--pk-hue-secondary), 0%, 40%, 0.3);
+}
+
+.pk-input[type="text"][required] {
+  border-left-width: 0.2em;
+}
+
+.pk-input[type="text"][readonly] {
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3) inset;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  background-color: hsl(var(--pk-hue-secondary), 0%, 40%, 0.1);
+}
+
+.pk-input[type="text"]:focus {
+  outline-offset: 2px;
+  outline: 2px solid hsl(var(--hue), var(--saturation), var(--lightness));
+}
+
+.pk-input[type="text"].pk-input-error {
+  --hue: var(--pk-hue-danger);
+  --lightness: 40%;
+  --saturation: 50%;
+}
+
+.pk-input[type="text"].pk-input-clean {
+  --hue: var(--pk-hue-success);
+  --lightness: 30%;
+  --saturation: 70%;
+}
+
+.pk-input[type="text"].pk-input-error,
+.pk-input[type="text"].pk-input-clean,
+.pk-input[type="text"] {
+  border-color: hsl(var(--hue), var(--saturation), var(--lightness));
+  outline-color: hsl(var(--hue), var(--saturation), var(--lightness));
+}
+
+.pk-input-label {
+  font-weight: bold;
+}
+
+.pk-input-label.label-required::before {
+  content: "*";
+  color: hsl(var(--pk-hue-danger), 100%, 40%);
+  padding-right: 0.25rem;
+}
+
+.pk-input-hint {
+  font-size: 0.9rem;
+  font-weight: thin;
+}
+
+.pk-input-feedback-default,
+.pk-input-feedback-error,
+.pk-input-feedback-clean {
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.pk-input-feedback-error {
+  --hue: var(--pk-hue-danger);
+  --lightness: 40%;
+  --saturation: 50%;
+}
+
+.pk-input-feedback-clean {
+  --hue: var(--pk-hue-success);
+  --lightness: 30%;
+  --saturation: 70%;
+}
+
+.pk-input-feedback-clean,
+.pk-input-feedback-error {
+  color: hsl(var(--hue), var(--saturation), var(--lightness));
+}

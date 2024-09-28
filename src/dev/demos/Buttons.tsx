@@ -27,9 +27,6 @@ function usePending() {
 export const ButtonSection = () => {
   return (
     <>
-      <h2>
-        <code>Button</code>
-      </h2>
       <h3>Size</h3>
       <ButtonSizes />
       <h3>Variant</h3>
@@ -48,7 +45,7 @@ const ButtonSizes = () => {
   return (
     <section>
       {buttonSizes.map(fit => {
-        const props = fit === "link" ? { href: "/" } : { onClick: handleClick }
+        const props = fit === "link" ? { href: "#" } : { onClick: handleClick }
         return (
           <Button key={fit} fit={fit} {...props} pending={pending === fit + "-fit"}>
             {fit + "-fit"}

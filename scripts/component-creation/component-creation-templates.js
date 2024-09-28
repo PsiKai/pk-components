@@ -69,5 +69,7 @@ function YourComponent() {
   return <${componentName}>Your content here</${componentName}>
 }
 \`\`\`
+
+[Live Demo](https://psikai.github.io/pk-components#${componentName})
 `
 }

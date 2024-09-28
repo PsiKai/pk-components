@@ -25,6 +25,7 @@ npm i pk-components
 
 - [Button](https://github.com/psikai/pk-components/blob/main/src/lib/components/Button/README.md)
 - [LoadingSpinner](https://github.com/psikai/pk-components/blob/main/src/lib/components/LoadingSpinner/README.md)
+- [Input](https://github.com/psikai/pk-components/blob/main/src/lib/components/Input/README.md)
 
 ### Demo
 
