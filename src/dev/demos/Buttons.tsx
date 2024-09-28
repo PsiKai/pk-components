@@ -48,7 +48,7 @@ const ButtonSizes = () => {
   return (
     <section>
       {buttonSizes.map(fit => {
-        const props = fit === "link" ? { href: "/" } : { onClick: handleClick }
+        const props = fit === "link" ? { href: "#" } : { onClick: handleClick }
         return (
           <Button key={fit} fit={fit} {...props} pending={pending === fit + "-fit"}>
             {fit + "-fit"}
