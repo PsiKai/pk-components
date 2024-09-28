@@ -31,6 +31,7 @@
 
 .pk-input[type="text"][disabled] {
   cursor: not-allowed;
+  background-color: hsl(var(--pk-hue-secondary), 0%, 40%, 0.3);
 }
 
 .pk-input[type="text"][required] {
