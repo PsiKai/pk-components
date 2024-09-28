@@ -68,10 +68,10 @@
   font-weight: bold;
 }
 
-.pk-input-label.label-required::after {
+.pk-input-label.label-required::before {
   content: "*";
   color: hsl(var(--pk-hue-danger), 100%, 40%);
-  padding-left: 0.25rem;
+  padding-right: 0.25rem;
 }
 
 .pk-input-hint {
