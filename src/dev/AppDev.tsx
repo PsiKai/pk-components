@@ -1,8 +1,9 @@
 import React from "react"
 import { LoadingSpinner } from "../lib/components/LoadingSpinner"
-import { ButtonSection } from "./demos/Buttons"
-import "./index.css"
 import { InputSection } from "./demos/Inputs"
+import { ButtonSection } from "./demos/Buttons"
+import { FileInputSection } from "./demos/FileInputs"
+import "./index.css"
 
 export const AppDev = () => {
   return (
@@ -23,6 +24,12 @@ export const AppDev = () => {
       </h2>
       <section>
         <InputSection />
+      </section>
+      <h2 id="FileInput">
+        <code>FileInput</code>
+      </h2>
+      <section>
+        <FileInputSection />
       </section>
     </>
   )
