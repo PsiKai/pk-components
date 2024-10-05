@@ -9,28 +9,36 @@ export const AppDev = () => {
   return (
     <>
       <h1>PK Component Library</h1>
-      <h2 id="Button">
-        <code>Button</code>
-      </h2>
-      <ButtonSection />
-      <h2 id="LoadingSpinner">
-        <code>LoadingSpinner</code>
-      </h2>
-      <section>
-        <LoadingSpinner />
-      </section>
-      <h2 id="Input">
-        <code>Input</code>
-      </h2>
-      <section>
-        <InputSection />
-      </section>
-      <h2 id="FileInput">
-        <code>FileInput</code>
-      </h2>
-      <section>
-        <FileInputSection />
-      </section>
+      <div className="section-wrapper">
+        <h2 id="Button" className="section-header">
+          <code>Button</code>
+        </h2>
+        <ButtonSection />
+      </div>
+      <div className="section-wrapper">
+        <h2 id="LoadingSpinner" className="section-header">
+          <code>LoadingSpinner</code>
+        </h2>
+        <section>
+          <LoadingSpinner />
+        </section>
+      </div>
+      <div className="section-wrapper">
+        <h2 id="Input" className="section-header">
+          <code>Input</code>
+        </h2>
+        <section>
+          <InputSection />
+        </section>
+      </div>
+      <div className="section-wrapper">
+        <h2 id="FileInput" className="section-header">
+          <code>FileInput</code>
+        </h2>
+        <section>
+          <FileInputSection />
+        </section>
+      </div>
     </>
   )
 }

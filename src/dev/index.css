@@ -12,6 +12,7 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
+  --background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -47,6 +48,13 @@ hr {
   width: 100%;
 }
 
+.section-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: var(--background-color);
+}
+
 section {
   display: flex;
   flex-wrap: wrap;
@@ -71,6 +79,7 @@ section {
   :root {
     color: #213547;
     background-color: #ffffff;
+    --background-color: #ffffff;
   }
 }
 
