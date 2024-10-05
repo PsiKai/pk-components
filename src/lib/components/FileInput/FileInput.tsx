@@ -39,14 +39,13 @@ export const FileInput = forwardRef<HTMLInputElement, TFileInputProps>((props, r
 
   const removeFile = useCallback(
     (fileName: string) => {
-      if (!fileName) return
-
       if (fileDisplay === "preview") {
         setFilePreview(prev => {
           prev.delete(fileName)
           return new Map(prev)
         })
-      } else if (fileDisplay === "list") {
+      }
+      if (fileDisplay === "list") {
         setFileNames(prev => prev.filter(name => name !== fileName))
       }
     },
@@ -83,18 +82,17 @@ export const FileInput = forwardRef<HTMLInputElement, TFileInputProps>((props, r
       {fileDisplay === "list" ? (
         <ul id={`${id}-file-list`} className="pk-file-list">
           {fileNames.map(fileName => (
-            <li key={fileName}>
-              <div className="pk-file-list-item">
-                <Button
-                  variant="secondary"
-                  fit="link"
-                  onClick={() => removeFile(fileName)}
-                  className="pk-file-list-remove"
-                >
-                  <CloseIcon />
-                </Button>
-                <span>{fileName}</span>
-              </div>
+            <li key={fileName} className="pk-file-list-item">
+              <Button
+                variant="secondary"
+                fit="link"
+                onClick={() => removeFile(fileName)}
+                className="pk-file-list-remove"
+                aria-label={`Remove ${fileName}`}
+              >
+                <CloseIcon />
+              </Button>
+              <span>{fileName}</span>
             </li>
           ))}
         </ul>
@@ -107,6 +105,7 @@ export const FileInput = forwardRef<HTMLInputElement, TFileInputProps>((props, r
                 fit="small"
                 onClick={() => removeFile(fileName)}
                 className="pk-file-preview-remove"
+                aria-label={`Remove ${fileName}`}
               >
                 <CloseIcon />
               </Button>
