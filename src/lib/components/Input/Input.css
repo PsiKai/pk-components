@@ -81,14 +81,14 @@
 }
 
 .pk-input-hint {
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   font-weight: thin;
 }
 
 .pk-input-feedback-default,
 .pk-input-feedback-error,
 .pk-input-feedback-clean {
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   font-style: italic;
 }
 
