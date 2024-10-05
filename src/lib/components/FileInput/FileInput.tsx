@@ -4,7 +4,7 @@ import "./FileInput.css"
 import { Button } from "../Button"
 
 export const FileInput = forwardRef<HTMLInputElement, TFileInputProps>((props, ref) => {
-  const { id, onChange, label, accept, required, fileDisplay, ...rest } = props
+  const { id, onChange, label, accept, required, fileDisplay, className = "", ...rest } = props
 
   const [fileNames, setFileNames] = useState<string[]>([])
   const [filePreview, setFilePreview] = useState<Map<string, string>>(new Map())
@@ -67,7 +67,7 @@ export const FileInput = forwardRef<HTMLInputElement, TFileInputProps>((props, r
         ref={ref}
         type="file"
         id={id}
-        className="pk-file-input"
+        className={`pk-file-input ${className}`}
         onChange={internalOnChange}
         accept={accept}
         aria-describedby={`${id}-description ${id}-accepts ${id}-file-list`}
