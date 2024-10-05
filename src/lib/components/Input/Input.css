@@ -74,12 +74,6 @@
   font-weight: bold;
 }
 
-.pk-input-label.label-required::before {
-  content: "*";
-  color: hsl(var(--pk-hue-danger), 100%, 40%);
-  padding-right: 0.25rem;
-}
-
 .pk-input-hint {
   font-size: 0.875rem;
   font-weight: thin;

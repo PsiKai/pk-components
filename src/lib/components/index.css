@@ -1,7 +1,20 @@
 :root {
+  /* Main colors */
   --pk-hue-primary: 200;
   --pk-hue-secondary: 0;
   --pk-hue-warning: 30;
   --pk-hue-danger: 0;
   --pk-hue-success: 120;
+
+  /* Global Style Dimensions */
+  --pk-btn-border-radius: 0.375rem;
+  --pk-hover-transition: background-color 100ms, border-color 100ms, color 100ms, transform 50ms;
+  --pk-box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  --pk-padding-lg: 0.75rem 1.25rem;
+}
+
+.label-required::before {
+  content: "*";
+  color: hsl(var(--pk-hue-danger), 100%, 40%);
+  padding-right: 0.25rem;
 }
