@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef } from "react"
 import { FileInput } from "../../lib/components/FileInput"
 
 export function FileInputSection() {
@@ -7,6 +7,8 @@ export function FileInputSection() {
       console.log(file.name)
     }
   }
+
+  const fileInput = useRef<HTMLInputElement>(null)
 
   return (
     <>
@@ -31,6 +33,20 @@ export function FileInputSection() {
           accept="image/*"
           multiple
           required
+        />
+      </div>
+      <div className="sub-section">
+        <h3>With label dropzone</h3>
+        <FileInput
+          id="file-input-preview-dropzone"
+          onChange={onChange}
+          fileDisplay="preview"
+          label="Upload your photos"
+          accept="image/*"
+          multiple
+          required
+          dropzone
+          ref={fileInput}
         />
       </div>
     </>
