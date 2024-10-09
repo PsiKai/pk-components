@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef } from "react"
+import { useCallback, useMemo, useRef } from "react"
 import { DropzoneProps } from "./Dropzone.model"
 import "./Dropzone.css"
 
@@ -18,9 +18,8 @@ export function Dropzone(props: DropzoneProps) {
     (e: React.DragEvent) => {
       const { items } = e.dataTransfer
       const files = Array.from(items).filter(({ type }) => type.match(typeMatch))
-      const dt = new DataTransfer()
-      files.forEach(file => dt.items.add(file.getAsFile()!))
-      e.dataTransfer = dt
+      e.dataTransfer.items.clear()
+      files.forEach(file => e.dataTransfer.items.add(file.getAsFile()!))
     },
     [typeMatch],
   )
@@ -46,7 +45,6 @@ export function Dropzone(props: DropzoneProps) {
       setDragClasses(e, false)
 
       filterNonMatchingFiles(e)
-      console.log(e.dataTransfer.items.length)
       if (e.dataTransfer.items.length) handleValidDrop(e)
       else handleInvalidDrop(e)
     },
@@ -56,7 +54,6 @@ export function Dropzone(props: DropzoneProps) {
   const handleDragEnter = useCallback(
     (e: React.DragEvent) => {
       e.preventDefault()
-      if (e.currentTarget.contains(e.relatedTarget as Node)) return
 
       if (isValidDragData(e)) {
         e.dataTransfer.effectAllowed = "copy"
