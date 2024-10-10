@@ -65,7 +65,6 @@ export const FileInput = forwardRef<HTMLInputElement, TFileInputProps>((props, r
 
   const handleValidDrop = useCallback(
     (e: React.DragEvent) => {
-      console.log(e)
       const inputRef = ref as React.MutableRefObject<HTMLInputElement>
       if (inputRef?.current) {
         inputRef.current.files = e.dataTransfer.files
@@ -77,7 +76,7 @@ export const FileInput = forwardRef<HTMLInputElement, TFileInputProps>((props, r
   )
 
   const handleInvalidDrop = useCallback((e: React.DragEvent) => {
-    console.log(e)
+    console.log(e.dataTransfer.files)
   }, [])
 
   return (
@@ -96,7 +95,7 @@ export const FileInput = forwardRef<HTMLInputElement, TFileInputProps>((props, r
           handleValidDrop={handleValidDrop}
           handleInvalidDrop={handleInvalidDrop}
           className="pk-file-input-dropzone"
-          accept={[accept || ""]}
+          accept={accept}
         >
           <span>Drag and Drop files here</span>
           <span className="pk-dropzone-or">-OR-</span>

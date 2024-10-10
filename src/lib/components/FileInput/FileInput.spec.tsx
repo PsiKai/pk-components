@@ -1,12 +1,22 @@
 import React from "react"
-import { fireEvent, render, screen } from "@testing-library/react"
+import { fireEvent, render, renderHook, screen } from "@testing-library/react"
 import "@testing-library/jest-dom"
 import { vi } from "vitest"
 
 import { FileInput } from "./FileInput"
+import { getMockDataEvent } from "../Dropzone/mocks"
 
 describe("FileInput", () => {
   const onChange = vi.fn()
+  const testFileName = "test-file.jpg"
+
+  beforeAll(() => {
+    vi.stubGlobal("URL", { createObjectURL: vi.fn().mockReturnValue(new Image().src) })
+  })
+
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
 
   describe("with basic props", () => {
     beforeEach(() => {
@@ -48,8 +58,6 @@ describe("FileInput", () => {
   })
 
   describe("when fileDisplay is list", () => {
-    const testFileName = "test-file.jpg"
-
     beforeEach(() => {
       render(<FileInput id="test-id" onChange={onChange} fileDisplay="list" />)
       const fileInput = screen.getByLabelText("Browse your files")
@@ -93,7 +101,6 @@ describe("FileInput", () => {
   })
 
   describe("when fileDisplay is preview", () => {
-    const testFileName = "test-file.jpg"
     const file = new File([""], testFileName, { type: "image/jpg" })
 
     beforeEach(() => {
@@ -101,14 +108,6 @@ describe("FileInput", () => {
 
       const fileInput = screen.getByLabelText("Browse your files")
       fireEvent.change(fileInput, { target: { files: [file] } })
-    })
-
-    beforeAll(() => {
-      vi.stubGlobal("URL", { createObjectURL: vi.fn().mockReturnValue(new Image().src) })
-    })
-
-    afterAll(() => {
-      vi.restoreAllMocks()
     })
 
     it("should call the onChange function", () => {
@@ -157,6 +156,59 @@ describe("FileInput", () => {
     it("should render a required label", () => {
       const labelText = screen.getByText("test label")
       expect(labelText).toHaveClass("label-required")
+    })
+  })
+
+  describe("with dropzone prop", () => {
+    describe("with ref prop", () => {
+      beforeEach(() => {
+        const inputRef = renderHook(() => React.useRef<HTMLInputElement>(null)).result.current
+        render(
+          <FileInput id="test-id" onChange={onChange} ref={inputRef} accept="image/*" dropzone />,
+        )
+      })
+
+      it("should render the dropzone", () => {
+        const dropzone = screen.getByTestId("pk-dropzone")
+        const labels = screen.getByText("Drag and Drop files here")
+        expect(dropzone).toBeInTheDocument()
+        expect(labels).toBeInTheDocument()
+      })
+
+      describe("when a valid file is dropped", () => {
+        it("should call the onChange function", () => {
+          const dropzone = screen.getByTestId("pk-dropzone")
+          const { dataTransfer } = getMockDataEvent()
+
+          fireEvent.drop(dropzone, { dataTransfer })
+          expect(onChange).toHaveBeenCalled()
+        })
+      })
+
+      describe("when an invalid file is dropped", () => {
+        it("should log the event", () => {
+          const dropzone = screen.getByTestId("pk-dropzone")
+          const { dataTransfer } = getMockDataEvent(false)
+          const consoleSpy = vi.spyOn(console, "log")
+
+          fireEvent.drop(dropzone, { dataTransfer })
+          expect(consoleSpy).toHaveBeenCalled()
+        })
+      })
+    })
+
+    describe("without ref prop", () => {
+      beforeEach(() => {
+        render(<FileInput id="test-id" onChange={onChange} accept="image/*" dropzone />)
+      })
+
+      it("should not call onChange on valid drop", () => {
+        const dropzone = screen.getByTestId("pk-dropzone")
+        const { dataTransfer } = getMockDataEvent()
+
+        fireEvent.drop(dropzone, { dataTransfer })
+        expect(onChange).not.toHaveBeenCalled()
+      })
     })
   })
 })

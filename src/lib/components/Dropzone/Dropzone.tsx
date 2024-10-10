@@ -3,11 +3,11 @@ import { DropzoneProps } from "./Dropzone.model"
 import "./Dropzone.css"
 
 export function Dropzone(props: DropzoneProps) {
-  const { handleValidDrop, handleInvalidDrop, accept = ["image/*"], children, className } = props
+  const { handleValidDrop, handleInvalidDrop, accept = "image/*", children, className } = props
 
   const validDrag = useRef(false)
 
-  const typeMatch = useMemo(() => new RegExp("^" + accept.join("|")), [accept])
+  const typeMatch = useMemo(() => new RegExp("^" + accept.split(/,\s*/).join("|")), [accept])
 
   const setDragClasses = useCallback((e: React.DragEvent, value: boolean) => {
     validDrag.current = value

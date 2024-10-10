@@ -56,7 +56,7 @@ describe("Dropzone", () => {
           handleValidDrop={onValidDrop}
           handleInvalidDrop={onInvalidDrop}
           className={"test-dropzone"}
-          accept={["image/*"]}
+          accept={"image/*"}
         >
           <div>
             <span>Dropzone</span>
