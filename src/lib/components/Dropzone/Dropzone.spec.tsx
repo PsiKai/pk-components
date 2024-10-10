@@ -76,22 +76,6 @@ describe("Dropzone", () => {
   let className: string | undefined
 
   beforeEach(() => {
-    accept = ["image/*"]
-    className = "test-dropzone"
-    render(
-      <Dropzone
-        handleValidDrop={onValidDrop}
-        handleInvalidDrop={onInvalidDrop}
-        className={className}
-        accept={accept}
-      >
-        <div style={{ width: "100px", height: "100px" }}>
-          <span style={{ margin: "24px" }}>Dropzone</span>
-          <span>Area</span>
-        </div>
-      </Dropzone>,
-    )
-
     vi.stubGlobal("DataTransfer", MockDataTransfer)
   })
 
@@ -99,165 +83,190 @@ describe("Dropzone", () => {
     vi.restoreAllMocks()
   })
 
-  describe("as a DOM element", () => {
-    it("should render the children", () => {
-      const child1 = screen.getByText("Dropzone")
-      const child2 = screen.getByText("Area")
-      expect(child1).toBeInTheDocument()
-      expect(child2).toBeInTheDocument()
-    })
-
-    it("should have the correct class names", () => {
-      const component = screen.getByTestId("pk-dropzone")
-      expect(component).toHaveClass("test-dropzone")
-      expect(component).toHaveClass("pk-dropzone")
-      expect(component).not.toHaveClass("is-dragged-over")
-    })
-  })
-
-  describe("with no accept prop", () => {
+  describe("with omitted props", () => {
     beforeEach(() => {
-      accept = undefined
+      render(
+        <Dropzone handleValidDrop={onValidDrop} handleInvalidDrop={onInvalidDrop}>
+          <div>
+            <span>Dropzone</span>
+            <span>Area</span>
+          </div>
+        </Dropzone>,
+      )
     })
 
-    it("should default to image/*", () => {
-      const dropzone = screen.getByTestId("pk-dropzone")
-      const { dataTransfer } = getDataEvent()
-
-      fireEvent.drop(dropzone, { dataTransfer })
-      expect(onValidDrop).toHaveBeenCalled()
-    })
-  })
-
-  describe("with no className prop", () => {
-    beforeEach(() => {
-      className = undefined
-    })
-
-    it("should default to pk-dropzone", () => {
-      const dropzone = screen.getByTestId("pk-dropzone")
-      expect(dropzone).toHaveClass("pk-dropzone")
-      expect(dropzone).not.toHaveClass("test-dropzone")
-    })
-  })
-
-  describe("with onValidDrop prop", () => {
-    it("should be fired when a valid file is dropped", () => {
-      const dropzone = screen.getByTestId("pk-dropzone")
-      const { dataTransfer } = getDataEvent()
-
-      fireEvent.drop(dropzone, { dataTransfer })
-      expect(onValidDrop).toHaveBeenCalled()
-    })
-  })
-
-  describe("with onInvalidDrop prop", () => {
-    it("should be fired when an invalid file is dropped", () => {
-      const dropzone = screen.getByTestId("pk-dropzone")
-      const { dataTransfer } = getDataEvent(false)
-
-      fireEvent.drop(dropzone, { dataTransfer })
-      expect(onInvalidDrop).toHaveBeenCalled()
-    })
-  })
-
-  describe("when a file is dragged over the dropzone", () => {
-    describe("with a valid file", () => {
-      it("should set the is-dragged-over class", () => {
+    describe("with no accept prop", () => {
+      it("should default to image/*", () => {
         const dropzone = screen.getByTestId("pk-dropzone")
         const { dataTransfer } = getDataEvent()
 
-        fireEvent.dragEnter(dropzone, { dataTransfer })
-        expect(dropzone).toHaveClass("is-dragged-over")
+        fireEvent.drop(dropzone, { dataTransfer })
+        expect(onValidDrop).toHaveBeenCalled()
       })
+    })
 
-      it("should set dropEffect to copy", () => {
+    describe("with no className prop", () => {
+      it("should default to pk-dropzone", () => {
         const dropzone = screen.getByTestId("pk-dropzone")
-        const { dataTransfer, dragEvent } = getDataEvent()
-        const preventDefault = vi.spyOn(dragEvent, "preventDefault")
-        const stopPropagation = vi.spyOn(dragEvent, "stopPropagation")
+        expect(dropzone).toHaveClass("pk-dropzone")
+        expect(dropzone).not.toHaveClass("test-dropzone")
+      })
+    })
+  })
 
-        fireEvent.dragEnter(dropzone, { dataTransfer })
-        fireEvent(dropzone, dragEvent)
-        expect(preventDefault).toHaveBeenCalled()
-        expect(stopPropagation).toHaveBeenCalled()
-        expect(dragEvent.dataTransfer?.dropEffect).toBe("copy")
+  describe("with valid props", () => {
+    beforeEach(() => {
+      accept = ["image/*"]
+      className = "test-dropzone"
+      render(
+        <Dropzone
+          handleValidDrop={onValidDrop}
+          handleInvalidDrop={onInvalidDrop}
+          className={className}
+          accept={accept}
+        >
+          <div>
+            <span>Dropzone</span>
+            <span>Area</span>
+          </div>
+        </Dropzone>,
+      )
+    })
+
+    describe("as a DOM element", () => {
+      it("should render the children", () => {
+        const child1 = screen.getByText("Dropzone")
+        const child2 = screen.getByText("Area")
+        expect(child1).toBeInTheDocument()
+        expect(child2).toBeInTheDocument()
       })
 
-      describe("when internal dragleave event is fired", () => {
-        it("should not remove the is-dragged-over class", () => {
+      it("should have the correct class names", () => {
+        const component = screen.getByTestId("pk-dropzone")
+        expect(component).toHaveClass("test-dropzone")
+        expect(component).toHaveClass("pk-dropzone")
+        expect(component).not.toHaveClass("is-dragged-over")
+      })
+    })
+
+    describe("with onValidDrop prop", () => {
+      it("should be fired when a valid file is dropped", () => {
+        const dropzone = screen.getByTestId("pk-dropzone")
+        const { dataTransfer } = getDataEvent()
+
+        fireEvent.drop(dropzone, { dataTransfer })
+        expect(onValidDrop).toHaveBeenCalled()
+      })
+    })
+
+    describe("with onInvalidDrop prop", () => {
+      it("should be fired when an invalid file is dropped", () => {
+        const dropzone = screen.getByTestId("pk-dropzone")
+        const { dataTransfer } = getDataEvent(false)
+
+        fireEvent.drop(dropzone, { dataTransfer })
+        expect(onInvalidDrop).toHaveBeenCalled()
+      })
+    })
+
+    describe("when a file is dragged over the dropzone", () => {
+      describe("with a valid file", () => {
+        it("should set the is-dragged-over class", () => {
           const dropzone = screen.getByTestId("pk-dropzone")
-          vi.spyOn(dropzone, "getBoundingClientRect").mockReturnValue({
-            top: 0,
-            bottom: 100,
-            left: 0,
-            right: 100,
-            x: 0,
-            y: 0,
-            width: 100,
-            height: 100,
-            toJSON: () => "",
-          })
-          const child = screen.getByText("Dropzone")
-          const { dataTransfer, dragEvent } = getDataEvent(true, "dragleave")
+          const { dataTransfer } = getDataEvent()
 
           fireEvent.dragEnter(dropzone, { dataTransfer })
           expect(dropzone).toHaveClass("is-dragged-over")
+        })
 
-          fireEvent(child, dragEvent)
-          expect(dropzone).toHaveClass("is-dragged-over")
+        it("should set dropEffect to copy", () => {
+          const dropzone = screen.getByTestId("pk-dropzone")
+          const { dataTransfer, dragEvent } = getDataEvent()
+          const preventDefault = vi.spyOn(dragEvent, "preventDefault")
+          const stopPropagation = vi.spyOn(dragEvent, "stopPropagation")
+
+          fireEvent.dragEnter(dropzone, { dataTransfer })
+          fireEvent(dropzone, dragEvent)
+          expect(preventDefault).toHaveBeenCalled()
+          expect(stopPropagation).toHaveBeenCalled()
+          expect(dragEvent.dataTransfer?.dropEffect).toBe("copy")
+        })
+
+        describe("when internal dragleave event is fired", () => {
+          it("should not remove the is-dragged-over class", () => {
+            const dropzone = screen.getByTestId("pk-dropzone")
+            vi.spyOn(dropzone, "getBoundingClientRect").mockReturnValue({
+              top: 0,
+              bottom: 100,
+              left: 0,
+              right: 100,
+              x: 0,
+              y: 0,
+              width: 100,
+              height: 100,
+              toJSON: () => "",
+            })
+            const child = screen.getByText("Dropzone")
+            const { dataTransfer, dragEvent } = getDataEvent(true, "dragleave")
+
+            fireEvent.dragEnter(dropzone, { dataTransfer })
+            expect(dropzone).toHaveClass("is-dragged-over")
+
+            fireEvent(child, dragEvent)
+            expect(dropzone).toHaveClass("is-dragged-over")
+          })
+        })
+      })
+
+      describe("with an invalid file", () => {
+        it("should not set the is-dragged-over class", () => {
+          const dropzone = screen.getByTestId("pk-dropzone")
+          const { dataTransfer } = getDataEvent(false)
+
+          fireEvent.dragEnter(dropzone, { dataTransfer })
+          expect(dropzone).not.toHaveClass("is-dragged-over")
+        })
+
+        it("should set dropEffect to none of invalid drag", () => {
+          const dropzone = screen.getByTestId("pk-dropzone")
+          const { dragEvent, dataTransfer } = getDataEvent(false)
+          const preventDefault = vi.spyOn(dragEvent, "preventDefault")
+          const stopPropagation = vi.spyOn(dragEvent, "stopPropagation")
+
+          fireEvent.dragEnter(dropzone, { dataTransfer })
+          fireEvent(dropzone, dragEvent)
+          expect(preventDefault).toHaveBeenCalled()
+          expect(stopPropagation).toHaveBeenCalled()
+          expect(dragEvent.dataTransfer?.dropEffect).toBe("none")
         })
       })
     })
 
-    describe("with an invalid file", () => {
-      it("should not set the is-dragged-over class", () => {
-        const dropzone = screen.getByTestId("pk-dropzone")
-        const { dataTransfer } = getDataEvent(false)
+    describe("when a file is dragged over the dropzone and then dragged out", () => {
+      describe("with dragleave event", () => {
+        it("should remove the is-dragged-over class", () => {
+          const dropzone = screen.getByTestId("pk-dropzone")
+          const { dataTransfer } = getDataEvent()
 
-        fireEvent.dragEnter(dropzone, { dataTransfer })
-        expect(dropzone).not.toHaveClass("is-dragged-over")
+          fireEvent.dragEnter(dropzone, { dataTransfer })
+          expect(dropzone).toHaveClass("is-dragged-over")
+
+          fireEvent.dragLeave(dropzone)
+          expect(dropzone).not.toHaveClass("is-dragged-over")
+        })
       })
 
-      it("should set dropEffect to none of invalid drag", () => {
-        const dropzone = screen.getByTestId("pk-dropzone")
-        const { dragEvent, dataTransfer } = getDataEvent(false)
-        const preventDefault = vi.spyOn(dragEvent, "preventDefault")
-        const stopPropagation = vi.spyOn(dragEvent, "stopPropagation")
+      describe("with dragend event", () => {
+        it("should remove the is-dragged-over-class", () => {
+          const dropzone = screen.getByTestId("pk-dropzone")
+          const { dataTransfer } = getDataEvent()
 
-        fireEvent.dragEnter(dropzone, { dataTransfer })
-        fireEvent(dropzone, dragEvent)
-        expect(preventDefault).toHaveBeenCalled()
-        expect(stopPropagation).toHaveBeenCalled()
-        expect(dragEvent.dataTransfer?.dropEffect).toBe("none")
-      })
-    })
-  })
+          fireEvent.dragEnter(dropzone, { dataTransfer })
+          expect(dropzone).toHaveClass("is-dragged-over")
 
-  describe("when a file is dragged over the dropzone and then dragged out", () => {
-    describe("with dragleave event", () => {
-      it("should remove the is-dragged-over class", () => {
-        const dropzone = screen.getByTestId("pk-dropzone")
-        const { dataTransfer } = getDataEvent()
-
-        fireEvent.dragEnter(dropzone, { dataTransfer })
-        expect(dropzone).toHaveClass("is-dragged-over")
-
-        fireEvent.dragLeave(dropzone)
-        expect(dropzone).not.toHaveClass("is-dragged-over")
-      })
-    })
-
-    describe("with dragend event", () => {
-      it("should remove the is-dragged-over-class", () => {
-        const dropzone = screen.getByTestId("pk-dropzone")
-        const { dataTransfer } = getDataEvent()
-
-        fireEvent.dragEnter(dropzone, { dataTransfer })
-        expect(dropzone).toHaveClass("is-dragged-over")
-
-        fireEvent.dragEnd(dropzone)
-        expect(dropzone).not.toHaveClass("is-dragged-over")
+          fireEvent.dragEnd(dropzone)
+          expect(dropzone).not.toHaveClass("is-dragged-over")
+        })
       })
     })
   })
