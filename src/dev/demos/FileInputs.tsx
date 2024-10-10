@@ -33,10 +33,11 @@ export function FileInputSection() {
           accept="image/*"
           multiple
           required
+          dropzone
         />
       </div>
       <div className="sub-section">
-        <h3>With label dropzone</h3>
+        <h3 id="Dropzone">With label dropzone</h3>
         <FileInput
           id="file-input-preview-dropzone"
           onChange={onChange}
