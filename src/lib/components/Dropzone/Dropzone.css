@@ -1,0 +1,22 @@
+@import "../index.css";
+
+.pk-dropzone {
+  padding: 1rem;
+  border: 2px dashed hsl(var(--pk-hue-secondary), 0%, 50%);
+  border-radius: var(--pk-btn-border-radius);
+  transition:
+    border-color 100ms,
+    background-color 100ms;
+}
+
+.pk-dropzone.is-dragged-over {
+  border-color: hsl(var(--pk-hue-secondary), 0%, 30%);
+  background-color: hsl(var(--pk-hue-secondary), 0%, 20%, 0.5);
+}
+
+@media (prefers-color-scheme: light) {
+  .pk-dropzone.is-dragged-over {
+    border-color: hsl(var(--pk-hue-secondary), 0%, 30%);
+    background-color: hsl(var(--pk-hue-secondary), 0%, 90%);
+  }
+}

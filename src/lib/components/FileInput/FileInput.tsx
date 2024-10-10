@@ -2,9 +2,20 @@ import { forwardRef, useCallback, useMemo, useState } from "react"
 import { TFileInputProps } from "./FileInput.model"
 import "./FileInput.css"
 import { Button } from "../Button"
+import { Dropzone } from "../Dropzone"
 
 export const FileInput = forwardRef<HTMLInputElement, TFileInputProps>((props, ref) => {
-  const { id, onChange, label, accept, required, fileDisplay, className = "", ...rest } = props
+  const {
+    id,
+    onChange,
+    dropzone,
+    label,
+    accept,
+    required,
+    fileDisplay,
+    className = "",
+    ...rest
+  } = props
 
   const [fileNames, setFileNames] = useState<string[]>([])
   const [filePreview, setFilePreview] = useState<Map<string, string>>(new Map())
@@ -52,6 +63,22 @@ export const FileInput = forwardRef<HTMLInputElement, TFileInputProps>((props, r
     [fileDisplay],
   )
 
+  const handleValidDrop = useCallback(
+    (e: React.DragEvent) => {
+      const inputRef = ref as React.MutableRefObject<HTMLInputElement>
+      if (inputRef?.current) {
+        inputRef.current.files = e.dataTransfer.files
+        const changeEvent = new Event("change", { bubbles: true })
+        inputRef.current.dispatchEvent(changeEvent)
+      }
+    },
+    [ref],
+  )
+
+  const handleInvalidDrop = useCallback((e: React.DragEvent) => {
+    console.log(e.dataTransfer.files)
+  }, [])
+
   return (
     <div className="pk-file-input-wrapper">
       <span id={`${id}-description`} className={labelClassNames}>
@@ -63,21 +90,50 @@ export const FileInput = forwardRef<HTMLInputElement, TFileInputProps>((props, r
           className="pk-file-input-accept"
         >{`accepts${rest.multiple ? " multiple" : ""}: ${accept}`}</span>
       ) : null}
-      <input
-        ref={ref}
-        type="file"
-        id={id}
-        className={`pk-file-input ${className}`}
-        onChange={internalOnChange}
-        accept={accept}
-        aria-describedby={`${id}-description ${id}-accepts ${id}-file-list`}
-        required={required}
-        {...rest}
-      />
-      <label htmlFor={id} className="pk-file-input-label">
-        <FileSvg />
-        <span>Browse your files</span>
-      </label>
+      {dropzone ? (
+        <Dropzone
+          handleValidDrop={handleValidDrop}
+          handleInvalidDrop={handleInvalidDrop}
+          className="pk-file-input-dropzone"
+          accept={accept}
+        >
+          <span>Drag and Drop files here</span>
+          <span className="pk-dropzone-or">-OR-</span>
+          <input
+            ref={ref}
+            type="file"
+            id={id}
+            className={`pk-file-input ${className}`}
+            onChange={internalOnChange}
+            accept={accept}
+            aria-describedby={`${id}-description ${id}-accepts ${id}-file-list`}
+            required={required}
+            {...rest}
+          />
+          <label htmlFor={id} className="pk-file-input-label">
+            <FileSvg />
+            <span>Browse your files</span>
+          </label>
+        </Dropzone>
+      ) : (
+        <>
+          <input
+            ref={ref}
+            type="file"
+            id={id}
+            className={`pk-file-input ${className}`}
+            onChange={internalOnChange}
+            accept={accept}
+            aria-describedby={`${id}-description ${id}-accepts ${id}-file-list`}
+            required={required}
+            {...rest}
+          />
+          <label htmlFor={id} className="pk-file-input-label">
+            <FileSvg />
+            <span>Browse your files</span>
+          </label>
+        </>
+      )}
 
       {fileDisplay === "list" ? (
         <ul id={`${id}-file-list`} className="pk-file-list">
