@@ -1,79 +1,14 @@
 import React from "react"
 import { fireEvent, render, screen } from "@testing-library/react"
+import { vi } from "vitest"
 import "@testing-library/jest-dom"
 
 import { Dropzone } from "./Dropzone"
-import { vi } from "vitest"
-
-class MockDataTransferItem extends File {
-  getAsFile() {
-    return this
-  }
-}
-
-class MockDataTransferItemList {
-  items: MockDataTransferItem[]
-  constructor() {
-    this.items = []
-  }
-
-  add(item: MockDataTransferItem) {
-    this.items.push(item)
-  }
-
-  clear() {
-    this.items = []
-  }
-
-  get length() {
-    return this.items.length
-  }
-
-  [Symbol.iterator]() {
-    return this.items[Symbol.iterator]()
-  }
-}
-
-class MockDataTransfer {
-  items: MockDataTransferItemList
-  dropEffect: "copy" | "none" | "move" | "link"
-  effectAllowed: "copy" | "none" | "move" | "link"
-  constructor() {
-    this.items = new MockDataTransferItemList()
-  }
-}
-
-class MockDragEvent extends Event {
-  clientX: number
-  clientY: number
-  constructor(type: string, eventInitDict: DragEventInit) {
-    super(type, eventInitDict)
-    const { clientX = 1, clientY = 1 } = eventInitDict
-    this.clientX = clientX
-    this.clientY = clientY
-  }
-}
-
-function getDataEvent(valid: boolean = true, type: string = "dragover") {
-  const dataTransfer = new MockDataTransfer()
-  const file = new MockDataTransferItem([""], "test.jpg", {
-    type: valid ? "image/jpeg" : "text/plain",
-  })
-  dataTransfer.items.add(file)
-
-  const event = new MockDragEvent(type, { bubbles: true, cancelable: true })
-  new MockDragEvent(type, { bubbles: true, cancelable: true })
-  const dragEvent = Object.defineProperty(event, "dataTransfer", {
-    value: dataTransfer,
-  }) as DragEvent
-  return { dragEvent, dataTransfer }
-}
+import { getMockDataEvent, mockBoundingBox, MockDataTransfer } from "./mocks"
 
 describe("Dropzone", () => {
   const onValidDrop = vi.fn()
   const onInvalidDrop = vi.fn()
-  let accept: string[] | undefined
-  let className: string | undefined
 
   beforeEach(() => {
     vi.stubGlobal("DataTransfer", MockDataTransfer)
@@ -98,7 +33,7 @@ describe("Dropzone", () => {
     describe("with no accept prop", () => {
       it("should default to image/*", () => {
         const dropzone = screen.getByTestId("pk-dropzone")
-        const { dataTransfer } = getDataEvent()
+        const { dataTransfer } = getMockDataEvent()
 
         fireEvent.drop(dropzone, { dataTransfer })
         expect(onValidDrop).toHaveBeenCalled()
@@ -116,14 +51,12 @@ describe("Dropzone", () => {
 
   describe("with valid props", () => {
     beforeEach(() => {
-      accept = ["image/*"]
-      className = "test-dropzone"
       render(
         <Dropzone
           handleValidDrop={onValidDrop}
           handleInvalidDrop={onInvalidDrop}
-          className={className}
-          accept={accept}
+          className={"test-dropzone"}
+          accept={["image/*"]}
         >
           <div>
             <span>Dropzone</span>
@@ -152,7 +85,7 @@ describe("Dropzone", () => {
     describe("with onValidDrop prop", () => {
       it("should be fired when a valid file is dropped", () => {
         const dropzone = screen.getByTestId("pk-dropzone")
-        const { dataTransfer } = getDataEvent()
+        const { dataTransfer } = getMockDataEvent()
 
         fireEvent.drop(dropzone, { dataTransfer })
         expect(onValidDrop).toHaveBeenCalled()
@@ -162,7 +95,7 @@ describe("Dropzone", () => {
     describe("with onInvalidDrop prop", () => {
       it("should be fired when an invalid file is dropped", () => {
         const dropzone = screen.getByTestId("pk-dropzone")
-        const { dataTransfer } = getDataEvent(false)
+        const { dataTransfer } = getMockDataEvent(false)
 
         fireEvent.drop(dropzone, { dataTransfer })
         expect(onInvalidDrop).toHaveBeenCalled()
@@ -173,7 +106,7 @@ describe("Dropzone", () => {
       describe("with a valid file", () => {
         it("should set the is-dragged-over class", () => {
           const dropzone = screen.getByTestId("pk-dropzone")
-          const { dataTransfer } = getDataEvent()
+          const { dataTransfer } = getMockDataEvent()
 
           fireEvent.dragEnter(dropzone, { dataTransfer })
           expect(dropzone).toHaveClass("is-dragged-over")
@@ -181,7 +114,7 @@ describe("Dropzone", () => {
 
         it("should set dropEffect to copy", () => {
           const dropzone = screen.getByTestId("pk-dropzone")
-          const { dataTransfer, dragEvent } = getDataEvent()
+          const { dataTransfer, dragEvent } = getMockDataEvent()
           const preventDefault = vi.spyOn(dragEvent, "preventDefault")
           const stopPropagation = vi.spyOn(dragEvent, "stopPropagation")
 
@@ -195,19 +128,9 @@ describe("Dropzone", () => {
         describe("when internal dragleave event is fired", () => {
           it("should not remove the is-dragged-over class", () => {
             const dropzone = screen.getByTestId("pk-dropzone")
-            vi.spyOn(dropzone, "getBoundingClientRect").mockReturnValue({
-              top: 0,
-              bottom: 100,
-              left: 0,
-              right: 100,
-              x: 0,
-              y: 0,
-              width: 100,
-              height: 100,
-              toJSON: () => "",
-            })
             const child = screen.getByText("Dropzone")
-            const { dataTransfer, dragEvent } = getDataEvent(true, "dragleave")
+            const { dataTransfer, dragEvent } = getMockDataEvent(true, "dragleave")
+            vi.spyOn(dropzone, "getBoundingClientRect").mockReturnValue(mockBoundingBox)
 
             fireEvent.dragEnter(dropzone, { dataTransfer })
             expect(dropzone).toHaveClass("is-dragged-over")
@@ -221,7 +144,7 @@ describe("Dropzone", () => {
       describe("with an invalid file", () => {
         it("should not set the is-dragged-over class", () => {
           const dropzone = screen.getByTestId("pk-dropzone")
-          const { dataTransfer } = getDataEvent(false)
+          const { dataTransfer } = getMockDataEvent(false)
 
           fireEvent.dragEnter(dropzone, { dataTransfer })
           expect(dropzone).not.toHaveClass("is-dragged-over")
@@ -229,7 +152,7 @@ describe("Dropzone", () => {
 
         it("should set dropEffect to none of invalid drag", () => {
           const dropzone = screen.getByTestId("pk-dropzone")
-          const { dragEvent, dataTransfer } = getDataEvent(false)
+          const { dragEvent, dataTransfer } = getMockDataEvent(false)
           const preventDefault = vi.spyOn(dragEvent, "preventDefault")
           const stopPropagation = vi.spyOn(dragEvent, "stopPropagation")
 
@@ -246,7 +169,7 @@ describe("Dropzone", () => {
       describe("with dragleave event", () => {
         it("should remove the is-dragged-over class", () => {
           const dropzone = screen.getByTestId("pk-dropzone")
-          const { dataTransfer } = getDataEvent()
+          const { dataTransfer } = getMockDataEvent()
 
           fireEvent.dragEnter(dropzone, { dataTransfer })
           expect(dropzone).toHaveClass("is-dragged-over")
@@ -259,7 +182,7 @@ describe("Dropzone", () => {
       describe("with dragend event", () => {
         it("should remove the is-dragged-over-class", () => {
           const dropzone = screen.getByTestId("pk-dropzone")
-          const { dataTransfer } = getDataEvent()
+          const { dataTransfer } = getMockDataEvent()
 
           fireEvent.dragEnter(dropzone, { dataTransfer })
           expect(dropzone).toHaveClass("is-dragged-over")
