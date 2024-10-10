@@ -3,5 +3,5 @@ export type DropzoneProps = {
   handleInvalidDrop: React.DragEventHandler
   accept?: string
   className?: string
-  children: React.ReactNode | React.ReactNode[] | null
+  children: React.ReactNode
 }
