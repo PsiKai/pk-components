@@ -1,4 +1,4 @@
-export type DropzoneProps = {
+export type TDropzoneProps = {
   handleValidDrop: React.DragEventHandler
   handleInvalidDrop: React.DragEventHandler
   accept?: string

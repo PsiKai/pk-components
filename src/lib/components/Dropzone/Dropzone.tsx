@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useRef } from "react"
-import { DropzoneProps } from "./Dropzone.model"
+import { TDropzoneProps } from "./Dropzone.model"
 import "./Dropzone.css"
 
-export function Dropzone(props: DropzoneProps) {
+export function Dropzone(props: TDropzoneProps) {
   const { handleValidDrop, handleInvalidDrop, accept = "image/*", children, className } = props
 
   const validDrag = useRef(false)
