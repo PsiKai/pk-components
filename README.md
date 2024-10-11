@@ -27,6 +27,7 @@ npm i pk-components
 - [LoadingSpinner](https://github.com/psikai/pk-components/blob/main/src/lib/components/LoadingSpinner/README.md)
 - [Input](https://github.com/psikai/pk-components/blob/main/src/lib/components/Input/README.md)
 - [FileInput](https://github.com/psikai/pk-components/blob/main/src/lib/components/FileInput/README.md)
+- [Dropzone](https://github.com/psikai/pk-components/blob/main/src/lib/components/Dropzone/README.md)
 
 ### Demo
 

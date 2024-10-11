@@ -120,3 +120,14 @@
   margin-top: calc(1ex - 1cap);
   fill: currentColor;
 }
+
+.pk-file-input-dropzone {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: center;
+}
+
+.pk-dropzone-or {
+  font-variant-caps: all-small-caps;
+}
