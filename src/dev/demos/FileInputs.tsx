@@ -33,7 +33,6 @@ export function FileInputSection() {
           accept="image/*"
           multiple
           required
-          dropzone
         />
       </div>
       <div className="sub-section">
@@ -42,7 +41,7 @@ export function FileInputSection() {
           id="file-input-preview-dropzone"
           onChange={onChange}
           fileDisplay="preview"
-          label="Upload your photos"
+          label="Share your vacation photos"
           accept="image/*"
           multiple
           required
