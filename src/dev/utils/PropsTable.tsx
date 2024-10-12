@@ -21,7 +21,7 @@ export function PropsTable({ rows }: { rows: TPropsTableRow[] }) {
             {Object.entries(row).map(([attr, cell], jindex) =>
               attr === "description" ? (
                 <td key={jindex} className="prop-description">
-                  {cell}
+                  <span>{cell}</span>
                 </td>
               ) : (
                 <td key={jindex}>
