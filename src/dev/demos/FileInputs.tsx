@@ -1,5 +1,7 @@
 import React, { useRef } from "react"
 import { FileInput } from "../../lib/components/FileInput"
+import { composePropsTableData } from "../utils/PropsTable.utils"
+import { PropsTable } from "../utils/PropsTable"
 
 export function FileInputSection() {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -8,23 +10,56 @@ export function FileInputSection() {
     }
   }
 
+  const fileInputProps = composePropsTableData([
+    [
+      "[HTML\u00A0Attributes]",
+      "React.AllHTMLAttributes<\n  HTMLInputElement\n>",
+      "undefined",
+      "Pass-through HTML attributes for input element.",
+    ],
+    ["id", "string", "undefined", "Required unique identifier for the input."],
+    [
+      "label",
+      "string",
+      "undefined",
+      "A description of the input. Not the strict accessible label.",
+    ],
+    ["fileDisplay", '"list" | "preview"', "undefined", "Display type of the inputted files."],
+    [
+      "ref",
+      "React.RefObject<HTMLInputElement>",
+      "undefined",
+      "Forwarded ref for the input element.",
+    ],
+    [
+      "dropzone",
+      "boolean",
+      "false",
+      "Enable the dropzone feature. A ref is required with the dropzone.",
+    ],
+  ])
+
   const fileInput = useRef<HTMLInputElement>(null)
 
   return (
     <>
       <div className="sub-section">
+        <h3 className="sub-section-header">Props</h3>
+        <PropsTable rows={fileInputProps} />
+      </div>
+      <div className="sub-section">
         <h3>With label, hint, and file list</h3>
         <FileInput
           id="file-input-list"
           onChange={onChange}
-          multiple
           label="Upload your résumé"
           fileDisplay="list"
           accept=".jpg,.jpeg,.png,.pdf"
         />
       </div>
+      <hr />
       <div className="sub-section">
-        <h3>With label hint and file preview</h3>
+        <h3>With label, hint, and file preview</h3>
         <FileInput
           id="file-input-preview"
           onChange={onChange}
@@ -35,8 +70,9 @@ export function FileInputSection() {
           required
         />
       </div>
+      <hr />
       <div className="sub-section">
-        <h3 id="Dropzone">With label dropzone</h3>
+        <h3 id="Dropzone">With dropzone area</h3>
         <FileInput
           id="file-input-preview-dropzone"
           onChange={onChange}
@@ -44,7 +80,6 @@ export function FileInputSection() {
           label="Share your vacation photos"
           accept="image/*"
           multiple
-          required
           dropzone
           ref={fileInput}
         />
