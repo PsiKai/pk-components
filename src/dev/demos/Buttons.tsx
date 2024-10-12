@@ -48,23 +48,20 @@ const buttonProps = composePropsTableData([
 
 export const ButtonSection = () => {
   return (
-    <>
-      <section>
-        <div className="sub-section">
-          <h3>Props</h3>
-          <PropsTable rows={buttonProps} />
-        </div>
-      </section>
+    <section>
+      <div className="sub-section">
+        <h3>Props</h3>
+        <PropsTable rows={buttonProps} />
+      </div>
 
-      <h3>Size</h3>
       <ButtonSizes />
-      <h3>Variant</h3>
+      <hr />
       <ButtonVariants />
-      <h3>Outline</h3>
+      <hr />
       <ButtonOutline />
-      <h3>State</h3>
+      <hr />
       <ButtonState />
-    </>
+    </section>
   )
 }
 
@@ -72,16 +69,19 @@ const ButtonSizes = () => {
   const { pending, handleClick } = usePending()
 
   return (
-    <section>
-      {buttonSizes.map(fit => {
-        const props = fit === "link" ? { href: "#" } : { onClick: handleClick }
-        return (
-          <Button key={fit} fit={fit} {...props} pending={pending === fit + "-fit"}>
-            {fit + "-fit"}
-          </Button>
-        )
-      })}
-    </section>
+    <div className="sub-section">
+      <h3>Fit</h3>
+      <div className="section-group">
+        {buttonSizes.map(fit => {
+          const props = fit === "link" ? { href: "#" } : { onClick: handleClick }
+          return (
+            <Button key={fit} fit={fit} {...props} pending={pending === fit + "-fit"}>
+              {fit + "-fit"}
+            </Button>
+          )
+        })}
+      </div>
+    </div>
   )
 }
 
@@ -89,18 +89,21 @@ const ButtonVariants = () => {
   const { pending, handleClick } = usePending()
 
   return (
-    <section>
-      {buttonVariants.map(variant => (
-        <Button
-          key={variant}
-          variant={variant}
-          onClick={handleClick}
-          pending={pending === variant + "-variant"}
-        >
-          {variant + "-variant"}
-        </Button>
-      ))}
-    </section>
+    <div className="sub-section">
+      <h3>Variant</h3>
+      <div className="section-group">
+        {buttonVariants.map(variant => (
+          <Button
+            key={variant}
+            variant={variant}
+            onClick={handleClick}
+            pending={pending === variant + "-variant"}
+          >
+            {variant + "-variant"}
+          </Button>
+        ))}
+      </div>
+    </div>
   )
 }
 
@@ -108,19 +111,22 @@ const ButtonOutline = () => {
   const { pending, handleClick } = usePending()
 
   return (
-    <section>
-      {buttonVariants.map(variant => (
-        <Button
-          key={variant}
-          variant={variant}
-          fill="outline"
-          onClick={handleClick}
-          pending={pending === variant + "-outline"}
-        >
-          {variant + "-outline"}
-        </Button>
-      ))}
-    </section>
+    <div className="sub-section">
+      <h3>Outline</h3>
+      <div className="section-group">
+        {buttonVariants.map(variant => (
+          <Button
+            key={variant}
+            variant={variant}
+            fill="outline"
+            onClick={handleClick}
+            pending={pending === variant + "-outline"}
+          >
+            {variant + "-outline"}
+          </Button>
+        ))}
+      </div>
+    </div>
   )
 }
 
@@ -147,10 +153,19 @@ const ButtonState = () => {
 
   return (
     <>
-      <h4>Disabled</h4>
-      <section>{buttonVariants.map(variant => buttonMap(variant, true, false))}</section>
-      <h4>Pending</h4>
-      <section>{buttonVariants.map(variant => buttonMap(variant, false, true))}</section>
+      <div className="sub-section">
+        <h3>State</h3>
+        <h4>Disabled</h4>
+        <div className="section-group">
+          {buttonVariants.map(variant => buttonMap(variant, true, false))}
+        </div>
+      </div>
+      <div className="sub-section">
+        <h4>Pending</h4>
+        <div className="section-group">
+          {buttonVariants.map(variant => buttonMap(variant, false, true))}
+        </div>
+      </div>
     </>
   )
 }
