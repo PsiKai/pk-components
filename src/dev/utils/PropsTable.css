@@ -1,7 +1,32 @@
-td {
-  padding: 0.5em 0;
+.table-wrapper {
+  overflow-x: scroll;
+  width: 100%;
+}
+
+table {
+  table-layout: fixed;
+  min-width: 700px;
+  border-collapse: collapse;
+  position: relative;
+}
+
+thead {
+  text-align: left;
+}
+
+tr {
   border-bottom: 1px solid currentColor;
-  height: 4em;
+}
+
+td {
+  height: 6em;
+  max-width: 30%;
+  width: min-content;
+  text-wrap: balance;
+}
+
+td:not(:last-child) {
+  padding-right: 1em;
 }
 
 .prop-description {
@@ -11,5 +36,4 @@ td {
 td span {
   display: block;
   font-size: 0.875em;
-  padding-left: 1em;
 }

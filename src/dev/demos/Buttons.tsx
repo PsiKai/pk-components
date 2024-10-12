@@ -28,8 +28,8 @@ function usePending() {
 
 const buttonProps = composePropsTableData([
   [
-    "[HTML Attributes]",
-    "React.AllHTMLAttributes",
+    "[HTML\u00A0Attributes]",
+    "React.AllHTMLAttributes<\n  HTMLButtonElement | \n  HTMLAnchorElement\n>",
     "undefined",
     "Pass-through HTML attributes for button or anchor element.",
   ],
@@ -42,7 +42,7 @@ const buttonProps = composePropsTableData([
   ],
   ["fit", '"small" | "medium" | "large" | "block" | "link"', "large", "Size of the button."],
   ["fill", '"solid" | "outline"', "solid", "Fill style of the button."],
-  ["pending", "boolean", "false", "Disable and how pending state of the button."],
+  ["pending", "boolean", "false", "Disable and show pending state of the button."],
   ["children", "ReactNode", "undefined", "Content inside the button."],
 ])
 
@@ -50,7 +50,7 @@ export const ButtonSection = () => {
   return (
     <section>
       <div className="sub-section">
-        <h3>Props</h3>
+        <h3 className="sub-section-header">Props</h3>
         <PropsTable rows={buttonProps} />
       </div>
 

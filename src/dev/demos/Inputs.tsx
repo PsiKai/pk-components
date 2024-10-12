@@ -6,8 +6,8 @@ import { composePropsTableData } from "../utils/PropsTable.utils"
 
 const inputProps = composePropsTableData([
   [
-    "[HTML Attributes]",
-    "React.AllHTMLAttributes",
+    "[HTML\u00A0Attributes]",
+    "React.AllHTMLAttributes<\n  HTMLInputElement\n>",
     "undefined",
     "Pass-through HTML attributes for input element.",
   ],
@@ -23,7 +23,7 @@ export const InputSection = () => {
   return (
     <>
       <div className="sub-section">
-        <h3>Props</h3>
+        <h3 className="sub-section-header">Props</h3>
         <PropsTable rows={inputProps} />
       </div>
       <div className="sub-section">
