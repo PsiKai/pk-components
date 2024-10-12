@@ -9,14 +9,14 @@ const inputProps = composePropsTableData([
     "[HTML Attributes]",
     "React.AllHTMLAttributes",
     "undefined",
-    "Pass-through HTML attributes for input element",
+    "Pass-through HTML attributes for input element.",
   ],
-  ["id", "string", "undefined", "Unique identifier for the input"],
-  ["label", "string", "undefined", "Label for the input"],
-  ["hint", "string", "undefined", "Hint text for the input"],
-  ["feedback", "string", "undefined", "Feedback text for the input"],
-  ["error", "string | boolean", "undefined", "Error feedback text for the input"],
-  ["clean", "string | boolean", "undefined", "Success feedback text for the input"],
+  ["id", "string", "undefined", "Required unique identifier for the input."],
+  ["label", "string", "undefined", "Accessible label for the input"],
+  ["hint", "string", "undefined", "Supplemental text for a detailed description."],
+  ["feedback", "string", "undefined", "Feedback text for the state or requirements of the input."],
+  ["error", "string | boolean", "undefined", "Feedback for the error state of the input."],
+  ["clean", "string | boolean", "undefined", "Feedback for the success state of the input."],
 ])
 
 export const InputSection = () => {
