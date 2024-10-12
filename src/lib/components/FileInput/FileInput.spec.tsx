@@ -189,7 +189,7 @@ describe("FileInput", () => {
         it("should log the event", () => {
           const dropzone = screen.getByTestId("pk-dropzone")
           const { dataTransfer } = getMockDataEvent(false)
-          const consoleSpy = vi.spyOn(console, "log")
+          const consoleSpy = vi.spyOn(console, "log").mockImplementation(vi.fn())
 
           fireEvent.drop(dropzone, { dataTransfer })
           expect(consoleSpy).toHaveBeenCalled()
