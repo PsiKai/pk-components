@@ -1,0 +1,15 @@
+td {
+  padding: 0.5em 0;
+  border-bottom: 1px solid currentColor;
+  height: 4em;
+}
+
+.prop-description {
+  width: 30%;
+}
+
+td span {
+  display: block;
+  font-size: 0.875em;
+  padding-left: 1em;
+}
