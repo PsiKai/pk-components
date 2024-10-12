@@ -1,6 +1,8 @@
 import React, { useCallback } from "react"
 import type { TButtonProps } from "../../lib/components/Button"
 import { Button } from "../../lib/components/Button"
+import { PropsTable } from "../utils/PropsTable"
+import { composePropsTableData } from "../utils/PropsTable.utils"
 
 const buttonVariants = [
   "primary",
@@ -24,9 +26,36 @@ function usePending() {
   return { pending, handleClick }
 }
 
+const buttonProps = composePropsTableData([
+  [
+    "[HTML Attributes]",
+    "React.AllHTMLAttributes",
+    "undefined",
+    "Pass-through HTML attributes for button or anchor element.",
+  ],
+  ["href", "string", "undefined", "Turns the button into an anchor element and assigns the href."],
+  [
+    "variant",
+    '"primary" | "secondary" | "success" | "warning" | "danger"',
+    "primary",
+    "Color variant of the button.",
+  ],
+  ["fit", '"small" | "medium" | "large" | "block" | "link"', "large", "Size of the button."],
+  ["fill", '"solid" | "outline"', "solid", "Fill style of the button."],
+  ["pending", "boolean", "false", "Disable and how pending state of the button."],
+  ["children", "ReactNode", "undefined", "Content inside the button."],
+])
+
 export const ButtonSection = () => {
   return (
     <>
+      <section>
+        <div className="sub-section">
+          <h3>Props</h3>
+          <PropsTable rows={buttonProps} />
+        </div>
+      </section>
+
       <h3>Size</h3>
       <ButtonSizes />
       <h3>Variant</h3>
