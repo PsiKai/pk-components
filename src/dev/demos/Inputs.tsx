@@ -1,10 +1,31 @@
 import React from "react"
 import { Input } from "../../lib/components/Input"
 import { Button } from "../../lib/components/Button"
+import { PropsTable } from "../utils/PropsTable"
+import { composePropsTableData } from "../utils/PropsTable.utils"
+
+const inputProps = composePropsTableData([
+  [
+    "[HTML Attributes]",
+    "React.AllHTMLAttributes",
+    "undefined",
+    "Pass-through HTML attributes for input element",
+  ],
+  ["id", "string", "undefined", "Unique identifier for the input"],
+  ["label", "string", "undefined", "Label for the input"],
+  ["hint", "string", "undefined", "Hint text for the input"],
+  ["feedback", "string", "undefined", "Feedback text for the input"],
+  ["error", "string | boolean", "undefined", "Error feedback text for the input"],
+  ["clean", "string | boolean", "undefined", "Success feedback text for the input"],
+])
 
 export const InputSection = () => {
   return (
     <>
+      <div className="sub-section">
+        <h3>Props</h3>
+        <PropsTable rows={inputProps} />
+      </div>
       <div className="sub-section">
         <h3>Basic Text Input</h3>
         <Input id="basic-text-input" />
