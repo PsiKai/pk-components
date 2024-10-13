@@ -3,6 +3,7 @@ import { InputSection } from "./demos/Inputs"
 import { ButtonSection } from "./demos/Buttons"
 import { FileInputSection } from "./demos/FileInputs"
 import { LoadingSpinnerSection } from "./demos/LoadingSpinners"
+import { HamburgerButtonSection } from "./demos/HamburgerButtons"
 import "./index.css"
 
 export const AppDev = () => {
@@ -38,6 +39,12 @@ export const AppDev = () => {
         <section>
           <FileInputSection />
         </section>
+      </div>
+      <div className="section-wrapper">
+        <h2 id="Hamburger" className="section-header">
+          <code>Hamburger</code>
+        </h2>
+        <HamburgerButtonSection />
       </div>
     </>
   )
