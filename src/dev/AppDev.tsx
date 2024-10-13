@@ -2,8 +2,8 @@ import React from "react"
 import { InputSection } from "./demos/Inputs"
 import { ButtonSection } from "./demos/Buttons"
 import { FileInputSection } from "./demos/FileInputs"
-import "./index.css"
 import { LoadingSpinnerSection } from "./demos/LoadingSpinners"
+import "./index.css"
 
 export const AppDev = () => {
   return (
