@@ -1,0 +1,39 @@
+.table-wrapper {
+  overflow-x: scroll;
+  width: 100%;
+}
+
+table {
+  table-layout: fixed;
+  min-width: 700px;
+  border-collapse: collapse;
+  position: relative;
+}
+
+thead {
+  text-align: left;
+}
+
+tr {
+  border-bottom: 1px solid currentColor;
+}
+
+td {
+  height: 6em;
+  max-width: 30%;
+  width: fit-content;
+  text-wrap: balance;
+}
+
+td:not(:last-child) {
+  padding-right: 1em;
+}
+
+.prop-description {
+  width: 30%;
+}
+
+td span {
+  display: block;
+  font-size: 0.875em;
+}

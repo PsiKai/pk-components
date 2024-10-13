@@ -11,7 +11,7 @@ export const sizeMap: TSpinnerMap = {
   sm: 16,
   md: 20,
   lg: 28,
-  xl: 36,
+  xl: 64,
 }
 
 /**
@@ -34,5 +34,5 @@ export const spinnerDotCountMap: TSpinnerMap = {
   sm: 6,
   md: 8,
   lg: 10,
-  xl: 14,
+  xl: 12,
 }

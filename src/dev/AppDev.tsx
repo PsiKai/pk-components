@@ -1,8 +1,8 @@
 import React from "react"
-import { LoadingSpinner } from "../lib/components/LoadingSpinner"
 import { InputSection } from "./demos/Inputs"
 import { ButtonSection } from "./demos/Buttons"
 import { FileInputSection } from "./demos/FileInputs"
+import { LoadingSpinnerSection } from "./demos/LoadingSpinners"
 import "./index.css"
 
 export const AppDev = () => {
@@ -20,7 +20,7 @@ export const AppDev = () => {
           <code>LoadingSpinner</code>
         </h2>
         <section>
-          <LoadingSpinner />
+          <LoadingSpinnerSection />
         </section>
       </div>
       <div className="section-wrapper">

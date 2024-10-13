@@ -155,7 +155,7 @@ export const FileInput = forwardRef<HTMLInputElement, TFileInputProps>((props, r
       ) : fileDisplay === "preview" ? (
         <div id={`${id}-file-list`} className="pk-file-preview-wrapper">
           {[...filePreview.entries()].map(([fileName, preview]) => (
-            <div className="pk-file-preview">
+            <div className="pk-file-preview" key={fileName}>
               <Button
                 variant="secondary"
                 fit="small"

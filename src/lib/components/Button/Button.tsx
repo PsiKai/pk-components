@@ -9,7 +9,6 @@ export function Button(props: TButtonProps) {
     children,
     className,
     disabled = false,
-    type = "button",
     variant = "primary",
     fit = "large",
     fill = "solid",
@@ -28,7 +27,7 @@ export function Button(props: TButtonProps) {
       {children}
     </a>
   ) : (
-    <button className={classString} disabled={disabled || pending} type={type} {...rest}>
+    <button className={classString} disabled={disabled || pending} {...rest}>
       {children}
       {pending && <LoadingSpinner fit={spinnerSizeMap[fit]} />}
     </button>

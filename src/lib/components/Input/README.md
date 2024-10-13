@@ -27,16 +27,16 @@ Both given muted styles to indicate a lack of interactivity.
 
 #### Props
 
-| Prop Name          | Type                                    | Required | Default     | Description                                                                                  |
-| ------------------ | --------------------------------------- | -------- | ----------- | -------------------------------------------------------------------------------------------- |
-| `[htmlAttributes]` | `React.AllHTMLAttributes<InputElement>` | No       | `undefined` | Any valid HTML attribute for an input element.                                               |
-| `className`        | `string`                                | No       | `undefined` | Additional class names to apply to the input element.                                        |
-| `id`               | `string`                                | Yes      | `undefined` | Id attribute assigned to the input element. Required to create an accessible label.          |
-| `label`            | `string`                                | No       | `undefined` | The accessble label to be associatied with the input. Not required but strongly recommended. |
-| `hint`             | `string`                                | No       | `undefined` | Smaller hint text to go under the label.                                                     |
-| `feedback`         | `string`                                | No       | `undefined` | Custom informative feedback about the input requirements under the element.                  |
-| `error`            | `string \| boolean`                     | No       | `undefined` | Custom or default error feedback under the element.                                          |
-| `clean`            | `string \| boolean`                     | No       | `undefined` | Custom or default success feedback under the element.                                        |
+| Prop Name          | Type                                    | Required | Default     | Description                                                                                 |
+| ------------------ | --------------------------------------- | -------- | ----------- | ------------------------------------------------------------------------------------------- |
+| `[htmlAttributes]` | `React.AllHTMLAttributes<InputElement>` | No       | `undefined` | Any valid HTML attribute for an input element.                                              |
+| `className`        | `string`                                | No       | `undefined` | Additional class names to apply to the input element.                                       |
+| `id`               | `string`                                | Yes      | `undefined` | Id attribute assigned to the input element. Required to create an accessible label.         |
+| `label`            | `React.ReactNode`                       | No       | `undefined` | The accessble label to be associated with the input. Not required but strongly recommended. |
+| `hint`             | `React.ReactNode`                       | No       | `undefined` | Smaller hint text to go under the label.                                                    |
+| `feedback`         | `React.ReactNode`                       | No       | `undefined` | Custom informative feedback about the input requirements under the element.                 |
+| `error`            | `React.ReactNode \| boolean`            | No       | `undefined` | Custom or default error feedback under the element.                                         |
+| `clean`            | `React.ReactNode \| boolean`            | No       | `undefined` | Custom or default success feedback under the element.                                       |
 
 #### Example
 

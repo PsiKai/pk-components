@@ -16,10 +16,10 @@ export function Input(props: TInputProps) {
 
   const feedbackText = useMemo(() => {
     if (isError) {
-      return typeof error === "string" ? error : "✗ Invalid"
+      return error === true ? "✗ Invalid" : error
     }
     if (isClean) {
-      return typeof clean === "string" ? clean : "✓ Done"
+      return clean === true ? "✓ Done" : clean
     }
     return feedback || ""
   }, [isError, isClean, error, clean, feedback])

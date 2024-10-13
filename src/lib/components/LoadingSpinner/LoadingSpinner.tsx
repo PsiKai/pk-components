@@ -5,14 +5,18 @@ import { circlePointPosition } from "./utils/geometry"
 import "./LoadingSpinner.css"
 
 export function LoadingSpinner(props: TLoadingSpinnerProps) {
-  const { fit = "md", ...rest } = props
+  const { fit = "md", backdrop = true, ...rest } = props
 
   const dots = useMemo(() => Array.from({ length: spinnerDotCountMap[fit] }, (_, i) => i), [fit])
   const height = useMemo(() => sizeMap[fit], [fit])
   const dotSize = useMemo(() => spinnerDotSizeMap[fit], [fit])
 
+  const classNames = useMemo(() => {
+    return `pk-loading-spinner ${backdrop ? "pk-loading-spinner-backdrop" : ""}`
+  }, [backdrop])
+
   return (
-    <div className="pk-loading-spinner" role="progressbar">
+    <div className={classNames} role="progressbar">
       <div className="pk-loading-spinner-inner" style={{ height: `${height}px` }}>
         {dots.map(i => {
           const { x, y } = circlePointPosition(height, dots.length, i)
