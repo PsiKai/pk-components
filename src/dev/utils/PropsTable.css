@@ -21,7 +21,7 @@ tr {
 td {
   height: 6em;
   max-width: 30%;
-  width: min-content;
+  width: fit-content;
   text-wrap: balance;
 }
 
