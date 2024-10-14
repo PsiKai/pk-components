@@ -18,7 +18,7 @@ const spinnerSizes = ["xs", "sm", "md", "lg", "xl"] as TLoadingSpinnerProps["fit
 
 export function LoadingSpinnerSection() {
   return (
-    <>
+    <section>
       <div className="sub-section">
         <h3 className="sub-section-header">Props</h3>
         <PropsTable rows={loadingSpinnerProps} />
@@ -47,9 +47,9 @@ export function LoadingSpinnerSection() {
         <h3>No Backdrop</h3>
         <div className="spinner-container">
           <div className="section-group">
-            <p>
+            <span>
               The spinner is inline with the content <LoadingSpinner backdrop={false} fit="sm" />
-            </p>
+            </span>
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@ export function LoadingSpinnerSection() {
         <h3>Embedded in components</h3>
         <SpinnerInInput />
       </div>
-    </>
+    </section>
   )
 }
 

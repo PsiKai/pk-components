@@ -15,6 +15,7 @@
 .pk-hamburger-button span {
   background-color: currentColor;
   height: 4px;
+  width: 100%;
   border-radius: 3px;
   transition: transform 200ms ease;
   transform-origin: 5px 5px;

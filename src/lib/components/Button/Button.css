@@ -38,8 +38,7 @@
 
 .pk-button-progress,
 .pk-button:disabled {
-  --saturation: 70%;
-  --lightness: 50%;
+  --saturation: 85%;
   box-shadow: none;
 
   &.pk-button-secondary {

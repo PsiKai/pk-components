@@ -1,51 +1,49 @@
-import React from "react"
-import { InputSection } from "./demos/Inputs"
-import { ButtonSection } from "./demos/Buttons"
-import { FileInputSection } from "./demos/FileInputs"
-import { LoadingSpinnerSection } from "./demos/LoadingSpinners"
-import { HamburgerButtonSection } from "./demos/HamburgerButtons"
+import React, { useCallback } from "react"
+import { Sidenav } from "../lib/components/Sidenav"
+import { Hamburger } from "../lib/components/Hamburger"
+import { Button } from "../lib/components/Button"
+import { components } from "./component-index"
+
 import "./index.css"
+import "./demos/sidenav-section.css"
 
 export const AppDev = () => {
+  const [navOpen, setNavOpen] = React.useState(false)
+
+  const navToggle = useCallback(() => {
+    setNavOpen(prev => !prev)
+  }, [])
+
+  const navClose = useCallback(() => {
+    setNavOpen(false)
+  }, [])
+
   return (
     <>
+      <header className="main-header">
+        <Hamburger open={navOpen} onClick={navToggle} />
+        <Sidenav open={navOpen} from="left" handleDismiss={navClose}>
+          <ul className="nav-links">
+            {Object.keys(components).map(section => (
+              <li>
+                <Button fit="link" onClick={navClose} href={`#${section}`}>
+                  {section}
+                </Button>
+              </li>
+            ))}
+          </ul>
+        </Sidenav>
+        <span>PK Component Library</span>
+      </header>
       <h1>PK Component Library</h1>
-      <div className="section-wrapper">
-        <h2 id="Button" className="section-header">
-          <code>Button</code>
-        </h2>
-        <ButtonSection />
-      </div>
-      <div className="section-wrapper">
-        <h2 id="LoadingSpinner" className="section-header">
-          <code>LoadingSpinner</code>
-        </h2>
-        <section>
-          <LoadingSpinnerSection />
-        </section>
-      </div>
-      <div className="section-wrapper">
-        <h2 id="Input" className="section-header">
-          <code>Input</code>
-        </h2>
-        <section>
-          <InputSection />
-        </section>
-      </div>
-      <div className="section-wrapper">
-        <h2 id="FileInput" className="section-header">
-          <code>FileInput</code>
-        </h2>
-        <section>
-          <FileInputSection />
-        </section>
-      </div>
-      <div className="section-wrapper">
-        <h2 id="Hamburger" className="section-header">
-          <code>Hamburger</code>
-        </h2>
-        <HamburgerButtonSection />
-      </div>
+      {Object.entries(components).map(([componentName, Component]) => (
+        <div className="section-wrapper" key={componentName}>
+          <h2 id={componentName} className="section-header">
+            <code>{componentName}</code>
+          </h2>
+          <Component />
+        </div>
+      ))}
     </>
   )
 }
