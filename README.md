@@ -29,6 +29,7 @@ npm i pk-components
 - [FileInput](https://github.com/psikai/pk-components/blob/main/src/lib/components/FileInput/README.md)
 - [Dropzone](https://github.com/psikai/pk-components/blob/main/src/lib/components/Dropzone/README.md)
 - [Hamburger](https://github.com/psikai/pk-components/blob/main/src/lib/components/Hamburger/README.md)
+- [Sidenav](https://github.com/psikai/pk-components/blob/main/src/lib/components/Sidenav/README.md)
 
 ### Demo
 
