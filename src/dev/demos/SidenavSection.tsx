@@ -5,6 +5,12 @@ import { PropsTable } from "../utils/PropsTable"
 import { composePropsTableData } from "../utils/PropsTable.utils"
 
 const SidenavProps = composePropsTableData([
+  [
+    "[HTML\u00A0Attributes]",
+    "React.AllHTMLAttributes<\n  HTMLElement\n>",
+    "undefined",
+    "Pass-through HTML attributes for input element.",
+  ],
   ["open", "boolean", "false", "Whether the sidenav is open or closed."],
   [
     "handleDismiss",

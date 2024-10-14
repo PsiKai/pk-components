@@ -1,6 +1,6 @@
 import { AllHtmlAttributes } from "../../core-types"
 
-export type TSidenavProps = AllHtmlAttributes & {
+export type TSidenavProps = AllHtmlAttributes<HTMLElement> & {
   className?: string
   children?: React.ReactNode
   open: boolean

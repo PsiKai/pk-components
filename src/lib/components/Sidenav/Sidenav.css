@@ -4,9 +4,12 @@
   height: 100vh;
   width: 100vw;
   max-width: 400px;
-  transition: translate 0.3s ease;
+  transition:
+    translate 0.3s ease,
+    visibility 0s 0.3s;
   border: inherit;
   background-color: inherit;
+  visibility: collapse;
 }
 
 .pk-sidenav-from-left {
@@ -23,6 +26,8 @@
 
 .pk-sidenav-open {
   translate: 0;
+  visibility: visible;
+  transition: translate 0.3s ease;
 }
 
 .pk-sidenav-open.pk-sidenav-from-left {
@@ -41,15 +46,16 @@
   opacity: 0;
   height: 100vh;
   scale: 0;
+  visibility: hidden;
   transition:
     opacity 0.3s ease,
-    scale 0s 0.3s;
+    scale 0s 0.3s,
+    visibility 0s 0.3s;
 }
 
 .pk-sidenav-backdrop-appear {
   opacity: 1;
   scale: 1;
-  transition:
-    opacity 0.3s ease,
-    scale 0s;
+  visibility: visible;
+  transition: opacity 0.3s ease;
 }

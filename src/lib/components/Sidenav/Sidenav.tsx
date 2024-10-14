@@ -5,15 +5,17 @@ import "./Sidenav.css"
 export function Sidenav(props: TSidenavProps) {
   const {
     children,
+    className = "",
     open,
     handleDismiss = () => { },
     parent = document.documentElement,
     from = "left",
+    ...rest
   } = props
 
   const classNames = useMemo(
-    () => `pk-sidenav pk-sidenav-from-${from} ${open ? "pk-sidenav-open" : ""}`,
-    [open, from],
+    () => `pk-sidenav pk-sidenav-from-${from} ${open ? "pk-sidenav-open" : ""} ${className}`,
+    [open, from, className],
   )
 
   const handleKeyDown = useCallback(
@@ -48,11 +50,14 @@ export function Sidenav(props: TSidenavProps) {
 
   return (
     <>
-      <nav className={classNames}>{children}</nav>
+      <nav className={classNames} data-testid="pk-sidenav" aria-hidden={!open} {...rest}>
+        {children}
+      </nav>
       <div
         onClick={handleDismiss}
         className={`pk-sidenav-backdrop ${open ? "pk-sidenav-backdrop-appear" : ""}`}
         aria-hidden
+        data-testid="pk-sidenav-backdrop"
       />
     </>
   )
