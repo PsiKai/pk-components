@@ -42,7 +42,7 @@ export function FileInputSection() {
   const fileInput = useRef<HTMLInputElement>(null)
 
   return (
-    <>
+    <section>
       <div className="sub-section">
         <h3 className="sub-section-header">Props</h3>
         <PropsTable rows={fileInputProps} />
@@ -84,6 +84,6 @@ export function FileInputSection() {
           ref={fileInput}
         />
       </div>
-    </>
+    </section>
   )
 }

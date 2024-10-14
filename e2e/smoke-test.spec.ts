@@ -9,7 +9,14 @@ test("Renders main header", async ({ page }) => {
 test("Renders component sections", async ({ page }) => {
   await page.goto("/")
 
-  for (const component of ["Button", "LoadingSpinner", "Input", "FileInput"]) {
+  for (const component of [
+    "Button",
+    "LoadingSpinner",
+    "Input",
+    "FileInput",
+    "Hamburger",
+    "Sidenav",
+  ]) {
     await expect(page.getByRole("heading", { name: component, exact: true })).toBeVisible()
   }
 })

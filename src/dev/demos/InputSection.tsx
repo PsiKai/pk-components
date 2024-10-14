@@ -31,7 +31,7 @@ const inputProps = composePropsTableData([
 
 export const InputSection = () => {
   return (
-    <>
+    <section>
       <div className="sub-section">
         <h3 className="sub-section-header">Props</h3>
         <PropsTable rows={inputProps} />
@@ -135,7 +135,7 @@ export const InputSection = () => {
       </div>
       <hr />
       <InputForm />
-    </>
+    </section>
   )
 }
 
