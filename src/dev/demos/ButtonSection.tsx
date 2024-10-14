@@ -65,7 +65,7 @@ export const ButtonSection = () => {
   )
 }
 
-const ButtonSizes = () => {
+const ButtonSizes = React.memo(() => {
   const { pending, handleClick } = usePending()
 
   return (
@@ -73,7 +73,7 @@ const ButtonSizes = () => {
       <h3>Fit</h3>
       <div className="section-group">
         {buttonSizes.map(fit => {
-          const props = fit === "link" ? { href: "#" } : { onClick: handleClick }
+          const props = fit === "link" ? { href: "#Button" } : { onClick: handleClick }
           return (
             <Button key={fit} fit={fit} {...props} pending={pending === fit + "-fit"}>
               {fit + "-fit"}
@@ -83,9 +83,9 @@ const ButtonSizes = () => {
       </div>
     </div>
   )
-}
+})
 
-const ButtonVariants = () => {
+const ButtonVariants = React.memo(() => {
   const { pending, handleClick } = usePending()
 
   return (
@@ -105,9 +105,9 @@ const ButtonVariants = () => {
       </div>
     </div>
   )
-}
+})
 
-const ButtonOutline = () => {
+const ButtonOutline = React.memo(() => {
   const { pending, handleClick } = usePending()
 
   return (
@@ -128,9 +128,10 @@ const ButtonOutline = () => {
       </div>
     </div>
   )
-}
+})
 
-const ButtonState = () => {
+const ButtonState = React.memo(() => {
+  console.log("ButtonState")
   const buttonMap = useCallback(
     (variant: (typeof buttonVariants)[number], disabled: boolean, pending: boolean) => {
       const fill = Math.random() > 0.7 ? "outline" : "solid"
@@ -168,4 +169,4 @@ const ButtonState = () => {
       </div>
     </>
   )
-}
+})

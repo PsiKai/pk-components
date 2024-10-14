@@ -15,7 +15,7 @@ const SidenavProps = composePropsTableData([
   [
     "parent",
     "HTMLElement | null",
-    "document.body",
+    "document.documentElement",
     "Parent element of the sidenav. Prevents scrolling of the parent when the sidenav is open.",
   ],
   ["from", '"left" | "right"', "left", "Direction from which the sidenav should appear."],
