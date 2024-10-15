@@ -73,3 +73,27 @@ function YourComponent() {
 [Live Demo](https://psikai.github.io/pk-components#${componentName})
 `
 }
+
+export function generateDemoFile(componentName) {
+  return `import React from "react"
+import { ${componentName} } from "../../lib/components/${componentName}"
+import { composePropsTableData } from "../utils/PropsTable.utils"
+
+const ${componentName}Props = composePropsTableData([])
+
+export const ${componentName}Section = () => {
+  return (
+    <section>
+      <div className="sub-section">
+        <h3 className="sub-section-header">Props</h3>
+        <PropsTable rows={${componentName}Props} />
+      </div>
+      <div className="sub-section">
+        <h3>Example</h3>
+        <${componentName} />
+      </div>
+    </section>
+  )
+}
+`
+}

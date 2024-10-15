@@ -16,6 +16,30 @@ export type { TTestComponentProps } from "./TestComponent.model"
 "
 `;
 
+exports[`component-creation template methods > generateDemoFile > should return string content for demo file 1`] = `
+"import React from "react"
+import { TestComponent } from "../../lib/components/TestComponent"
+import { composePropsTableData } from "../utils/PropsTable.utils"
+
+const TestComponentProps = composePropsTableData([])
+
+export const TestComponentSection = () => {
+  return (
+    <section>
+      <div className="sub-section">
+        <h3 className="sub-section-header">Props</h3>
+        <PropsTable rows={TestComponentProps} />
+      </div>
+      <div className="sub-section">
+        <h3>Example</h3>
+        <TestComponent />
+      </div>
+    </section>
+  )
+}
+"
+`;
+
 exports[`component-creation template methods > generateModelFile > should return string content for model file 1`] = `
 "import { AllHtmlAttributes } from "../../core-types"
 
