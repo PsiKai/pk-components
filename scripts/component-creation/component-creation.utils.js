@@ -2,35 +2,67 @@ export function parseInsertDemoIndex(fileData, componentName) {
   const lines = fileData.split("\n")
 
   // Insert the import statement
-  const startIndex = lines.findIndex(line => line.includes("import {"))
-  const endIndex = lines.findIndex(line => line.includes("} from"))
-  const componentSections = lines.slice(startIndex, endIndex)
-  componentSections.push(`  ${componentName},`)
-  const sortedComponentSections = componentSections.toSorted()
-
-  lines.splice(startIndex, componentSections.length, ...sortedComponentSections)
+  const {
+    lines: importLines,
+    startIndex: importLinesStartIndex,
+    endIndex: importLinesEndIndex,
+  } = getLinesBetween(lines, "import {", "} from")
+  const sortedChunk = insertAndSort(importLines, `  ${componentName}Section,`)
+  const sortedImportLines = insertChunk(
+    lines,
+    sortedChunk,
+    importLinesStartIndex,
+    importLinesEndIndex,
+  )
 
   // Insert component map
-  const componentMapIndex = lines.findIndex(line => line.includes("export const components = {"))
-  const componentMapEndIndex = lines.findIndex(line => line.includes("}"))
-  const componentMapSections = lines.slice(componentMapIndex, componentMapEndIndex)
-  componentMapSections.push(`  ${componentName}: ${componentName}Section,`)
-  const sortedComponentMapSections = componentMapSections.toSorted()
+  const {
+    lines: componentMapLines,
+    startIndex: componentMapStartIndex,
+    endIndex: componentMapEndIndex,
+  } = getLinesBetween(sortedImportLines, "export const components = {", "}")
+  const sortedComponentMapChunk = insertAndSort(
+    componentMapLines,
+    `  ${componentName}: ${componentName}Section,`,
+  )
+  const sortedComponentMapLines = insertChunk(
+    sortedImportLines,
+    sortedComponentMapChunk,
+    componentMapStartIndex,
+    componentMapEndIndex,
+  )
 
-  lines.splice(componentMapIndex, componentMapSections.length, ...sortedComponentMapSections)
-
-  return lines.join("\n")
+  return sortedComponentMapLines.join("\n")
 }
 
 export function parseInsertLibIndex(fileData, componentName) {
   const lines = fileData.split("\n")
 
-  lines.push(`export { ${componentName} } from "./components/${componentName}"`)
-  const sortedLines = lines.toSorted((a, b) => {
-    const aSliced = a.slice("export { ".length, a.indexOf(" }"))
-    const bSliced = b.slice("export { ".length, b.indexOf(" }"))
+  const { lines: exportLines, startIndex, endIndex } = getLinesBetween(lines, "export", false)
+  const linesWithInsert = insertAndSort(
+    exportLines,
+    `export { ${componentName} } from "./components/${componentName}"`,
+  )
+  const newLines = insertChunk(lines, linesWithInsert, startIndex, endIndex)
+
+  return newLines.join("\n")
+}
+
+function getLinesBetween(lines, start, end) {
+  const startIndex = lines.findIndex(line => line.includes(start))
+  const endIndex = lines.findIndex((line, i) => i > startIndex && line.includes(end))
+  return { lines: lines.slice(startIndex + 1, endIndex), startIndex, endIndex }
+}
+
+function insertAndSort(lines, insertLine, { excludePrefix = "", separator = /$/ } = {}) {
+  const newLines = [...lines, insertLine]
+  return newLines.sort((a, b) => {
+    const aSliced = a.slice(excludePrefix.length, a.search(separator))
+    const bSliced = b.slice(excludePrefix.length, b.search(separator))
     return aSliced.localeCompare(bSliced)
   })
+}
 
-  return sortedLines.join("\n")
+function insertChunk(lines, chunk, start, end) {
+  return [...lines.slice(0, start + 1), ...chunk, ...lines.slice(end)]
 }

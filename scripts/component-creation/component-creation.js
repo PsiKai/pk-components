@@ -78,17 +78,17 @@ export async function main(componentName) {
     generateDemoFile(santizedComponentName),
   )
 
-  // // Update the library index.tsx file
-  // const indexFile = path.join(__dirname, "../../src", "lib", "index.tsx")
-  // const indexFileData = await fs.promises.readFile(indexFile, "utf-8")
-  // const newIndexFileData = parseInsertLibIndex(indexFileData, santizedComponentName)
-  // await fs.promises.writeFile(indexFile, newIndexFileData)
-  //
-  // // Update the demo component-index.tsx file
-  // const componentIndexFile = path.join(demoPath, "component-index.tsx")
-  // const fileData = await fs.promises.readFile(componentIndexFile, "utf-8")
-  // const newData = await parseInsertDemoIndex(fileData, santizedComponentName)
-  // await fs.promises.writeFile(componentIndexFile, newData)
+  // Update the library index.tsx file
+  const indexFile = path.join(__dirname, "../../src", "lib", "index.tsx")
+  const indexFileData = await fs.promises.readFile(indexFile, { encoding: "utf-8" })
+  const newIndexFileData = parseInsertLibIndex(indexFileData, santizedComponentName)
+  await fs.promises.writeFile(indexFile, newIndexFileData)
+
+  // Update the demo component-index.tsx file
+  const componentIndexFile = path.join(demoPath, "component-index.tsx")
+  const fileData = await fs.promises.readFile(componentIndexFile, { encoding: "utf-8" })
+  const newData = parseInsertDemoIndex(fileData, santizedComponentName)
+  await fs.promises.writeFile(componentIndexFile, newData)
 
   console.log("COMPONENT CREATED SUCCESSFULLY")
 }

@@ -3,7 +3,10 @@ import fs from "fs"
 import path, { dirname } from "path"
 import { vi } from "vitest"
 import { fileURLToPath } from "url"
+
 import * as componentTemplates from "./component-creation-templates"
+import * as componentUtils from "./component-creation.utils"
+
 import { main } from "./component-creation"
 import { findFile } from "../../utils/file-utils"
 
@@ -13,6 +16,8 @@ const __dirname = dirname(__filename)
 describe("component-creation", () => {
   const writeFileMock = vi.spyOn(fs.promises, "writeFile").mockResolvedValue()
   const mkdirMock = vi.spyOn(fs.promises, "mkdir").mockResolvedValue()
+  const readFileMock = vi.spyOn(fs.promises, "readFile").mockResolvedValue()
+
   const logSpy = vi.spyOn(console, "log").mockImplementation(vi.fn())
 
   vi.spyOn(componentTemplates, "generateIndexFile").mockImplementation(name => `index ${name}`)
@@ -24,23 +29,27 @@ describe("component-creation", () => {
   vi.spyOn(componentTemplates, "generateReadmeFile").mockImplementation(name => `readme ${name}`)
   vi.spyOn(componentTemplates, "generateDemoFile").mockImplementation(name => `demo ${name}`)
 
+  vi.spyOn(componentUtils, "parseInsertDemoIndex").mockImplementation(
+    (_fileData, name) => `component-index ${name}`,
+  )
+  vi.spyOn(componentUtils, "parseInsertLibIndex").mockImplementation(
+    (_fileData, name) => `export ${name}`,
+  )
+
   const componentName = "TestComponent"
   const actualComponent = "Button"
-  const expectedHomeDirectory = "src"
-
-  let filePath = findFile(`${actualComponent}.tsx`, expectedHomeDirectory)
-  if (!filePath) {
+  let actualComponentPath = findFile(`${actualComponent}.tsx`, "src")
+  if (!actualComponentPath) {
     throw new Error(`File not found: ${actualComponent}.tsx`)
   }
 
-  filePath = path.dirname(filePath).replace(actualComponent, componentName)
-  const fullPath = path.join(__dirname, "../../", filePath)
+  const testfilePath = path.dirname(actualComponentPath).replace(actualComponent, componentName)
+  const fullPath = path.join(__dirname, "../../", testfilePath)
+  const demoPath = path.join(__dirname, "../../src/dev")
 
-  const demoPath = path.join(__dirname, "../../src/dev/demos")
-
-  describe("with file system", async () => {
-    beforeEach(() => {
-      main(componentName)
+  describe("with file system", () => {
+    beforeEach(async () => {
+      await main(componentName)
     })
 
     afterEach(() => {
@@ -49,48 +58,60 @@ describe("component-creation", () => {
       expect(logSpy).toHaveBeenCalledWith("COMPONENT CREATED SUCCESSFULLY")
     })
 
-    it("should create the directory in the components folder", async () => {
+    it("should create the directory in the components folder", () => {
       expect(mkdirMock).toHaveBeenCalledWith(fullPath, { recursive: true })
     })
 
-    it("should create the index.ts file", async () => {
+    it("should create the index.ts file", () => {
       expect(writeFileMock).toHaveBeenCalledWith(`${fullPath}/index.ts`, `index ${componentName}`)
     })
 
-    it("should create the component file", async () => {
+    it("should create the component file", () => {
       expect(writeFileMock).toHaveBeenCalledWith(
         `${fullPath}/${componentName}.tsx`,
         `component ${componentName}`,
       )
     })
 
-    it("should create the model file", async () => {
+    it("should create the model file", () => {
       expect(writeFileMock).toHaveBeenCalledWith(
         `${fullPath}/${componentName}.model.ts`,
         `model ${componentName}`,
       )
     })
 
-    it("should create the css file", async () => {
+    it("should create the css file", () => {
       expect(writeFileMock).toHaveBeenCalledWith(`${fullPath}/${componentName}.css`, "")
     })
 
-    it("should create the component spec file", async () => {
+    it("should create the component spec file", () => {
       expect(writeFileMock).toHaveBeenCalledWith(
         `${fullPath}/${componentName}.spec.tsx`,
         `spec ${componentName}`,
       )
     })
 
-    it("should create the readme file", async () => {
+    it("should create the readme file", () => {
       expect(writeFileMock).toHaveBeenCalledWith(`${fullPath}/README.md`, `readme ${componentName}`)
     })
 
-    it("should create the demo file", async () => {
+    it("should create the demo file", () => {
       expect(writeFileMock).toHaveBeenCalledWith(
-        `${demoPath}/${componentName}Section.tsx`,
+        `${demoPath}/demos/${componentName}Section.tsx`,
         `demo ${componentName}`,
       )
+    })
+
+    it("should insert the component name into the demo index file", () => {
+      expect(writeFileMock).toHaveBeenCalledWith(
+        `${demoPath}/component-index.tsx`,
+        `component-index ${componentName}`,
+      )
+    })
+
+    it("should insert the component name into the lib index file", () => {
+      const indexPath = path.join(__dirname, "../../src/lib/index.tsx")
+      expect(writeFileMock).toHaveBeenCalledWith(indexPath, `export ${componentName}`)
     })
   })
 
@@ -99,11 +120,11 @@ describe("component-creation", () => {
     const processMock = vi.spyOn(process, "exit").mockImplementation(vi.fn())
     const consoleMock = vi.spyOn(console, "error").mockImplementation(vi.fn())
 
-    beforeEach(() => {
-      main(componentName)
+    beforeEach(async () => {
+      await main(componentName)
     })
 
-    it("should throw an error", async () => {
+    it("should throw an error", () => {
       expect(existsSyncMock).toHaveBeenCalledWith(fullPath)
       expect(processMock).toHaveBeenCalledWith(1)
       expect(consoleMock).toHaveBeenCalledWith("ERROR\nCOMPONENT ALREADY EXISTS:", componentName)
@@ -111,7 +132,7 @@ describe("component-creation", () => {
   })
 
   describe("with no component name", () => {
-    it("should throw an error", async () => {
+    it("should throw an error", () => {
       expect(() => execSync("npm run component")).toThrow("ERROR: Please provide a component name")
     })
   })
