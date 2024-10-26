@@ -10,12 +10,6 @@ export function TestComponent(props: TTestComponentProps) {
 "
 `;
 
-exports[`component-creation template methods > generateComponentFile > should return string content for index file 1`] = `
-"export { TestComponent } from "./TestComponent"
-export type { TTestComponentProps } from "./TestComponent.model"
-"
-`;
-
 exports[`component-creation template methods > generateDemoFile > should return string content for demo file 1`] = `
 "import React from "react"
 import { TestComponent } from "../../lib/components/TestComponent"
@@ -37,6 +31,12 @@ export const TestComponentSection = () => {
     </section>
   )
 }
+"
+`;
+
+exports[`component-creation template methods > generateIndexFile > should return string content for index file 1`] = `
+"export { TestComponent } from "./TestComponent"
+export type { TTestComponentProps } from "./TestComponent.model"
 "
 `;
 

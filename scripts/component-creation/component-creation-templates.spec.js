@@ -10,7 +10,7 @@ import {
 describe("component-creation template methods", () => {
   const componentName = "TestComponent"
 
-  describe("generateComponentFile", () => {
+  describe("generateIndexFile", () => {
     it("should return string content for index file", () => {
       expect(generateIndexFile(componentName)).toMatchSnapshot()
     })
