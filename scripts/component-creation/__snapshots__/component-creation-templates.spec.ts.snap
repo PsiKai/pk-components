@@ -19,16 +19,21 @@ const TestComponentProps = composePropsTableData([])
 
 export const TestComponentSection = () => {
   return (
-    <section>
-      <div className="sub-section">
-        <h3 className="sub-section-header">Props</h3>
-        <PropsTable rows={TestComponentProps} />
-      </div>
-      <div className="sub-section">
-        <h3>Example</h3>
-        <TestComponent />
-      </div>
-    </section>
+    <div className="section-wrapper">
+      <h2 id="TestComponent" className="section-header">
+        <code>TestComponent</code>
+      </h2>
+      <section>
+        <div className="sub-section">
+          <h3 className="sub-section-header">Props</h3>
+          <PropsTable rows={TestComponentProps} />
+        </div>
+        <div className="sub-section">
+          <h3>Example</h3>
+          <TestComponent />
+        </div>
+      </section>
+    </div>
   )
 }
 "

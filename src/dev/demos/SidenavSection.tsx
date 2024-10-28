@@ -30,21 +30,26 @@ const SidenavProps = composePropsTableData([
 
 export const SidenavSection = () => {
   return (
-    <section>
-      <div className="sub-section">
-        <h3 className="sub-section-header">Props</h3>
-        <PropsTable rows={SidenavProps} />
-      </div>
-      <div className="sub-section">
-        <h3>Example</h3>
-        <FullPageSidenav />
-      </div>
-      <hr />
-      <div className="sub-section">
-        <h3>From the Right</h3>
-        <FullPageSidenav fromRight={true} />
-      </div>
-    </section>
+    <div className="section-wrapper">
+      <h2 id="Sidenav" className="section-header">
+        <code>Sidenav</code>
+      </h2>
+      <section>
+        <div className="sub-section">
+          <h3 className="sub-section-header">Props</h3>
+          <PropsTable rows={SidenavProps} />
+        </div>
+        <div className="sub-section">
+          <h3>Example</h3>
+          <FullPageSidenav />
+        </div>
+        <hr />
+        <div className="sub-section">
+          <h3>From the Right</h3>
+          <FullPageSidenav fromRight={true} />
+        </div>
+      </section>
+    </div>
   )
 }
 

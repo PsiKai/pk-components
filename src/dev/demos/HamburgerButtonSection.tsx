@@ -21,16 +21,21 @@ export function HamburgerButtonSection() {
   }, [])
 
   return (
-    <section>
-      <div className="sub-section">
-        <h3 className="sub-section-header">Props</h3>
-        <PropsTable rows={buttonProps} />
-      </div>
+    <div className="section-wrapper">
+      <h2 id="HamburgerButton" className="section-header">
+        <code>HamburgerButton</code>
+      </h2>
+      <section>
+        <div className="sub-section">
+          <h3 className="sub-section-header">Props</h3>
+          <PropsTable rows={buttonProps} />
+        </div>
 
-      <div className="sub-section">
-        <h3>Example</h3>
-        <Hamburger onClick={onClick} open={open} />
-      </div>
-    </section>
+        <div className="sub-section">
+          <h3>Example</h3>
+          <Hamburger onClick={onClick} open={open} />
+        </div>
+      </section>
+    </div>
   )
 }

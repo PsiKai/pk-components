@@ -83,16 +83,21 @@ const ${componentName}Props = composePropsTableData([])
 
 export const ${componentName}Section = () => {
   return (
-    <section>
-      <div className="sub-section">
-        <h3 className="sub-section-header">Props</h3>
-        <PropsTable rows={${componentName}Props} />
-      </div>
-      <div className="sub-section">
-        <h3>Example</h3>
-        <${componentName} />
-      </div>
-    </section>
+    <div className="section-wrapper">
+      <h2 id="${componentName}" className="section-header">
+        <code>${componentName}</code>
+      </h2>
+      <section>
+        <div className="sub-section">
+          <h3 className="sub-section-header">Props</h3>
+          <PropsTable rows={${componentName}Props} />
+        </div>
+        <div className="sub-section">
+          <h3>Example</h3>
+          <${componentName} />
+        </div>
+      </section>
+    </div>
   )
 }
 `

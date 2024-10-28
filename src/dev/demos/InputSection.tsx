@@ -31,111 +31,116 @@ const inputProps = composePropsTableData([
 
 export const InputSection = () => {
   return (
-    <section>
-      <div className="sub-section">
-        <h3 className="sub-section-header">Props</h3>
-        <PropsTable rows={inputProps} />
-      </div>
-      <div className="sub-section">
-        <h3>Basic Text Input</h3>
-        <Input id="basic-text-input" />
-      </div>
-      <hr />
-      <div className="sub-section">
-        <h3>With Label</h3>
-        <Input label="Name" id="label-text-input" />
-      </div>
-      <hr />
-      <div className="sub-section">
-        <h3>With Hint Text</h3>
-        <Input id="hint-text-input" label="Name" hint="Enter your name" />
-      </div>
-      <hr />
-      <div className="sub-section">
-        <h3>With Feedback Text</h3>
-        <Input
-          id="feedback-text-input"
-          label="Name"
-          hint="Enter your name"
-          feedback="No special characters allowed."
-        />
-      </div>
-      <hr />
-      <div className="sub-section">
-        <h3>Required</h3>
-        <Input
-          id="error-message-text-input"
-          label="Name"
-          hint="Mark the input required for automatic demarcation."
-          feedback="No special characters allowed."
-          required
-        />
-      </div>
-      <hr />
-      <div className="sub-section">
-        <h3>With Error Feedback</h3>
-        <Input
-          id="error-input"
-          label="No Feedback Text"
-          hint="Pass an empty string for no feedback text"
-          error=""
-        />
-        <Input
-          id="error-text-input"
-          label="Default Feedback Text"
-          hint="Pass a boolean value to get the default feedback text"
-          error
-          required
-        />
-        <Input
-          id="error-message-text-input"
-          label="Custom Feedback Text"
-          hint="Pass a string value to get a custom feedback text"
-          error="Invalid name"
-          required
-        />
-      </div>
-      <hr />
-      <div className="sub-section">
-        <h3>With Success Feedback</h3>
-        <Input
-          id="clean-input"
-          label="No feedback text"
-          hint="Pass an empty string for no feedback text"
-          clean=""
-        />
-        <Input
-          id="clean-text-input"
-          label="Default Feedback Text"
-          hint="Pass a boolean value to get the default feedback text"
-          clean
-        />
+    <div className="section-wrapper">
+      <h2 id="Input" className="section-header">
+        <code>Input</code>
+      </h2>
+      <section>
+        <div className="sub-section">
+          <h3 className="sub-section-header">Props</h3>
+          <PropsTable rows={inputProps} />
+        </div>
+        <div className="sub-section">
+          <h3>Basic Text Input</h3>
+          <Input id="basic-text-input" />
+        </div>
+        <hr />
+        <div className="sub-section">
+          <h3>With Label</h3>
+          <Input label="Name" id="label-text-input" />
+        </div>
+        <hr />
+        <div className="sub-section">
+          <h3>With Hint Text</h3>
+          <Input id="hint-text-input" label="Name" hint="Enter your name" />
+        </div>
+        <hr />
+        <div className="sub-section">
+          <h3>With Feedback Text</h3>
+          <Input
+            id="feedback-text-input"
+            label="Name"
+            hint="Enter your name"
+            feedback="No special characters allowed."
+          />
+        </div>
+        <hr />
+        <div className="sub-section">
+          <h3>Required</h3>
+          <Input
+            id="error-message-text-input"
+            label="Name"
+            hint="Mark the input required for automatic demarcation."
+            feedback="No special characters allowed."
+            required
+          />
+        </div>
+        <hr />
+        <div className="sub-section">
+          <h3>With Error Feedback</h3>
+          <Input
+            id="error-input"
+            label="No Feedback Text"
+            hint="Pass an empty string for no feedback text"
+            error=""
+          />
+          <Input
+            id="error-text-input"
+            label="Default Feedback Text"
+            hint="Pass a boolean value to get the default feedback text"
+            error
+            required
+          />
+          <Input
+            id="error-message-text-input"
+            label="Custom Feedback Text"
+            hint="Pass a string value to get a custom feedback text"
+            error="Invalid name"
+            required
+          />
+        </div>
+        <hr />
+        <div className="sub-section">
+          <h3>With Success Feedback</h3>
+          <Input
+            id="clean-input"
+            label="No feedback text"
+            hint="Pass an empty string for no feedback text"
+            clean=""
+          />
+          <Input
+            id="clean-text-input"
+            label="Default Feedback Text"
+            hint="Pass a boolean value to get the default feedback text"
+            clean
+          />
 
-        <Input
-          id="clean-message-text-input"
-          label="Custom Feedback Text"
-          hint="Pass a string value to get a custom feedback text"
-          clean="Name is valid"
-        />
-      </div>
-      <hr />
-      <div className="sub-section">
-        <h3>With Placeholder</h3>
-        <Input id="placeholder-text-input" label="Name" placeholder="John Doe" />
-      </div>
-      <hr />
-      <div className="sub-section">
-        <h3>Disabled</h3>
-        <Input id="disabled-text-input" label="Name" disabled value="Alexander" />
-      </div>
-      <hr />
-      <div className="sub-section">
-        <h3>Read Only</h3>
-        <Input id="readonly-text-input" label="Name" value="John Doe" readOnly />
-      </div>
-      <hr />
-      <InputForm />
-    </section>
+          <Input
+            id="clean-message-text-input"
+            label="Custom Feedback Text"
+            hint="Pass a string value to get a custom feedback text"
+            clean="Name is valid"
+          />
+        </div>
+        <hr />
+        <div className="sub-section">
+          <h3>With Placeholder</h3>
+          <Input id="placeholder-text-input" label="Name" placeholder="John Doe" />
+        </div>
+        <hr />
+        <div className="sub-section">
+          <h3>Disabled</h3>
+          <Input id="disabled-text-input" label="Name" disabled value="Alexander" />
+        </div>
+        <hr />
+        <div className="sub-section">
+          <h3>Read Only</h3>
+          <Input id="readonly-text-input" label="Name" value="John Doe" readOnly />
+        </div>
+        <hr />
+        <InputForm />
+      </section>
+    </div>
   )
 }
 

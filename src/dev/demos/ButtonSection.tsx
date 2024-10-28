@@ -48,20 +48,25 @@ const buttonProps = composePropsTableData([
 
 export const ButtonSection = () => {
   return (
-    <section>
-      <div className="sub-section">
-        <h3 className="sub-section-header">Props</h3>
-        <PropsTable rows={buttonProps} />
-      </div>
+    <div className="section-wrapper">
+      <h2 id="Button" className="section-header">
+        <code>Button</code>
+      </h2>
+      <section>
+        <div className="sub-section">
+          <h3 className="sub-section-header">Props</h3>
+          <PropsTable rows={buttonProps} />
+        </div>
 
-      <ButtonSizes />
-      <hr />
-      <ButtonVariants />
-      <hr />
-      <ButtonOutline />
-      <hr />
-      <ButtonState />
-    </section>
+        <ButtonSizes />
+        <hr />
+        <ButtonVariants />
+        <hr />
+        <ButtonOutline />
+        <hr />
+        <ButtonState />
+      </section>
+    </div>
   )
 }
 
