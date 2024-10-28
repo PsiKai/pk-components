@@ -22,8 +22,8 @@ export function HamburgerButtonSection() {
 
   return (
     <div className="section-wrapper">
-      <h2 id="HamburgerButton" className="section-header">
-        <code>HamburgerButton</code>
+      <h2 id="Hamburger" className="section-header">
+        <code>Hamburger</code>
       </h2>
       <section>
         <div className="sub-section">
