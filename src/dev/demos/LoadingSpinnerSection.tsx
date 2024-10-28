@@ -18,47 +18,52 @@ const spinnerSizes = ["xs", "sm", "md", "lg", "xl"] as TLoadingSpinnerProps["fit
 
 export function LoadingSpinnerSection() {
   return (
-    <section>
-      <div className="sub-section">
-        <h3 className="sub-section-header">Props</h3>
-        <PropsTable rows={loadingSpinnerProps} />
-      </div>
-      <div className="sub-section">
-        <h3>Basic Spinner</h3>
-        <div className="spinner-container">
-          <p>The spinner and the backdrop overlay the content...</p>
-          <LoadingSpinner />
+    <div className="section-wrapper">
+      <h2 id="LoadingSpinner" className="section-header">
+        <code>LoadingSpinner</code>
+      </h2>
+      <section>
+        <div className="sub-section">
+          <h3 className="sub-section-header">Props</h3>
+          <PropsTable rows={loadingSpinnerProps} />
         </div>
-      </div>
-      <hr />
-      <div className="sub-section">
-        <h3>Fit Variants</h3>
-        <div className="section-group">
-          {spinnerSizes.map(fit => (
-            <div key={fit} className="spinner-container">
-              <span>{fit}</span>
-              <LoadingSpinner fit={fit} />
-            </div>
-          ))}
-        </div>
-      </div>
-      <hr />
-      <div className="sub-section">
-        <h3>No Backdrop</h3>
-        <div className="spinner-container">
-          <div className="section-group">
-            <span>
-              The spinner is inline with the content <LoadingSpinner backdrop={false} fit="sm" />
-            </span>
+        <div className="sub-section">
+          <h3>Basic Spinner</h3>
+          <div className="spinner-container">
+            <p>The spinner and the backdrop overlay the content...</p>
+            <LoadingSpinner />
           </div>
         </div>
-      </div>
-      <hr />
-      <div className="sub-section">
-        <h3>Embedded in components</h3>
-        <SpinnerInInput />
-      </div>
-    </section>
+        <hr />
+        <div className="sub-section">
+          <h3>Fit Variants</h3>
+          <div className="section-group">
+            {spinnerSizes.map(fit => (
+              <div key={fit} className="spinner-container">
+                <span>{fit}</span>
+                <LoadingSpinner fit={fit} />
+              </div>
+            ))}
+          </div>
+        </div>
+        <hr />
+        <div className="sub-section">
+          <h3>No Backdrop</h3>
+          <div className="spinner-container">
+            <div className="section-group">
+              <span>
+                The spinner is inline with the content <LoadingSpinner backdrop={false} fit="sm" />
+              </span>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div className="sub-section">
+          <h3>Embedded in components</h3>
+          <SpinnerInInput />
+        </div>
+      </section>
+    </div>
   )
 }
 

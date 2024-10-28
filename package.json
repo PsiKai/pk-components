@@ -14,9 +14,9 @@
     "build:lib": "tsc -b && vite build --mode lib",
     "build:demo": "tsc -b && vite build --mode demo",
     "lint": "eslint .",
-    "preview": "npm run build:demo && node server.js",
+    "preview": "npm run build:demo && tsx server.ts",
     "test": "vitest run --coverage",
-    "component": "node scripts/component-creation"
+    "component": "tsx scripts/component-creation/index.ts"
   },
   "files": [
     "./dist"
@@ -55,6 +55,7 @@
     "express": "^4.21.0",
     "globals": "^15.9.0",
     "jsdom": "^25.0.0",
+    "tsx": "^4.19.1",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1",

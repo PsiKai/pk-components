@@ -1,19 +1,21 @@
 import path, { dirname } from "path"
 import fs from "fs"
 import { fileURLToPath } from "url"
-import { pascalize } from "../../utils/string-utils.js"
+import { pascalize } from "../../utils/string-utils"
 import {
   generateComponentFile,
+  generateDemoFile,
   generateIndexFile,
   generateModelFile,
   generateReadmeFile,
   generateSpecFile,
-} from "./component-creation-templates.js"
+} from "./component-creation-templates"
+import { parseInsertDemoIndex, parseInsertLibIndex } from "./component-creation.utils"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-async function main(componentName) {
+export async function main(componentName: string) {
   const santizedComponentName = pascalize(componentName)
 
   const destinationPath = path.join(
@@ -25,8 +27,7 @@ async function main(componentName) {
   )
 
   if (fs.existsSync(destinationPath)) {
-    console.error("ERROR\nCOMPONENT ALREADY EXISTS:", santizedComponentName)
-    process.exit(1)
+    throw new Error(`COMPONENT ALREADY EXISTS: ${santizedComponentName}`)
   }
 
   console.log("CREATING COMPONENT:", santizedComponentName)
@@ -68,13 +69,25 @@ async function main(componentName) {
     generateReadmeFile(santizedComponentName),
   )
 
+  const demoPath = path.join(__dirname, "../../src", "dev")
+
+  // Create demo file
+  await fs.promises.writeFile(
+    path.join(demoPath, `demos/${santizedComponentName}Section.tsx`),
+    generateDemoFile(santizedComponentName),
+  )
+
+  // Update the library index.tsx file
+  const indexFile = path.join(__dirname, "../../src", "lib", "index.tsx")
+  const indexFileData = await fs.promises.readFile(indexFile, { encoding: "utf-8" })
+  const newIndexFileData = parseInsertLibIndex(indexFileData, santizedComponentName)
+  await fs.promises.writeFile(indexFile, newIndexFileData)
+
+  // Update the demo component-index.tsx file
+  const componentIndexFile = path.join(demoPath, "component-index.tsx")
+  const fileData = await fs.promises.readFile(componentIndexFile, { encoding: "utf-8" })
+  const newData = parseInsertDemoIndex(fileData, santizedComponentName)
+  await fs.promises.writeFile(componentIndexFile, newData)
+
   console.log("COMPONENT CREATED SUCCESSFULLY")
 }
-
-const componentName = process.argv[2]
-if (!componentName) {
-  console.error("ERROR: Please provide a component name")
-  process.exit(1)
-}
-
-main(componentName).catch(console.error)

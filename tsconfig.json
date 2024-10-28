@@ -22,7 +22,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true
   },
   "include": ["./src/lib/**/*"],
   "exclude": ["node_modules", "./src/dev", "**/*.test.*", "**/*.spec.*", "./tests"]

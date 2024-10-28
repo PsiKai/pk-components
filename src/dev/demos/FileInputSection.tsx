@@ -42,48 +42,53 @@ export function FileInputSection() {
   const fileInput = useRef<HTMLInputElement>(null)
 
   return (
-    <section>
-      <div className="sub-section">
-        <h3 className="sub-section-header">Props</h3>
-        <PropsTable rows={fileInputProps} />
-      </div>
-      <div className="sub-section">
-        <h3>With label, hint, and file list</h3>
-        <FileInput
-          id="file-input-list"
-          onChange={onChange}
-          label="Upload your résumé"
-          fileDisplay="list"
-          accept=".jpg,.jpeg,.png,.pdf"
-        />
-      </div>
-      <hr />
-      <div className="sub-section">
-        <h3>With label, hint, and file preview</h3>
-        <FileInput
-          id="file-input-preview"
-          onChange={onChange}
-          fileDisplay="preview"
-          label="Upload your photos"
-          accept="image/*"
-          multiple
-          required
-        />
-      </div>
-      <hr />
-      <div className="sub-section">
-        <h3 id="Dropzone">With dropzone area</h3>
-        <FileInput
-          id="file-input-preview-dropzone"
-          onChange={onChange}
-          fileDisplay="preview"
-          label="Share your vacation photos"
-          accept="image/*"
-          multiple
-          dropzone
-          ref={fileInput}
-        />
-      </div>
-    </section>
+    <div className="section-wrapper">
+      <h2 id="FileInput" className="section-header">
+        <code>FileInput</code>
+      </h2>
+      <section>
+        <div className="sub-section">
+          <h3 className="sub-section-header">Props</h3>
+          <PropsTable rows={fileInputProps} />
+        </div>
+        <div className="sub-section">
+          <h3>With label, hint, and file list</h3>
+          <FileInput
+            id="file-input-list"
+            onChange={onChange}
+            label="Upload your résumé"
+            fileDisplay="list"
+            accept=".jpg,.jpeg,.png,.pdf"
+          />
+        </div>
+        <hr />
+        <div className="sub-section">
+          <h3>With label, hint, and file preview</h3>
+          <FileInput
+            id="file-input-preview"
+            onChange={onChange}
+            fileDisplay="preview"
+            label="Upload your photos"
+            accept="image/*"
+            multiple
+            required
+          />
+        </div>
+        <hr />
+        <div className="sub-section">
+          <h3 id="Dropzone">With dropzone area</h3>
+          <FileInput
+            id="file-input-preview-dropzone"
+            onChange={onChange}
+            fileDisplay="preview"
+            label="Share your vacation photos"
+            accept="image/*"
+            multiple
+            dropzone
+            ref={fileInput}
+          />
+        </div>
+      </section>
+    </div>
   )
 }

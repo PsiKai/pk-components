@@ -1,15 +1,17 @@
 import fs from "fs"
 import path from "path"
 
-export function findFile(fileName, dir) {
-  let files
+export function findFile(fileName: string, dir: string): string | null {
+  let files: string[]
   try {
     files = fs.readdirSync(dir)
   } catch (error) {
+    console.error(`Error reading directory: ${dir}`)
+    console.error(error)
     return null
   }
 
-  for (let file of files) {
+  for (const file of files) {
     const filePath = path.join(dir, file)
     const stat = fs.statSync(filePath)
 

@@ -1,4 +1,4 @@
-import { pascalize } from "./string-utils.js"
+import { pascalize } from "./string-utils"
 
 describe("pascalize", () => {
   describe("should convert a string to pascal case", () => {

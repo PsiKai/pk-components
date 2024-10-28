@@ -48,20 +48,25 @@ const buttonProps = composePropsTableData([
 
 export const ButtonSection = () => {
   return (
-    <section>
-      <div className="sub-section">
-        <h3 className="sub-section-header">Props</h3>
-        <PropsTable rows={buttonProps} />
-      </div>
+    <div className="section-wrapper">
+      <h2 id="Button" className="section-header">
+        <code>Button</code>
+      </h2>
+      <section>
+        <div className="sub-section">
+          <h3 className="sub-section-header">Props</h3>
+          <PropsTable rows={buttonProps} />
+        </div>
 
-      <ButtonSizes />
-      <hr />
-      <ButtonVariants />
-      <hr />
-      <ButtonOutline />
-      <hr />
-      <ButtonState />
-    </section>
+        <ButtonSizes />
+        <hr />
+        <ButtonVariants />
+        <hr />
+        <ButtonOutline />
+        <hr />
+        <ButtonState />
+      </section>
+    </div>
   )
 }
 
@@ -116,7 +121,7 @@ const ButtonOutline = React.memo(() => {
       <div className="section-group">
         {buttonVariants.map(variant => (
           <Button
-            key={variant}
+            key={variant + "-outline"}
             variant={variant}
             fill="outline"
             onClick={handleClick}
@@ -131,14 +136,13 @@ const ButtonOutline = React.memo(() => {
 })
 
 const ButtonState = React.memo(() => {
-  console.log("ButtonState")
   const buttonMap = useCallback(
     (variant: (typeof buttonVariants)[number], disabled: boolean, pending: boolean) => {
       const fill = Math.random() > 0.7 ? "outline" : "solid"
       const fit = buttonSizes[Math.floor(Math.random() * buttonSizes.length)]
       return (
         <Button
-          key={variant}
+          key={`${variant}-${fill}-${fit}`}
           variant={variant}
           fill={fill}
           fit={fit}

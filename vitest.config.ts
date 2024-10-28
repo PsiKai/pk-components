@@ -11,7 +11,7 @@ export default defineConfig(configEnv => {
         setupFiles: "./tests/setup.ts",
         coverage: {
           provider: "istanbul",
-          include: ["src/**/*", "utils/**/*"],
+          include: ["src/**/*", "utils/**/*", "scripts/**/*"],
           exclude: ["src/dev/**/*", "**/*.spec.*", "**/*.test.*", "**/*.mock.*"],
         },
         exclude: [...configDefaults.exclude, "e2e"],

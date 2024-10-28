@@ -37,12 +37,7 @@ export const AppDev = () => {
       </header>
       <h1>PK Component Library</h1>
       {Object.entries(components).map(([componentName, Component]) => (
-        <div className="section-wrapper" key={componentName}>
-          <h2 id={componentName} className="section-header">
-            <code>{componentName}</code>
-          </h2>
-          <Component />
-        </div>
+        <Component key={componentName} />
       ))}
     </>
   )

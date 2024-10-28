@@ -1,5 +1,6 @@
 import path from "path"
 import fs from "fs"
+import { vi } from "vitest"
 import { findFile } from "./file-utils"
 
 describe("findFile", () => {
@@ -34,6 +35,8 @@ describe("findFile", () => {
   })
 
   it("should return null if the directory is not found", () => {
+    const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {})
     expect(findFile("Button.tsx", "not-found")).toBe(null)
+    expect(consoleErrorSpy).toHaveBeenCalledTimes(2)
   })
 })

@@ -10,7 +10,36 @@ export function TestComponent(props: TTestComponentProps) {
 "
 `;
 
-exports[`component-creation template methods > generateComponentFile > should return string content for index file 1`] = `
+exports[`component-creation template methods > generateDemoFile > should return string content for demo file 1`] = `
+"import React from "react"
+import { TestComponent } from "../../lib/components/TestComponent"
+import { composePropsTableData } from "../utils/PropsTable.utils"
+
+const TestComponentProps = composePropsTableData([])
+
+export const TestComponentSection = () => {
+  return (
+    <div className="section-wrapper">
+      <h2 id="TestComponent" className="section-header">
+        <code>TestComponent</code>
+      </h2>
+      <section>
+        <div className="sub-section">
+          <h3 className="sub-section-header">Props</h3>
+          <PropsTable rows={TestComponentProps} />
+        </div>
+        <div className="sub-section">
+          <h3>Example</h3>
+          <TestComponent />
+        </div>
+      </section>
+    </div>
+  )
+}
+"
+`;
+
+exports[`component-creation template methods > generateIndexFile > should return string content for index file 1`] = `
 "export { TestComponent } from "./TestComponent"
 export type { TTestComponentProps } from "./TestComponent.model"
 "
@@ -38,8 +67,8 @@ A brief description of the component. Basic functionality and behavior.
 | Prop Name            | Type                                                                | Required | Default       | Description                                     |
 | -------------------- | ------------------------------------------------------------------- | -------- | ------------- | ----------------------------------------------- |
 | \`[htmlAttributes]\` | \`React.AllHTMLAttributes<HTMLElement>\`                            | No       | \`undefined\` | Any valid HTML attribute for the element type   |
-| \`aria-*\`          | \`[key: aria-\${string}]: string \\| number \\| boolean \\| null\` | No       | \`undefined\` | Optional Accessibility attributes               |
-| \`data-*\`          | \`[key: data-\${string}]: string \\| number \\| boolean \\| null\` | No       | \`undefined\` | Optional dataset attributes                     |
+| \`aria-*\`           | \`[key: aria-\${string}]: string \\| number \\| boolean \\| null\`  | No       | \`undefined\` | Optional Accessibility attributes               |
+| \`data-*\`           | \`[key: data-\${string}]: string \\| number \\| boolean \\| null\`  | No       | \`undefined\` | Optional dataset attributes                     |
 | \`className\`        | \`string\`                                                          | No       | \`undefined\` | Additional class names to apply to the spinner. |
 
 #### Example
