@@ -14,7 +14,7 @@
     "build:lib": "tsc -b && vite build --mode lib",
     "build:demo": "tsc -b && vite build --mode demo",
     "lint": "eslint .",
-    "preview": "npm run build:demo && node server.js",
+    "preview": "npm run build:demo && tsx server.ts",
     "test": "vitest run --coverage",
     "component": "tsx scripts/component-creation/index.ts"
   },
