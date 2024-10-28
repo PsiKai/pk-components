@@ -1,7 +1,7 @@
 import path, { dirname } from "path"
 import fs from "fs"
 import { fileURLToPath } from "url"
-import { pascalize } from "../../utils/string-utils.js"
+import { pascalize } from "../../utils/string-utils"
 import {
   generateComponentFile,
   generateDemoFile,
@@ -9,13 +9,13 @@ import {
   generateModelFile,
   generateReadmeFile,
   generateSpecFile,
-} from "./component-creation-templates.js"
-import { parseInsertDemoIndex, parseInsertLibIndex } from "./component-creation.utils.js"
+} from "./component-creation-templates"
+import { parseInsertDemoIndex, parseInsertLibIndex } from "./component-creation.utils"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-export async function main(componentName) {
+export async function main(componentName: string) {
   const santizedComponentName = pascalize(componentName)
 
   const destinationPath = path.join(
@@ -27,8 +27,7 @@ export async function main(componentName) {
   )
 
   if (fs.existsSync(destinationPath)) {
-    console.error("ERROR\nCOMPONENT ALREADY EXISTS:", santizedComponentName)
-    process.exit(1)
+    throw new Error(`COMPONENT ALREADY EXISTS: ${santizedComponentName}`)
   }
 
   console.log("CREATING COMPONENT:", santizedComponentName)

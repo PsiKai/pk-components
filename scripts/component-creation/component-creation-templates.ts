@@ -1,10 +1,10 @@
-export function generateIndexFile(componentName) {
+export function generateIndexFile(componentName: string) {
   return `export { ${componentName} } from "./${componentName}"
 export type { T${componentName}Props } from "./${componentName}.model"
 `
 }
 
-export function generateComponentFile(componentName) {
+export function generateComponentFile(componentName: string) {
   return `import { T${componentName}Props } from "./${componentName}.model"
 import "./${componentName}.css"
 
@@ -14,7 +14,7 @@ export function ${componentName}(props: T${componentName}Props) {
 `
 }
 
-export function generateModelFile(componentName) {
+export function generateModelFile(componentName: string) {
   return `import { AllHtmlAttributes } from "../../core-types"
 
 export type T${componentName}Props = AllHtmlAttributes & {
@@ -24,7 +24,7 @@ export type T${componentName}Props = AllHtmlAttributes & {
 `
 }
 
-export function generateSpecFile(componentName) {
+export function generateSpecFile(componentName: string) {
   return `import React from "react"
   import { render, screen } from "@testing-library/react"
   import "@testing-library/jest-dom"
@@ -44,7 +44,7 @@ export function generateSpecFile(componentName) {
 `
 }
 
-export function generateReadmeFile(componentName) {
+export function generateReadmeFile(componentName: string) {
   return `### ${componentName} Component
 
 #### Description
@@ -56,8 +56,8 @@ A brief description of the component. Basic functionality and behavior.
 | Prop Name            | Type                                                                | Required | Default       | Description                                     |
 | -------------------- | ------------------------------------------------------------------- | -------- | ------------- | ----------------------------------------------- |
 | \`[htmlAttributes]\` | \`React.AllHTMLAttributes<HTMLElement>\`                            | No       | \`undefined\` | Any valid HTML attribute for the element type   |
-| \`aria-\*\`          | \`[key: aria-$\{string\}]: string \\| number \\| boolean \\| null\` | No       | \`undefined\` | Optional Accessibility attributes               |
-| \`data-\*\`          | \`[key: data-$\{string\}]: string \\| number \\| boolean \\| null\` | No       | \`undefined\` | Optional dataset attributes                     |
+| \`aria-*\`           | \`[key: aria-$\{string}]: string \\| number \\| boolean \\| null\`  | No       | \`undefined\` | Optional Accessibility attributes               |
+| \`data-*\`           | \`[key: data-$\{string}]: string \\| number \\| boolean \\| null\`  | No       | \`undefined\` | Optional dataset attributes                     |
 | \`className\`        | \`string\`                                                          | No       | \`undefined\` | Additional class names to apply to the spinner. |
 
 #### Example
@@ -74,7 +74,7 @@ function YourComponent() {
 `
 }
 
-export function generateDemoFile(componentName) {
+export function generateDemoFile(componentName: string) {
   return `import React from "react"
 import { ${componentName} } from "../../lib/components/${componentName}"
 import { composePropsTableData } from "../utils/PropsTable.utils"

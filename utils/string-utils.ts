@@ -1,4 +1,4 @@
-export function pascalize(str) {
+export function pascalize(str: string) {
   return str
     .replace(/([a-z])([A-Z])/g, "$1 $2")
     .split(/[-_\s]/g)

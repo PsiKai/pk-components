@@ -1,4 +1,4 @@
-export function parseInsertDemoIndex(fileData, componentName) {
+export function parseInsertDemoIndex(fileData: string, componentName: string) {
   const lines = fileData.split("\n")
 
   // Insert the import statement
@@ -35,7 +35,7 @@ export function parseInsertDemoIndex(fileData, componentName) {
   return sortedComponentMapLines.join("\n")
 }
 
-export function parseInsertLibIndex(fileData, componentName) {
+export function parseInsertLibIndex(fileData: string, componentName: string) {
   const lines = fileData.split("\n")
 
   const { lines: exportLines, startIndex, endIndex } = getLinesBetween(lines, "export", false)
@@ -48,13 +48,17 @@ export function parseInsertLibIndex(fileData, componentName) {
   return newLines.join("\n")
 }
 
-function getLinesBetween(lines, start, end) {
+function getLinesBetween(lines: string[], start: string, end: string | false) {
   const startIndex = lines.findIndex(line => line.includes(start))
-  const endIndex = lines.findIndex((line, i) => i > startIndex && line.includes(end))
+  const endIndex = lines.findIndex((line, i) => i > startIndex && line.includes(end as string))
   return { lines: lines.slice(startIndex + 1, endIndex), startIndex, endIndex }
 }
 
-function insertAndSort(lines, insertLine, { excludePrefix = "", separator = /$/ } = {}) {
+function insertAndSort(
+  lines: string[],
+  insertLine: string,
+  { excludePrefix = "", separator = /$/ } = {},
+) {
   const newLines = [...lines, insertLine]
   return newLines.sort((a, b) => {
     const aSliced = a.slice(excludePrefix.length, a.search(separator))
@@ -63,6 +67,6 @@ function insertAndSort(lines, insertLine, { excludePrefix = "", separator = /$/ 
   })
 }
 
-function insertChunk(lines, chunk, start, end) {
+function insertChunk(lines: string[], chunk: string[], start: number, end: number) {
   return [...lines.slice(0, start + 1), ...chunk, ...lines.slice(end)]
 }

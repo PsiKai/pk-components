@@ -7,6 +7,7 @@ import { fileURLToPath } from "url"
 import * as componentTemplates from "./component-creation-templates"
 import * as componentUtils from "./component-creation.utils"
 
+import * as mainIndex from "./component-creation"
 import { main } from "./component-creation"
 import { findFile } from "../../utils/file-utils"
 
@@ -15,8 +16,8 @@ const __dirname = dirname(__filename)
 
 describe("component-creation", () => {
   const writeFileMock = vi.spyOn(fs.promises, "writeFile").mockResolvedValue()
-  const mkdirMock = vi.spyOn(fs.promises, "mkdir").mockResolvedValue()
-  const readFileMock = vi.spyOn(fs.promises, "readFile").mockResolvedValue()
+  const mkdirMock = vi.spyOn(fs.promises, "mkdir").mockResolvedValue(undefined)
+  // const readFileMock = vi.spyOn(fs.promises, "readFile").mockResolvedValue()
 
   const logSpy = vi.spyOn(console, "log").mockImplementation(vi.fn())
 
@@ -38,7 +39,7 @@ describe("component-creation", () => {
 
   const componentName = "TestComponent"
   const actualComponent = "Button"
-  let actualComponentPath = findFile(`${actualComponent}.tsx`, "src")
+  const actualComponentPath = findFile(`${actualComponent}.tsx`, "src")
   if (!actualComponentPath) {
     throw new Error(`File not found: ${actualComponent}.tsx`)
   }
@@ -116,24 +117,41 @@ describe("component-creation", () => {
   })
 
   describe("with existing component of same name", () => {
-    const existsSyncMock = vi.spyOn(fs, "existsSync").mockReturnValue(true)
-    const processMock = vi.spyOn(process, "exit").mockImplementation(vi.fn())
-    const consoleMock = vi.spyOn(console, "error").mockImplementation(vi.fn())
-
-    beforeEach(async () => {
-      await main(componentName)
-    })
-
     it("should throw an error", () => {
-      expect(existsSyncMock).toHaveBeenCalledWith(fullPath)
-      expect(processMock).toHaveBeenCalledWith(1)
-      expect(consoleMock).toHaveBeenCalledWith("ERROR\nCOMPONENT ALREADY EXISTS:", componentName)
+      vi.spyOn(fs, "existsSync").mockReturnValue(true)
+      expect(async () => await main(componentName)).rejects.toThrow(
+        `COMPONENT ALREADY EXISTS: ${componentName}`,
+      )
     })
   })
 
   describe("with no component name", () => {
     it("should throw an error", () => {
       expect(() => execSync("npm run component")).toThrow("ERROR: Please provide a component name")
+    })
+  })
+
+  describe("from index.ts", () => {
+    const originalArgv = process.argv
+
+    afterEach(() => {
+      process.argv = originalArgv
+    })
+
+    it("should call main with the component name from process.argv", async () => {
+      process.argv = ["", "", componentName]
+      const mainSpy = vi.spyOn(mainIndex, "main").mockImplementation(async () => {})
+      await import("./index.ts")
+      expect(mainSpy).toHaveBeenCalledWith(componentName)
+    })
+
+    it("should throw an error if no component name is provided", async () => {
+      process.argv = ["", ""]
+      try {
+        await import("./index.ts")
+      } catch (error) {
+        expect(error).toEqual(new Error("ERROR: Please provide a component name"))
+      }
     })
   })
 })
