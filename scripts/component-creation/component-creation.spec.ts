@@ -17,7 +17,6 @@ const __dirname = dirname(__filename)
 describe("component-creation", () => {
   const writeFileMock = vi.spyOn(fs.promises, "writeFile").mockResolvedValue()
   const mkdirMock = vi.spyOn(fs.promises, "mkdir").mockResolvedValue(undefined)
-  // const readFileMock = vi.spyOn(fs.promises, "readFile").mockResolvedValue()
 
   const logSpy = vi.spyOn(console, "log").mockImplementation(vi.fn())
 
