@@ -9,9 +9,9 @@ import {
 
 export const components = {
   Button: ButtonSection,
-  LoadingSpinner: LoadingSpinnerSection,
-  Input: InputSection,
   FileInput: FileInputSection,
   Hamburger: HamburgerButtonSection,
+  Input: InputSection,
+  LoadingSpinner: LoadingSpinnerSection,
   Sidenav: SidenavSection,
 }
