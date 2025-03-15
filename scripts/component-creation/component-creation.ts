@@ -10,7 +10,11 @@ import {
   generateReadmeFile,
   generateSpecFile,
 } from "./component-creation-templates"
-import { parseInsertDemoIndex, parseInsertLibIndex } from "./component-creation.utils"
+import {
+  parseInsertDemoExport,
+  parseInsertDemoIndex,
+  parseInsertLibIndex,
+} from "./component-creation.utils"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -76,6 +80,12 @@ export async function main(componentName: string) {
     path.join(demoPath, `demos/${santizedComponentName}Section.tsx`),
     generateDemoFile(santizedComponentName),
   )
+
+  // Update demo export file
+  const demoExportFile = path.join(demoPath, "demos", "index.tsx")
+  const demoExportFileData = await fs.promises.readFile(demoExportFile, { encoding: "utf-8" })
+  const newDemoExportFileData = parseInsertDemoExport(demoExportFileData, santizedComponentName)
+  await fs.promises.writeFile(demoExportFile, newDemoExportFileData)
 
   // Update the library index.tsx file
   const indexFile = path.join(__dirname, "../../src", "lib", "index.tsx")

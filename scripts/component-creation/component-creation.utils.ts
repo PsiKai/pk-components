@@ -1,3 +1,11 @@
+export function parseInsertDemoExport(fileData: string, componentName: string) {
+  const lines = fileData.split("\n")
+  const componentLine = `export { ${componentName}Section } from "./${componentName}Section"`
+
+  const linesWithInsert = insertAndSort(lines, componentLine, { excludePrefix: "export { " })
+  return linesWithInsert.join("\n")
+}
+
 export function parseInsertDemoIndex(fileData: string, componentName: string) {
   const lines = fileData.split("\n")
 
