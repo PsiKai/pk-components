@@ -1,5 +1,5 @@
 import React from "react"
-import { ToastAlert } from "../../lib/components/ToastAlert"
+import { ToastAlerts } from "../../lib/components/ToastAlert"
 import { composePropsTableData } from "../utils/PropsTable.utils"
 import { PropsTable } from "../utils/PropsTable"
 
@@ -18,7 +18,7 @@ export const ToastAlertSection = () => {
         </div>
         <div className="sub-section">
           <h3>Example</h3>
-          <ToastAlert />
+          <ToastAlerts />
         </div>
       </section>
     </div>
