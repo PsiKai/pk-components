@@ -3,10 +3,13 @@ import { AllHtmlAttributes } from "../../core-types"
 
 export type TToastAlertProps = AllHtmlAttributes & {
   className?: string
-  children?: React.ReactNode
 }
 
-export type TAlertIntent = "info" | "success" | "warning" | "error"
+export interface IToastAlertSyle extends React.CSSProperties {
+  "--alert-intent": `var(--${TAlert["intent"]})`
+}
+
+export type TAlertIntent = "info" | "success" | "warning" | "error" | "danger"
 
 export type TAlert = {
   id: string

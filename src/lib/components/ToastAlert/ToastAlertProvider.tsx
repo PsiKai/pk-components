@@ -1,5 +1,6 @@
 import { createContext, useReducer, ReactNode } from "react"
 import { TAlertAction, TAlertContext, TAlertReducerState } from "./ToastAlert.model"
+import { ToastAlerts } from "./ToastAlert"
 
 const initialAlertContext: TAlertContext = {
   toastAlerts: [],
@@ -11,7 +12,12 @@ export const AlertContext = createContext(initialAlertContext)
 export function ToastAlertProvider({ children }: { children: ReactNode }) {
   const [toastAlerts, dispatch] = useReducer(AlertsReducer, [])
 
-  return <AlertContext.Provider value={{ toastAlerts, dispatch }}>{children}</AlertContext.Provider>
+  return (
+    <AlertContext.Provider value={{ toastAlerts, dispatch }}>
+      {children}
+      <ToastAlerts />
+    </AlertContext.Provider>
+  )
 }
 
 function AlertsReducer(state: TAlertReducerState, action: TAlertAction) {

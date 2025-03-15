@@ -9,7 +9,7 @@ export function useToastManager() {
   const defaultIntent = useMemo(() => "info" as const, [])
 
   const removeToastTimeout = useCallback(
-    (id: TAlert["id"]) => {
+    (id: TAlert["id"] | undefined) => {
       const alert = toastAlerts.find(alert => alert.id === id)
       clearTimeout(alert?.timeout)
     },
@@ -18,7 +18,7 @@ export function useToastManager() {
 
   const dismissToast = useCallback(
     (id: TAlert["id"]) => {
-      const alert = document.querySelector(`[data-alertid="${id}"]`)
+      const alert = document.querySelector(`[data-toastid="${id}"]`)
       if (!alert) return
 
       const { height } = alert.getBoundingClientRect()
@@ -69,7 +69,9 @@ export function useToastManager() {
 
   const newToast = useCallback(
     (content: TAlert["content"], options: TNewToastOptions = {}) => {
+      console.log("NEW TOAST:", content)
       const id = Math.random().toString(36).slice(2)
+      console.log("NEW TOAST ID:", id)
       const timeout = setAlertTimeout(id, options.duration ?? defaultDuration)
       const intent = options.intent ?? defaultIntent
 
@@ -81,7 +83,9 @@ export function useToastManager() {
   )
 
   const resumeToastTimeout = useCallback(
-    (id: TAlert["id"], timer: number) => {
+    (id: TAlert["id"] | undefined, timer?: number) => {
+      if (!id) return
+
       const timeout = setAlertTimeout(id, timer ?? 4000)
       dispatch({ type: "UPDATE_ALERT", payload: { id, timeout } })
     },

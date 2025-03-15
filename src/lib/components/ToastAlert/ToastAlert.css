@@ -1,0 +1,71 @@
+@import "../index.css";
+
+.toast-container {
+  --info: hsl(var(--pk-hue-primary), 100%, 40%);
+  --success: hsl(var(--pk-hue-success), 100%, 30%);
+  --warning: hsl(var(--pk-hue-warning), 100%, 50%);
+  --danger: hsl(var(--pk-hue-danger), 100%, 40%);
+  --error: hsl(var(--pk-hue-danger), 100%, 40%);
+
+  position: fixed;
+  top: calc(1rem + 60px);
+  right: 1rem;
+  z-index: 500;
+  width: 500px;
+  max-width: calc(100% - 2rem);
+  display: grid;
+  gap: 1rem;
+  contain: style;
+}
+
+.toast-container > div {
+  transform: translateZ(0);
+  overflow: hidden;
+  box-shadow: var(--pk-box-shadow);
+  animation: toast-in 400ms forwards;
+  border-radius: var(--pk-btn-border-radius);
+  will-change: transform, max-height;
+}
+
+.alert-toast {
+  border-radius: var(--pk-btn-border-radius);
+  padding: 1rem 40px 1rem 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  border: 4px solid var(--alert-intent);
+  color: black;
+  position: relative;
+}
+
+@keyframes toast-in {
+  from {
+    translate: 200% 0;
+  }
+}
+
+.alert-toast > i {
+  font-size: 2rem;
+  color: var(--alert-intent, var(--info));
+}
+
+.toast-content {
+  font-size: 1.35rem;
+  font-weight: bold;
+  text-align: left;
+}
+
+.alert-dismiss {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  height: 100%;
+  padding: 0 0.5rem 0 0.75rem;
+  transition: var(--pk-hover-transition);
+}
+
+.alert-dismiss:hover {
+  background-color: var(--alert-intent);
+}
