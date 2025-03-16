@@ -159,6 +159,10 @@ code {
   list-style: none;
 }
 
+.pk-toast-alert {
+  background-color: var(--background-color);
+}
+
 @media (max-width: 480px) {
   body {
     padding: 0.5rem;

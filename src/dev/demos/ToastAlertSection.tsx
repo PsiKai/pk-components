@@ -3,8 +3,11 @@ import { ToastAlertProvider, useToastAlerts } from "../../lib/components/ToastAl
 import { composePropsTableData } from "../utils/PropsTable.utils"
 import { PropsTable } from "../utils/PropsTable"
 import { Button } from "../../lib/components/Button"
+import { TAlertIntent } from "../../lib/components/ToastAlert/ToastAlert.model"
 
 const ToastAlertProps = composePropsTableData([])
+
+const alertIntents: TAlertIntent[] = ["success", "warning", "danger", "primary", "secondary"]
 
 export const ToastAlertSection = () => {
   return (
@@ -18,9 +21,21 @@ export const ToastAlertSection = () => {
           <PropsTable rows={ToastAlertProps} />
         </div>
         <div className="sub-section">
-          <h3>Toast example</h3>
-          <ToastAlertProvider>
-            <ToastExampleLayout />
+          <h3>From top left</h3>
+          <ToastAlertProvider origin="tl">
+            <ToastTriggers />
+          </ToastAlertProvider>
+          <h3>From top right</h3>
+          <ToastAlertProvider origin="tr">
+            <ToastTriggers />
+          </ToastAlertProvider>
+          <h3>From bottom left</h3>
+          <ToastAlertProvider origin="bl">
+            <ToastTriggers />
+          </ToastAlertProvider>
+          <h3>From bottom right</h3>
+          <ToastAlertProvider origin="br">
+            <ToastTriggers />
           </ToastAlertProvider>
         </div>
       </section>
@@ -28,107 +43,21 @@ export const ToastAlertSection = () => {
   )
 }
 
-function ToastExampleLayout() {
+function ToastTriggers() {
   const { newToast } = useToastAlerts()
 
   return (
-    <div className="full-page-container">
-      <main className="simple-website-main">
-        <h1 className="simple-website-heading">Welcome to Simple Website</h1>
-        <div className="simple-website-div">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac ligula nec odio
-            ultricies ultricies. Nulla facilisi. Donec scelerisque, libero nec tincidunt ultricies,
-            risus metus sollicitudin nunc, et tempor sapien turpis ac nunc. Cras ullamcorper, nunc
-            nec ultricies lacinia, felis justo tincidunt sapien, a ultricies purus nunc in neque. Ut
-            nec mi et nunc ultricies lacinia. Donec euismod, dui ac molestie fermentum, nunc sapien
-            tincidunt turpis, vel scelerisque.
-          </p>
-          <Button
-            fit="small"
-            variant="success"
-            onClick={() => newToast("This is a toast alert!", { intent: "success" })}
-          >
-            Show Success Toast
-          </Button>
-        </div>
-        <div className="simple-website-div">
-          <h2 className="simple-website-heading">About</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac ligula nec odio
-            ultricies ultricies. Nulla facilisi. Donec scelerisque, libero nec tincidunt ultricies,
-            risus metus sollicitudin nunc, et tempor sapien turpis ac nunc. Cras ullamcorper, nunc
-            nec ultricies lacinia, felis justo tincidunt sapien, a ultricies purus nunc in neque. Ut
-            nec mi et nunc ultricies lacinia. Donec euismod, dui ac molestie fermentum, nunc sapien
-            tincidunt turpis, vel scelerisque.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac ligula nec odio
-            ultricies ultricies. Nulla facilisi. Donec scelerisque, libero nec tincidunt ultricies,
-            risus metus sollicitudin nunc, et tempor sapien turpis ac nunc. Cras ullamcorper, nunc
-            nec ultricies lacinia, felis justo tincidunt sapien, a ultricies purus nunc in neque. Ut
-            nec mi et nunc ultricies lacinia. Donec euismod, dui ac molestie fermentum, nunc sapien
-            tincidunt turpis, vel scelerisque.
-          </p>
-        </div>
-        <div className="simple-website-div">
-          <h2 className="simple-website-heading">Services</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac ligula nec odio
-            ultricies ultricies. Nulla facilisi. Donec scelerisque, libero nec tincidunt ultricies,
-            risus metus sollicitudin nunc, et tempor sapien turpis ac nunc. Cras ullamcorper, nunc
-            nec ultricies lacinia, felis justo tincidunt sapien, a ultricies purus nunc in neque. Ut
-            nec mi et nunc ultricies lacinia. Donec euismod, dui ac molestie fermentum, nunc sapien
-            tincidunt turpis, vel scelerisque.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac ligula nec odio
-            ultricies ultricies. Nulla facilisi. Donec scelerisque, libero nec tincidunt ultricies,
-            risus metus sollicitudin nunc, et tempor sapien turpis ac nunc. Cras ullamcorper, nunc
-            nec ultricies lacinia, felis justo tincidunt sapien, a ultricies purus nunc in neque. Ut
-            nec mi et nunc ultricies lacinia. Donec euismod, dui ac molestie fermentum, nunc sapien
-            tincidunt turpis, vel scelerisque.
-          </p>
-        </div>
-        <div className="simple-website-div">
-          <h2 className="simple-website-heading">Contact</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac ligula nec odio
-            ultricies ultricies. Nulla facilisi. Donec scelerisque, libero nec tincidunt ultricies,
-            risus metus sollicitudin nunc, et tempor sapien turpis ac nunc. Cras ullamcorper, nunc
-            nec ultricies lacinia, felis justo tincidunt sapien, a ultricies purus nunc in neque. Ut
-            nec mi et nunc ultricies lacinia. Donec euismod, dui ac molestie fermentum, nunc sapien
-            tincidunt turpis, vel scelerisque.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac ligula nec odio
-            ultricies ultricies. Nulla facilisi. Donec scelerisque, libero nec tincidunt ultricies,
-            risus metus sollicitudin nunc, et tempor sapien turpis ac nunc. Cras ullamcorper, nunc
-            nec ultricies lacinia, felis justo tincidunt sapien, a ultricies purus nunc in neque. Ut
-            nec mi et nunc ultricies lacinia. Donec euismod, dui ac molestie fermentum, nunc sapien
-            tincidunt turpis, vel scelerisque.
-          </p>
-        </div>
-        <div className="simple-website-div">
-          <h2 className="simple-website-heading">People</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac ligula nec odio
-            ultricies ultricies. Nulla facilisi. Donec scelerisque, libero nec tincidunt ultricies,
-            risus metus sollicitudin nunc, et tempor sapien turpis ac nunc. Cras ullamcorper, nunc
-            nec ultricies lacinia, felis justo tincidunt sapien, a ultricies purus nunc in neque. Ut
-            nec mi et nunc ultricies lacinia. Donec euismod, dui ac molestie fermentum, nunc sapien
-            tincidunt turpis, vel scelerisque.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac ligula nec odio
-            ultricies ultricies. Nulla facilisi. Donec scelerisque, libero nec tincidunt ultricies,
-            risus metus sollicitudin nunc, et tempor sapien turpis ac nunc. Cras ullamcorper, nunc
-            nec ultricies lacinia, felis justo tincidunt sapien, a ultricies purus nunc in neque. Ut
-            nec mi et nunc ultricies lacinia. Donec euismod, dui ac molestie fermentum, nunc sapien
-            tincidunt turpis, vel scelerisque.
-          </p>
-        </div>
-      </main>
+    <div className="section-group">
+      {alertIntents.map(intent => (
+        <Button
+          key={intent}
+          fit="link"
+          variant={intent}
+          onClick={() => newToast(`Toast alert: ${intent}!`, { intent, duration: 7000 })}
+        >
+          {`${intent} toast`}
+        </Button>
+      ))}
     </div>
   )
 }

@@ -10,7 +10,7 @@
   "version": "0.7.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --open --port 3001",
+    "dev": "vite --host --open --port 3001",
     "build:lib": "tsc -b && vite build --mode lib",
     "build:demo": "tsc -b && vite build --mode demo",
     "lint": "eslint .",

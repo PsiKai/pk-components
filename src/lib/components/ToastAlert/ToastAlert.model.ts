@@ -7,9 +7,10 @@ export type TToastAlertProps = AllHtmlAttributes & {
 
 export interface IToastAlertSyle extends React.CSSProperties {
   "--alert-intent": `var(--${TAlert["intent"]})`
+  "--alert-origin": string
 }
 
-export type TAlertIntent = "info" | "success" | "warning" | "error" | "danger"
+export type TAlertIntent = "success" | "warning" | "danger" | "primary" | "secondary"
 
 export type TAlert = {
   id: string
@@ -23,6 +24,7 @@ export type TAlertReducerState = TAlert[]
 export type TAlertContext = {
   toastAlerts: TAlertReducerState
   dispatch: React.Dispatch<TAlertAction>
+  origin: TToastOrigin
 }
 
 export type TAlertAction =
@@ -35,3 +37,16 @@ export type TNewToastOptions = {
   intent?: TAlert["intent"]
   duration?: number
 }
+
+export type TToastOrigin = "tr" | "tl" | "br" | "bl"
+
+export type TToastAlertProviderProps = {
+  children: ReactNode
+  origin?: TToastOrigin
+}
+
+type TToastNames = "info" | "success" | "warning" | "danger" | "message"
+export type TToastMethods = Record<
+  TToastNames,
+  (content: TAlert["content"], options: TNewToastOptions) => string
+>
