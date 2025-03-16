@@ -1,19 +1,26 @@
 import { IToastAlertSyle, TAlertIntent, TToastOrigin } from "./ToastAlert.model"
+import {
+  BellOutlinedIcon,
+  CheckCircleIcon,
+  ErrorIcon,
+  InfoOulinedIcon,
+  WarningTriangleOutlineIcon,
+} from "../SVG"
+import { ReactNode } from "react"
 
-export const ICON_MAP = (intent: TAlertIntent) => {
+export const ICON_MAP = (intent: TAlertIntent): ReactNode => {
   switch (intent) {
     case "success":
-      return "check-circle"
+      return CheckCircleIcon()
     case "warning":
-      return "exclamation-triangle"
+      return WarningTriangleOutlineIcon()
     case "danger":
-      return "ban"
+      return ErrorIcon()
     case "primary":
-      return "info-circle"
+      return InfoOulinedIcon()
     case "secondary":
-      return "info-circle"
     default:
-      return "bell"
+      return BellOutlinedIcon()
   }
 }
 

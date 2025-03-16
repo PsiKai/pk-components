@@ -36,8 +36,8 @@ export function ToastAlerts(props: TToastAlertProps) {
           style={toastStyle(toast.intent, origin)}
         >
           <div className={className} role="toast">
-            <i className={`fa fa-${ICON_MAP(toast.intent)}`} aria-hidden="true"></i>
-            <span className="pk-toast-content">{toast.content}</span>
+            <i className="pk-toast-icon">{ICON_MAP(toast.intent)}</i>
+            {toast.content}
             <Button
               variant="secondary"
               fit="small"

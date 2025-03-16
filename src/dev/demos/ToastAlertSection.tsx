@@ -3,11 +3,18 @@ import { ToastAlertProvider, useToastAlerts } from "../../lib/components/ToastAl
 import { composePropsTableData } from "../utils/PropsTable.utils"
 import { PropsTable } from "../utils/PropsTable"
 import { Button } from "../../lib/components/Button"
-import { TAlertIntent } from "../../lib/components/ToastAlert/ToastAlert.model"
+import { TAlertIntent, TToastNames } from "../../lib/components/ToastAlert/ToastAlert.model"
 
 const ToastAlertProps = composePropsTableData([])
 
-const alertIntents: TAlertIntent[] = ["success", "warning", "danger", "primary", "secondary"]
+const alertIntents: TAlertIntent[] = ["primary", "secondary", "success", "warning", "danger"]
+const intentNameMap: Record<TAlertIntent, TToastNames> = {
+  primary: "info",
+  secondary: "message",
+  success: "success",
+  warning: "warning",
+  danger: "error",
+}
 
 export const ToastAlertSection = () => {
   return (
@@ -53,11 +60,26 @@ function ToastTriggers() {
           key={intent}
           fit="link"
           variant={intent}
-          onClick={() => newToast(`Toast alert: ${intent}!`, { intent, duration: 7000 })}
+          onClick={() =>
+            newToast(<ToastContent toastName={intentNameMap[intent]} />, { intent, duration: 7000 })
+          }
         >
-          {`${intent} toast`}
+          {`${intentNameMap[intent]} toast`}
         </Button>
       ))}
+    </div>
+  )
+}
+
+function ToastContent({ toastName }: { toastName: TToastNames }) {
+  return (
+    <div>
+      <b>Toast {toastName}</b>
+      <br />
+      <span>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac ligula nec odio ultricies
+        ultricies. Nulla facilisi.
+      </span>
     </div>
   )
 }

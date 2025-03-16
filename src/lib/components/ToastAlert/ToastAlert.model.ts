@@ -45,7 +45,7 @@ export type TToastAlertProviderProps = {
   origin?: TToastOrigin
 }
 
-type TToastNames = "info" | "success" | "warning" | "danger" | "message"
+export type TToastNames = "info" | "success" | "warning" | "error" | "message"
 export type TToastMethods = Record<
   TToastNames,
   (content: TAlert["content"], options: TNewToastOptions) => string

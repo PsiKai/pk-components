@@ -91,11 +91,19 @@
 }
 
 .pk-toast-alert svg {
-  height: 1lh;
   aspect-ratio: 1;
   vertical-align: middle;
   margin-top: calc(1ex - 1cap);
+}
+
+.pk-toast-dismiss svg {
+  height: 1lh;
   fill: currentColor;
+}
+
+.pk-toast-icon > svg {
+  fill: var(--alert-intent);
+  height: 1.5lh;
 }
 
 .pk-toast-dismiss {
