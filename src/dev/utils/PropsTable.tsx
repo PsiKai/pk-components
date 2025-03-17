@@ -4,7 +4,6 @@ import "./PropsTable.css"
 export type TPropsTableRow = { Name: string; Type: string; Default?: string; Description: string }
 
 export function PropsTable({ rows }: { rows: TPropsTableRow[] }) {
-  console.log("rows0", rows[0])
   return (
     <div className="table-wrapper">
       <table>

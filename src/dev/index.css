@@ -50,6 +50,12 @@ h3 {
   line-height: 1.3;
 }
 
+p {
+  line-height: 1.8;
+  max-width: 80ch;
+  margin: 1rem auto;
+}
+
 hr {
   width: 100%;
 }
