@@ -1,4 +1,4 @@
-import { MouseEventHandler, useCallback, useMemo } from "react"
+import { FocusEventHandler, MouseEventHandler, useCallback, useMemo } from "react"
 import { TToastAlertProps } from "./ToastAlert.model"
 import { useToastManager } from "./useToastManager"
 import { ICON_MAP, toastStyle } from "./ToastAlert.utils"
@@ -20,6 +20,16 @@ export function ToastAlerts(props: TToastAlertProps) {
     [resumeToastTimeout],
   )
 
+  const handleFocusWithin: FocusEventHandler<HTMLDivElement> = useCallback(
+    e => removeToastTimeout(e.currentTarget.dataset.toastid),
+    [removeToastTimeout],
+  )
+
+  const handleBlur: FocusEventHandler<HTMLDivElement> = useCallback(
+    e => resumeToastTimeout(e.currentTarget.dataset.toastid),
+    [resumeToastTimeout],
+  )
+
   const className = useMemo(
     () => `pk-toast-alert${props.className ? ` ${props.className}` : ""}`,
     [props.className],
@@ -33,6 +43,8 @@ export function ToastAlerts(props: TToastAlertProps) {
           data-toastid={toast.id}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
+          onFocus={handleFocusWithin}
+          onBlur={handleBlur}
           style={toastStyle(toast.intent, origin)}
         >
           <div className={className} role="toast">

@@ -10,7 +10,7 @@ export function useToastAlerts() {
       info: (content, options) => newToast(content, { ...options, intent: "primary" }),
       success: (content, options) => newToast(content, { ...options, intent: "success" }),
       warning: (content, options) => newToast(content, { ...options, intent: "warning" }),
-      danger: (content, options) => newToast(content, { ...options, intent: "danger" }),
+      error: (content, options) => newToast(content, { ...options, intent: "danger" }),
       message: (content, options) => newToast(content, { ...options, intent: "secondary" }),
     }
   }, [newToast])

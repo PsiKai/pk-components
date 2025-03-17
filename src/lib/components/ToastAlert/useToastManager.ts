@@ -18,14 +18,17 @@ export function useToastManager() {
     [toastAlerts],
   )
 
-  const dismissToast = useCallback(
+  const removeAlert = useCallback(
     (id: TAlert["id"]) => {
-      const alert = document.querySelector(`[data-toastid="${id}"]`)
-      if (!alert) return
+      dispatch({ type: "REMOVE_ALERT", payload: { id } })
+    },
+    [dispatch],
+  )
 
-      removeToastTimeout(id)
+  const animateToast = useCallback(
+    (alert: Element, onFinishCb: () => void) => {
       const slideFrames = new KeyframeEffect(alert, [{ translate: originTranslate }], {
-        duration: 200,
+        duration: 300,
         easing: "ease",
         fill: "forwards",
       })
@@ -34,7 +37,7 @@ export function useToastManager() {
       const collapseFrames = new KeyframeEffect(
         alert,
         [{ maxHeight: `${height}px` }, { maxHeight: "0" }],
-        { duration: 100, easing: "ease-in", fill: "forwards" },
+        { duration: 150, easing: "ease-in", fill: "forwards" },
       )
       const slideAnimation = new Animation(slideFrames, document.timeline)
       const collapseAnimation = new Animation(collapseFrames, document.timeline)
@@ -42,11 +45,23 @@ export function useToastManager() {
       slideAnimation.onfinish = () => {
         collapseAnimation.play()
       }
-      collapseAnimation.onfinish = () => {
-        dispatch({ type: "REMOVE_ALERT", payload: { id } })
-      }
+      collapseAnimation.onfinish = () => onFinishCb()
     },
-    [dispatch, removeToastTimeout, originTranslate],
+    [originTranslate],
+  )
+
+  const dismissToast = useCallback(
+    (id: TAlert["id"]) => {
+      const alert = document.querySelector(`[data-toastid="${id}"]`)
+      if (!alert) return
+
+      removeToastTimeout(id)
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return removeAlert(id)
+      }
+      animateToast(alert, () => removeAlert(id))
+    },
+    [removeToastTimeout, animateToast, removeAlert],
   )
 
   const clearAllToasts = useCallback(() => {
