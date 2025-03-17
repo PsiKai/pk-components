@@ -1,10 +1,16 @@
-type TRow = [string, string, string, string]
+import { TPropsTableRow } from "./PropsTable"
 
-export function composePropsTableData(rows: TRow[]) {
-  return rows.map(row => ({
-    name: row[0],
-    type: row[1],
-    default: row[2],
-    description: row[3],
+type Tuple<A extends number, T, R extends Array<T> = []> = R["length"] extends A
+  ? R
+  : Tuple<A, T, [...R, T]>
+type TRow = Tuple<4, string> | Tuple<3, string>
+
+export function composePropsTableData(rows: TRow[]): TPropsTableRow[] {
+  const rowsMapped = rows.map(row => ({
+    Name: row[0],
+    Type: row[1],
+    ...(row.length === 3 ? { Description: row[2] } : { Default: row[2], Description: row[3]! }),
   }))
+  console.log("rowsMapped", rowsMapped)
+  return rowsMapped
 }

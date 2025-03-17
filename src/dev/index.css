@@ -55,7 +55,7 @@ hr {
 }
 
 .section-wrapper {
-  width: 800px;
+  width: 1000px;
   max-width: 100%;
   margin: 0 auto;
 }
@@ -93,8 +93,26 @@ section {
 }
 
 code {
-  display: inline-block;
+  display: inline;
   white-space: pre-wrap;
+  color: #f4f4f4;
+  background-color: #333;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+}
+
+code.snippet {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+code.block {
+  display: block;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  overflow-x: auto;
 }
 
 .sub-section {
