@@ -14,6 +14,7 @@ exports[`component-creation template methods > generateDemoFile > should return 
 "import React from "react"
 import { TestComponent } from "../../lib/components/TestComponent"
 import { composePropsTableData } from "../utils/PropsTable.utils"
+import { PropsTable } from "../utils/PropsTable"
 
 const TestComponentProps = composePropsTableData([])
 
