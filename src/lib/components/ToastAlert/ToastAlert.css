@@ -113,7 +113,7 @@
   top: 0;
   right: 0;
   background: none;
-  padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+  padding: 0.25rem;
   transition: var(--pk-hover-transition);
   box-shadow: none;
   color: currentColor;

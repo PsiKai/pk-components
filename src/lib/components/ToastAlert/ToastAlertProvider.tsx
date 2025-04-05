@@ -1,4 +1,4 @@
-import { createContext, useReducer, ReactNode } from "react"
+import { createContext, useReducer } from "react"
 import {
   TAlertAction,
   TAlertContext,
@@ -9,7 +9,7 @@ import { ToastAlerts } from "./ToastAlert"
 
 const initialAlertContext: TAlertContext = {
   toastAlerts: [],
-  dispatch: () => { },
+  dispatch: () => {},
   origin: "tr",
 }
 
@@ -39,7 +39,5 @@ function AlertsReducer(state: TAlertReducerState, action: TAlertAction) {
     }
     case "CLEAR_ALERTS":
       return []
-    default:
-      return state
   }
 }

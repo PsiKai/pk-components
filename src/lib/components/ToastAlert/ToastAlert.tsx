@@ -11,55 +11,50 @@ export function ToastAlerts(props: TToastAlertProps) {
     useToastManager()
 
   const handleMouseEnter: MouseEventHandler<HTMLDivElement> = useCallback(
-    e => removeToastTimeout(e.currentTarget.dataset.toastid),
+    e => removeToastTimeout(e.currentTarget.dataset.toastid!),
     [removeToastTimeout],
   )
 
   const handleMouseLeave: MouseEventHandler<HTMLDivElement> = useCallback(
-    e => resumeToastTimeout(e.currentTarget.dataset.toastid),
+    e => resumeToastTimeout(e.currentTarget.dataset.toastid!),
     [resumeToastTimeout],
   )
 
   const handleFocusWithin: FocusEventHandler<HTMLDivElement> = useCallback(
-    e => removeToastTimeout(e.currentTarget.dataset.toastid),
+    e => removeToastTimeout(e.currentTarget.dataset.toastid!),
     [removeToastTimeout],
   )
 
   const handleBlur: FocusEventHandler<HTMLDivElement> = useCallback(
-    e => resumeToastTimeout(e.currentTarget.dataset.toastid),
+    e => resumeToastTimeout(e.currentTarget.dataset.toastid!),
     [resumeToastTimeout],
   )
 
-  const className = useMemo(
-    () => `pk-toast-alert${props.className ? ` ${props.className}` : ""}`,
-    [props.className],
-  )
-
   return (
-    <div className={`pk-toast-container ${origin}`}>
+    <div className={`pk-toast-container ${origin}`} data-testid="pk-toast-container">
       {toastAlerts.map(toast => (
         <div
           key={toast.id}
           data-toastid={toast.id}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          onFocus={handleFocusWithin}
-          onBlur={handleBlur}
+          onFocusCapture={handleFocusWithin}
+          onBlurCapture={handleBlur}
           style={toastStyle(toast.intent, origin)}
+          className="pk-toast-alert"
+          role="toast"
         >
-          <div className={className} role="toast">
-            <i className="pk-toast-icon">{ICON_MAP(toast.intent)}</i>
-            {toast.content}
-            <Button
-              variant="secondary"
-              fit="small"
-              onClick={() => dismissToast(toast.id)}
-              className="pk-toast-dismiss"
-              aria-label="Remove Toast"
-            >
-              <CloseIcon />
-            </Button>
-          </div>
+          <i className="pk-toast-icon">{ICON_MAP(toast.intent)}</i>
+          {toast.content}
+          <Button
+            variant="secondary"
+            fit="small"
+            onClick={() => dismissToast(toast.id)}
+            className="pk-toast-dismiss"
+            aria-label="Remove Toast"
+          >
+            <CloseIcon />
+          </Button>
         </div>
       ))}
     </div>

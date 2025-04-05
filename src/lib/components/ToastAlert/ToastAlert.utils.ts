@@ -1,4 +1,4 @@
-import { IToastAlertSyle, TAlertIntent, TToastOrigin } from "./ToastAlert.model"
+import { IToastAlertSyle, TAlertIntent, TToastNames, TToastOrigin } from "./ToastAlert.model"
 import {
   BellOutlinedIcon,
   CheckCircleIcon,
@@ -26,7 +26,7 @@ export const ICON_MAP = (intent: TAlertIntent): ReactNode => {
 
 export const toastStyle = (intent: TAlertIntent, origin: TToastOrigin): IToastAlertSyle => {
   return {
-    "--alert-intent": `var(--${intent || "primary"})`,
+    "--alert-intent": `var(--${intent})`,
     "--alert-origin": originCalculation(origin),
   }
 }
@@ -41,4 +41,12 @@ export const originCalculation = (origin: TToastOrigin) => {
     default:
       return "200% 0"
   }
+}
+
+export const methodIntentMap: Record<TToastNames, TAlertIntent> = {
+  success: "success",
+  error: "danger",
+  warning: "warning",
+  info: "primary",
+  message: "secondary",
 }

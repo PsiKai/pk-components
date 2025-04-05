@@ -19,9 +19,7 @@ export function useToastManager() {
   )
 
   const removeAlert = useCallback(
-    (id: TAlert["id"]) => {
-      dispatch({ type: "REMOVE_ALERT", payload: { id } })
-    },
+    (id: TAlert["id"]) => dispatch({ type: "REMOVE_ALERT", payload: { id } }),
     [dispatch],
   )
 
@@ -41,11 +39,9 @@ export function useToastManager() {
       )
       const slideAnimation = new Animation(slideFrames, document.timeline)
       const collapseAnimation = new Animation(collapseFrames, document.timeline)
-      slideAnimation.play()
-      slideAnimation.onfinish = () => {
-        collapseAnimation.play()
-      }
       collapseAnimation.onfinish = () => onFinishCb()
+      slideAnimation.onfinish = () => collapseAnimation.play()
+      slideAnimation.play()
     },
     [originTranslate],
   )
@@ -75,9 +71,9 @@ export function useToastManager() {
     (id: TAlert["id"], timer?: number) => {
       return setTimeout(() => {
         requestAnimationFrame(() => dismissToast(id))
-      }, timer ?? defaultDuration)
+      }, timer)
     },
-    [dismissToast, defaultDuration],
+    [dismissToast],
   )
 
   const newToast = useCallback(
@@ -94,10 +90,8 @@ export function useToastManager() {
   )
 
   const resumeToastTimeout = useCallback(
-    (id: TAlert["id"] | undefined, timer?: number) => {
-      if (!id) return
-
-      const timeout = setAlertTimeout(id, timer ?? 4000)
+    (id: TAlert["id"]) => {
+      const timeout = setAlertTimeout(id, 4000)
       dispatch({ type: "UPDATE_ALERT", payload: { id, timeout } })
     },
     [dispatch, setAlertTimeout],
