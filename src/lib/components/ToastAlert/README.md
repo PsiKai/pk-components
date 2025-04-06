@@ -12,10 +12,10 @@ By default, a toast will dismiss itself after 5 seconds. You can override this b
 
 The provider component takes a minimal set of props for some basic customization. The system is designed for you to inject your own JSX elements for the toast content, so the customization of the layout is on the consumer. Please see the code example for more details.
 
-| Prop Name  | Type                                   | Required | Default     | Description                                 |
-| ---------- | -------------------------------------- | -------- | ----------- | ------------------------------------------- |
-| `children` | `React.ReactNode`                      | `true`   | `undefined` | The section of JSX that the Provider wraps. |
-| `origin`   | `"tr" \| "tl" \| "br" \| "bl" \| "tr"` | `false`  | `"tr"`      | The origin location of the toast alerts.    |
+| Prop Name  | Type                           | Required | Default     | Description                                 |
+| ---------- | ------------------------------ | -------- | ----------- | ------------------------------------------- |
+| `children` | `React.ReactNode`              | Yes      | `undefined` | The section of JSX that the Provider wraps. |
+| `origin`   | `"tr" \| "tl" \| "br" \| "bl"` | No       | `"tr"`      | The origin location of the toast alerts.    |
 
 #### Example
 
