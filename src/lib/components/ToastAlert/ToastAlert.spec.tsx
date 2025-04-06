@@ -109,13 +109,8 @@ describe("ToastAlertProvider", () => {
     describe("with animations", () => {
       const KeyframeEffectStub = vi.fn()
       const AnimationStub = vi.fn()
-      AnimationStub.prototype.play = vi.fn(() => {
-        AnimationStub.prototype.finish()
-      })
-      AnimationStub.prototype.onfinish = vi.fn()
-      AnimationStub.prototype.finish = vi.fn().mockImplementation(() => {
-        AnimationStub.prototype.onfinish()
-      })
+      AnimationStub.prototype.play = vi.fn()
+      AnimationStub.prototype.finished = Promise.resolve()
 
       beforeAll(() => {
         Object.defineProperty(globalThis, "KeyframeEffect", {
@@ -123,6 +118,7 @@ describe("ToastAlertProvider", () => {
         })
 
         Object.defineProperty(globalThis, "Animation", {
+          writable: true,
           value: AnimationStub,
         })
 
@@ -146,8 +142,8 @@ describe("ToastAlertProvider", () => {
         await act(async () => dismiss.click())
         expect(KeyframeEffectStub).toHaveBeenCalledTimes(2)
         expect(AnimationStub).toHaveBeenCalledTimes(2)
-        expect(AnimationStub.prototype.play).toHaveBeenCalledTimes(1)
-        // await waitFor(() => expect(toast).not.toBeInTheDocument())
+        expect(AnimationStub.prototype.play).toHaveBeenCalledTimes(2)
+        await waitFor(() => expect(toast).not.toBeInTheDocument())
       })
     })
   })

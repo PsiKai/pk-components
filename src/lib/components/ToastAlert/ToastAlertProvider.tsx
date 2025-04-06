@@ -7,9 +7,8 @@ import {
 } from "./ToastAlert.model"
 import { ToastAlerts } from "./ToastAlert"
 
-const initialAlertContext: TAlertContext = {
+const initialAlertContext: Partial<TAlertContext> = {
   toastAlerts: [],
-  dispatch: () => {},
   origin: "tr",
 }
 

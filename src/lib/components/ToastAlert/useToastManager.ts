@@ -24,7 +24,7 @@ export function useToastManager() {
   )
 
   const animateToast = useCallback(
-    (alert: Element, onFinishCb: () => void) => {
+    async (alert: Element, onFinishCb: () => void) => {
       const slideFrames = new KeyframeEffect(alert, [{ translate: originTranslate }], {
         duration: 300,
         easing: "ease",
@@ -39,9 +39,11 @@ export function useToastManager() {
       )
       const slideAnimation = new Animation(slideFrames, document.timeline)
       const collapseAnimation = new Animation(collapseFrames, document.timeline)
-      collapseAnimation.onfinish = () => onFinishCb()
-      slideAnimation.onfinish = () => collapseAnimation.play()
       slideAnimation.play()
+      await slideAnimation.finished
+      collapseAnimation.play()
+      await collapseAnimation.finished
+      onFinishCb()
     },
     [originTranslate],
   )
