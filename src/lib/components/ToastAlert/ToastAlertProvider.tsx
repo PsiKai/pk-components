@@ -7,8 +7,10 @@ import {
 } from "./ToastAlert.model"
 import { ToastAlerts } from "./ToastAlert"
 
-const initialAlertContext: Partial<TAlertContext> = {
+/* istanbul ignore next */
+const initialAlertContext: TAlertContext = {
   toastAlerts: [],
+  dispatch: () => {},
   origin: "tr",
 }
 

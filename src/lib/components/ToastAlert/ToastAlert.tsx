@@ -1,4 +1,4 @@
-import { FocusEventHandler, MouseEventHandler, useCallback, useMemo } from "react"
+import { FocusEventHandler, MouseEventHandler, useCallback } from "react"
 import { TToastAlertProps } from "./ToastAlert.model"
 import { useToastManager } from "./useToastManager"
 import { ICON_MAP, toastStyle } from "./ToastAlert.utils"
@@ -6,7 +6,7 @@ import { CloseIcon } from "../SVG"
 import { Button } from "../Button"
 import "./ToastAlert.css"
 
-export function ToastAlerts(props: TToastAlertProps) {
+export function ToastAlerts(_props: TToastAlertProps) {
   const { toastAlerts, dismissToast, removeToastTimeout, resumeToastTimeout, origin } =
     useToastManager()
 
