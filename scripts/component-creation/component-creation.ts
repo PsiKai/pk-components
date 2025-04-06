@@ -88,7 +88,7 @@ export async function main(componentName: string) {
   await fs.promises.writeFile(demoExportFile, newDemoExportFileData)
 
   // Update the library index.tsx file
-  const indexFile = path.join(__dirname, "../../src", "lib", "index.tsx")
+  const indexFile = path.join(__dirname, "../../src", "lib", "index.ts")
   const indexFileData = await fs.promises.readFile(indexFile, { encoding: "utf-8" })
   const newIndexFileData = parseInsertLibIndex(indexFileData, santizedComponentName)
   await fs.promises.writeFile(indexFile, newIndexFileData)
