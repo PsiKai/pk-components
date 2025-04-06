@@ -4,12 +4,7 @@ import "@testing-library/jest-dom"
 import { vi } from "vitest"
 import { ToastAlertProvider } from "./ToastAlertProvider"
 import { useToastAlerts } from "./useToastAlerts"
-import { TAlertIntent, TToastNames, TToastOrigin } from "./ToastAlert.model"
-import { methodIntentMap } from "./ToastAlert.utils"
-
-const intents: TAlertIntent[] = ["primary", "secondary", "success", "danger", "warning"]
-const methods: TToastNames[] = ["success", "info", "warning", "error", "message"]
-const origins: TToastOrigin[] = ["tl", "tr", "bl", "br"]
+import { allIntents, allToastNames, allToastNamesMap, allToastOrigins } from "./ToastAlert.model"
 
 describe("ToastAlertProvider", () => {
   beforeAll(() => {
@@ -43,14 +38,14 @@ describe("ToastAlertProvider", () => {
       expect(toast).toHaveClass("pk-toast-alert")
     })
 
-    it.each(methods)("should render a %s toast from the toast object", async type => {
+    it.each(allToastNames)("should render a %s toast from the toast object", async type => {
       const button = screen.getByText(`${type} toast`)
       act(() => button.click())
       const toast = await screen.findByRole("toast")
       expect(toast).toBeInTheDocument()
     })
 
-    it.each(intents)("should render a %s toast from the newToast method", async intent => {
+    it.each(allIntents)("should render a %s toast from the newToast method", async intent => {
       const button = screen.getByText(`${intent} newToast`)
       act(() => button.click())
       const toast = await screen.findByRole("toast")
@@ -90,12 +85,15 @@ describe("ToastAlertProvider", () => {
       }
     })
 
-    it.each(methods)("%s method should render toast with correct --alert-intent", async type => {
-      const button = screen.getByText(`${type} toast`)
-      act(() => button.click())
-      const toast = await screen.findByRole("toast")
-      expect(toast).toHaveStyle({ "--alert-intent": `var(--${methodIntentMap[type]})` })
-    })
+    it.each(allToastNames)(
+      "%s method should render toast with correct --alert-intent",
+      async type => {
+        const button = screen.getByText(`${type} toast`)
+        act(() => button.click())
+        const toast = await screen.findByRole("toast")
+        expect(toast).toHaveStyle({ "--alert-intent": `var(--${allToastNamesMap[type]})` })
+      },
+    )
 
     describe("with no specified options", () => {
       it("should render a toast with the default intent and duration", async () => {
@@ -103,6 +101,13 @@ describe("ToastAlertProvider", () => {
         act(() => button.click())
         const toast = await screen.findByRole("toast")
         expect(toast).toHaveStyle({ "--alert-intent": "var(--primary)" })
+      })
+
+      it.each(allToastNames)("should render a %s toast with the default options", async type => {
+        const button = screen.getByText(`${type} no options`)
+        act(() => button.click())
+        const toast = await screen.findByRole("toast")
+        expect(toast).toHaveStyle({ "--alert-intent": `var(--${allToastNamesMap[type]})` })
       })
     })
 
@@ -254,7 +259,7 @@ describe("ToastAlertProvider", () => {
   })
 
   describe("with a custom origin", () => {
-    it.each(origins)("should render the toast container with the %s origin", origin => {
+    it.each(allToastOrigins)("should render the toast container with the %s origin", origin => {
       render(
         <ToastAlertProvider origin={origin}>
           <FooComponent />
@@ -278,7 +283,14 @@ const FooComponent = () => {
           </button>
         )
       })}
-      {intents.map(intent => {
+      {Object.entries(toast).map(([type, method]) => {
+        return (
+          <button key={type} onClick={() => method(type)}>
+            {`${type} no options`}
+          </button>
+        )
+      })}
+      {allIntents.map(intent => {
         return (
           <button
             key={intent}

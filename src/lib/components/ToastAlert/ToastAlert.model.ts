@@ -10,7 +10,8 @@ export interface IToastAlertSyle extends React.CSSProperties {
   "--alert-origin": string
 }
 
-export type TAlertIntent = "success" | "warning" | "danger" | "primary" | "secondary"
+export const allIntents = ["success", "warning", "danger", "primary", "secondary"] as const
+export type TAlertIntent = (typeof allIntents)[number]
 
 export type TAlert = {
   id: string
@@ -38,15 +39,24 @@ export type TNewToastOptions = {
   duration?: number
 }
 
-export type TToastOrigin = "tr" | "tl" | "br" | "bl"
+export const allToastOrigins = ["tr", "tl", "br", "bl"] as const
+export type TToastOrigin = (typeof allToastOrigins)[number]
 
 export type TToastAlertProviderProps = {
   children: ReactNode
   origin?: TToastOrigin
 }
 
-export type TToastNames = "info" | "success" | "warning" | "error" | "message"
+export const allToastNames = ["info", "success", "warning", "error", "message"] as const
+export type TToastNames = (typeof allToastNames)[number]
+export const allToastNamesMap: Record<TToastNames, TAlertIntent> = {
+  info: "primary",
+  success: "success",
+  warning: "warning",
+  error: "danger",
+  message: "secondary",
+}
 export type TToastMethods = Record<
   TToastNames,
-  (content: TAlert["content"], options: TNewToastOptions) => string
+  (content: TAlert["content"], options?: TNewToastOptions) => string
 >
