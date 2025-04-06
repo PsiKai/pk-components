@@ -173,8 +173,8 @@ describe("ToastAlertProvider", () => {
       act(() => button.click())
       const toast = await screen.findByRole("toast")
       expect(toast).toBeInTheDocument()
-      act(() => vi.advanceTimersByTime(1_000))
-      expect(toast).not.toBeInTheDocument()
+      act(() => vi.advanceTimersByTime(2_000))
+      await waitFor(() => expect(toast).not.toBeInTheDocument())
     })
 
     it("should pause the dismiss timer when a toast is hovered", async () => {

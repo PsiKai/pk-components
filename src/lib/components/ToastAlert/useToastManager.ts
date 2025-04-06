@@ -11,7 +11,7 @@ export function useToastManager() {
   const originTranslate = useMemo(() => originCalculation(origin), [origin])
 
   const removeToastTimeout = useCallback(
-    (id: TAlert["id"] | undefined) => {
+    (id: TAlert["id"]) => {
       const alert = toastAlerts.find(alert => alert.id === id)
       clearTimeout(alert?.timeout)
     },
@@ -24,7 +24,9 @@ export function useToastManager() {
   )
 
   const animateToast = useCallback(
-    async (alert: Element, onFinishCb: () => void) => {
+    async (alert: Element) => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+
       const slideFrames = new KeyframeEffect(alert, [{ translate: originTranslate }], {
         duration: 300,
         easing: "ease",
@@ -43,7 +45,6 @@ export function useToastManager() {
       await slideAnimation.finished
       collapseAnimation.play()
       await collapseAnimation.finished
-      onFinishCb()
     },
     [originTranslate],
   )
@@ -54,10 +55,7 @@ export function useToastManager() {
       if (!alert) return
 
       removeToastTimeout(id)
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        return removeAlert(id)
-      }
-      animateToast(alert, () => removeAlert(id))
+      animateToast(alert).then(() => removeAlert(id))
     },
     [removeToastTimeout, animateToast, removeAlert],
   )
@@ -70,7 +68,7 @@ export function useToastManager() {
   }, [toastAlerts, dispatch, removeToastTimeout])
 
   const setAlertTimeout = useCallback(
-    (id: TAlert["id"], timer?: number) => {
+    (id: TAlert["id"], timer: number) => {
       return setTimeout(() => {
         requestAnimationFrame(() => dismissToast(id))
       }, timer)
