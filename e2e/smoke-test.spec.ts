@@ -16,6 +16,7 @@ test("Renders component sections", async ({ page }) => {
     "FileInput",
     "Hamburger",
     "Sidenav",
+    "ToastAlertProvider",
   ]) {
     await expect(page.getByRole("heading", { name: component, exact: true })).toBeVisible()
   }
