@@ -1,6 +1,25 @@
-import { parseInsertDemoIndex, parseInsertLibIndex } from "./component-creation.utils"
+import {
+  parseInsertDemoExport,
+  parseInsertDemoIndex,
+  parseInsertLibIndex,
+} from "./component-creation.utils"
 
 const testComponentName = "JTestComponent"
+
+const fakeDemoExportData = `export { ButtonSection } from "./ButtonSection"
+export { FileInputSection } from "./FileInputSection"
+export { HamburgerButtonSection } from "./HamburgerButtonSection"
+export { InputSection } from "./InputSection"
+export { LoadingSpinnerSection } from "./LoadingSpinnerSection"
+export { SidenavSection } from "./SidenavSection"`
+
+const fakeDemoWithExport = `export { ButtonSection } from "./ButtonSection"
+export { FileInputSection } from "./FileInputSection"
+export { HamburgerButtonSection } from "./HamburgerButtonSection"
+export { InputSection } from "./InputSection"
+export { ${testComponentName}Section } from "./${testComponentName}Section"
+export { LoadingSpinnerSection } from "./LoadingSpinnerSection"
+export { SidenavSection } from "./SidenavSection"`
 
 const fakeDemoIndexData = `import {
   ButtonSection,
@@ -62,6 +81,13 @@ export { Sidenav } from "./components/Sidenav"
 `
 
 describe("component-creation.utils", () => {
+  describe("parseInsertDemoExport", () => {
+    it("should insert the component name into the demo export file", () => {
+      const result = parseInsertDemoExport(fakeDemoExportData, testComponentName)
+      expect(result).toBe(fakeDemoWithExport)
+    })
+  })
+
   describe("parseInsertDemoIndex", () => {
     it("should insert the component name into the demo index file", () => {
       const result = parseInsertDemoIndex(fakeDemoIndexData, testComponentName)

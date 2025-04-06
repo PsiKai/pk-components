@@ -30,6 +30,7 @@ npm i pk-components
 - [Dropzone](https://github.com/psikai/pk-components/blob/main/src/lib/components/Dropzone/README.md)
 - [Hamburger](https://github.com/psikai/pk-components/blob/main/src/lib/components/Hamburger/README.md)
 - [Sidenav](https://github.com/psikai/pk-components/blob/main/src/lib/components/Sidenav/README.md)
+- [ToastAlertProvider](https://github.com/psikai/pk-components/blob/main/src/lib/components/ToastAlert/README.md)
 
 ### Demo
 

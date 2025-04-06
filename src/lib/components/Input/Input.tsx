@@ -3,7 +3,6 @@ import { TInputProps } from "./Input.model"
 import "./Input.css"
 
 export function Input(props: TInputProps) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { className = "", label, id, hint, feedback, clean, error, type: _type, ...rest } = props
 
   const isError = useMemo(() => error || typeof error === "string", [error])

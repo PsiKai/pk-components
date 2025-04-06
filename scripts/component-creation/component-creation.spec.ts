@@ -110,7 +110,7 @@ describe("component-creation", () => {
     })
 
     it("should insert the component name into the lib index file", () => {
-      const indexPath = path.join(__dirname, "../../src/lib/index.tsx")
+      const indexPath = path.join(__dirname, "../../src/lib/index.ts")
       expect(writeFileMock).toHaveBeenCalledWith(indexPath, `export ${componentName}`)
     })
   })

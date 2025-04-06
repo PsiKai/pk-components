@@ -10,7 +10,7 @@
   "version": "0.7.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --open --port 3001",
+    "dev": "vite --host --open --port 3001",
     "build:lib": "tsc -b && vite build --mode lib",
     "build:demo": "tsc -b && vite build --mode demo",
     "lint": "eslint .",
@@ -19,16 +19,15 @@
     "component": "tsx scripts/component-creation/index.ts"
   },
   "files": [
-    "./dist"
+    "dist"
   ],
-  "main": "./dist/pk-components.umd.cjs",
-  "module": "./dist/pk-components.js",
-  "require": "./dist/pk-components.umd.cjs",
+  "main": "dist/index.umd.cjs",
+  "module": "dist/index.js",
+  "types": "dist/types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/pk-components.js",
-      "require": "./dist/pk-components.umd.cjs",
-      "main": "./dist/pk-components.umd.cjs",
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.cjs",
       "types": "./dist/types/index.d.ts"
     }
   },

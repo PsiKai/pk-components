@@ -1,9 +1,7 @@
 import React from "react"
 import "./PropsTable.css"
 
-const propsTableHeadings = ["Name", "Type", "Default", "Description"]
-
-type TPropsTableRow = { name: string; type: string; default: string; description: string }
+export type TPropsTableRow = { Name: string; Type: string; Default?: string; Description: string }
 
 export function PropsTable({ rows }: { rows: TPropsTableRow[] }) {
   return (
@@ -11,7 +9,7 @@ export function PropsTable({ rows }: { rows: TPropsTableRow[] }) {
       <table>
         <thead>
           <tr>
-            {propsTableHeadings.map((heading, index) => (
+            {Object.keys(rows[0]).map((heading, index) => (
               <th key={index}>{heading}</th>
             ))}
           </tr>
@@ -20,13 +18,13 @@ export function PropsTable({ rows }: { rows: TPropsTableRow[] }) {
           {rows.map((row, index) => (
             <tr key={index}>
               {Object.entries(row).map(([attr, cell], jindex) =>
-                attr === "description" ? (
+                attr === "Description" ? (
                   <td key={jindex} className="prop-description">
                     <span>{cell}</span>
                   </td>
                 ) : (
                   <td key={jindex}>
-                    <code>{cell}</code>
+                    <code className="snippet">{cell}</code>
                   </td>
                 ),
               )}

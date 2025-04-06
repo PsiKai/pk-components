@@ -1,9 +1,9 @@
-import { defineConfig } from "vite"
+import { defineConfig, UserConfig } from "vite"
 import react from "@vitejs/plugin-react-swc"
 import dts from "vite-plugin-dts"
 import cssInjectedByJS from "vite-plugin-css-injected-by-js"
 
-const libBuildConfig = {
+const libBuildConfig: UserConfig = {
   plugins: [
     react(),
     dts({
@@ -17,12 +17,12 @@ const libBuildConfig = {
   },
   build: {
     lib: {
-      entry: "src/lib/index.tsx",
+      entry: ["src/lib/index.ts"],
       name: "pk-components",
     },
     rollupOptions: {
       external: ["react", "react-dom"],
-      input: "src/lib/index.tsx",
+      input: "src/lib/index.ts",
       output: {
         globals: {
           react: "React",
@@ -34,7 +34,7 @@ const libBuildConfig = {
   },
 }
 
-const demoBuildConfig = {
+const demoBuildConfig: UserConfig = {
   build: {
     outDir: "build",
     rollupOptions: {
@@ -49,7 +49,7 @@ const demoBuildConfig = {
   base: "/pk-components/",
 }
 
-const defaultConfig = {
+const defaultConfig: UserConfig = {
   plugins: [react()],
   css: {
     devSourcemap: true,

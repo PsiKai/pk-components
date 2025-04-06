@@ -1,0 +1,128 @@
+@import "../index.css";
+
+.pk-toast-container {
+  --primary: hsl(var(--pk-hue-primary), 100%, 40%);
+  --secondary: hsl(var(--pk-hue-secondary), 0%, 40%);
+  --warning: hsl(var(--pk-hue-warning), 100%, 50%);
+  --danger: hsl(var(--pk-hue-danger), 100%, 40%);
+  --success: hsl(var(--pk-hue-success), 100%, 30%);
+
+  position: fixed;
+  z-index: 2000;
+  width: 500px;
+  max-width: calc(100% - 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  contain: style;
+}
+
+.pk-toast-container.tl,
+.pk-toast-container.tr {
+  top: 1rem;
+  bottom: auto;
+}
+
+.pk-toast-container.tl {
+  right: auto;
+  left: 1rem;
+}
+
+.pk-toast-container.tr {
+  right: 1rem;
+  left: auto;
+}
+
+.pk-toast-container.bl,
+.pk-toast-container.br {
+  top: auto;
+  bottom: 1rem;
+  flex-direction: column-reverse;
+}
+
+.pk-toast-container.bl {
+  right: auto;
+  left: 1rem;
+}
+
+.pk-toast-container.br {
+  right: 1rem;
+  left: auto;
+}
+
+@keyframes toast-in-right {
+  from {
+    translate: 200% 0;
+  }
+}
+
+@keyframes toast-in-left {
+  from {
+    translate: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pk-toast-container.bl > div,
+  .pk-toast-container.tl > div {
+    animation: toast-in-left 400ms forwards;
+  }
+
+  .pk-toast-container.br > div,
+  .pk-toast-container.tr > div {
+    animation: toast-in-right 400ms forwards;
+  }
+}
+
+.pk-toast-alert {
+  transform: translateZ(0);
+  overflow: hidden;
+  box-shadow: var(--pk-box-shadow-large);
+  border-radius: var(--pk-btn-border-radius);
+  padding: 1rem 40px 1rem 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  border: 2px solid var(--alert-intent);
+  position: relative;
+  will-change: transform, max-height;
+}
+
+.pk-toast-alert svg {
+  aspect-ratio: 1;
+  vertical-align: middle;
+  margin-top: calc(1ex - 1cap);
+}
+
+.pk-toast-dismiss svg {
+  height: 1lh;
+  fill: currentColor;
+}
+
+.pk-toast-icon > svg {
+  height: 1.5lh;
+  fill: var(--alert-intent);
+}
+
+.pk-toast-dismiss {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  padding: 0.25rem;
+  transition: var(--pk-hover-transition);
+  box-shadow: none;
+  color: currentColor;
+  border: none;
+  border-radius: 0;
+  border-bottom-left-radius: var(--pk-btn-border-radius);
+}
+
+button.pk-button.pk-toast-dismiss:active {
+  transform: none;
+}
+
+.pk-toast-dismiss:hover,
+.pk-toast-dismiss:focus-visible {
+  outline: 2px solid var(--alert-intent);
+}

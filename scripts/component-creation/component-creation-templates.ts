@@ -78,6 +78,7 @@ export function generateDemoFile(componentName: string) {
   return `import React from "react"
 import { ${componentName} } from "../../lib/components/${componentName}"
 import { composePropsTableData } from "../utils/PropsTable.utils"
+import { PropsTable } from "../utils/PropsTable"
 
 const ${componentName}Props = composePropsTableData([])
 

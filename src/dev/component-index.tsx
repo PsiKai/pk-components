@@ -5,6 +5,7 @@ import {
   InputSection,
   LoadingSpinnerSection,
   SidenavSection,
+  ToastAlertSection,
 } from "./demos"
 
 export const components = {
@@ -14,4 +15,5 @@ export const components = {
   Input: InputSection,
   LoadingSpinner: LoadingSpinnerSection,
   Sidenav: SidenavSection,
+  ToastAlert: ToastAlertSection,
 }
