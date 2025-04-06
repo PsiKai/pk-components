@@ -17,12 +17,12 @@ const libBuildConfig: UserConfig = {
   },
   build: {
     lib: {
-      entry: ["src/lib/index.tsx", "src/lib/index.ts"],
+      entry: ["src/lib/index.ts"],
       name: "pk-components",
     },
     rollupOptions: {
       external: ["react", "react-dom"],
-      input: "src/lib/index.tsx",
+      input: "src/lib/index.ts",
       output: {
         globals: {
           react: "React",
