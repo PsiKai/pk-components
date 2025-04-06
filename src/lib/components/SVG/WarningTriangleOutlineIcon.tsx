@@ -1,0 +1,14 @@
+export function WarningTriangleOutlineIcon() {
+  return (
+    <svg
+      data-testid="warning-triangle-outline-icon"
+      className="warning-triangle-outline-icon"
+      focusable="false"
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+    >
+      <path d="M12 5.99 19.53 19H4.47zM12 2 1 21h22z"></path>
+      <path d="M13 16h-2v2h2zm0-6h-2v5h2z"></path>
+    </svg>
+  )
+}

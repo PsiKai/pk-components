@@ -1,6 +1,7 @@
 import React from "react"
 import { render, screen } from "@testing-library/react"
-import {
+import * as Icons from "./index"
+const {
   FileSvg,
   CloseIcon,
   CheckCircleIcon,
@@ -8,7 +9,7 @@ import {
   ErrorIcon,
   InfoOulinedIcon,
   BellOutlinedIcon,
-} from "."
+} = Icons
 
 describe("SVG Icons", () => {
   it("renders FileSvg correctly", () => {
