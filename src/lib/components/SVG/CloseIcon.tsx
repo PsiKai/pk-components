@@ -1,4 +1,3 @@
-/* istanbul include file: ./CloseIcon.test.tsx */
 export function CloseIcon() {
   return (
     <svg
