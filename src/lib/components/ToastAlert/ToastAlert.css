@@ -8,7 +8,7 @@
   --success: hsl(var(--pk-hue-success), 100%, 30%);
 
   position: fixed;
-  z-index: 500;
+  z-index: 2000;
   width: 500px;
   max-width: calc(100% - 2rem);
   display: flex;
@@ -19,7 +19,7 @@
 
 .pk-toast-container.tl,
 .pk-toast-container.tr {
-  top: calc(1rem + 60px);
+  top: 1rem;
   bottom: auto;
 }
 
@@ -74,15 +74,10 @@
   }
 }
 
-.pk-toast-container > div {
+.pk-toast-alert {
   transform: translateZ(0);
   overflow: hidden;
   box-shadow: var(--pk-box-shadow-large);
-  border-radius: var(--pk-btn-border-radius);
-  will-change: transform, max-height;
-}
-
-.pk-toast-alert {
   border-radius: var(--pk-btn-border-radius);
   padding: 1rem 40px 1rem 1rem;
   display: flex;
@@ -90,6 +85,7 @@
   align-items: center;
   border: 2px solid var(--alert-intent);
   position: relative;
+  will-change: transform, max-height;
 }
 
 .pk-toast-alert svg {
